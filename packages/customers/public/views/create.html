@@ -1,0 +1,29 @@
+<section data-ng-controller="PricePlansController">
+    <form name="pricePlanForm" class="form-horizontal col-md-6" role="form" data-ng-submit="create(pricePlanForm.$valid)" novalidate>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && pricePlanForm.name.$invalid }">
+            <label mean-token="'create-priceplan-name'" class="col-md-3 control-label">Name</label>
+            <div class="col-md-9">
+                <input name="name" type="text" class="form-control" data-ng-model="name" id="name" placeholder="Name" required>
+                <div ng-show="submitted && pricePlanForm.name.$invalid" class="help-block">
+                    <p ng-show="pricePlanForm.name.$error.required">Title is required</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : submitted && pricePlanForm.description.$invalid }">
+            <label mean-token="'create-priceplan-description'" for="description" class="col-md-3 control-label">Description</label>
+            <div class="col-md-9">
+                <textarea name="description" data-ng-model="description" id="description" cols="30" rows="5" placeholder="Description" class="form-control" required></textarea>
+                <div ng-show="submitted && pricePlanForm.description.$invalid" class="help-block">
+                    <p ng-show="pricePlanForm.description.$error.required">Description is required</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn btn-info">Submit</button>
+            </div>
+        </div>
+    </form>
+</section>

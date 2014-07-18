@@ -11,19 +11,19 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$st
 
         $scope.create = function(isValid) {
             if (isValid) {
-                var article = new Articles({
-                    title: this.title,
-                    content: this.content
-                });
-                article.$save(function(response) {
-                    $location.path('articles/' + response._id);
-                });
+            var article = new Articles({
+              title: this.title,
+              content: this.content
+            });
+            article.$save(function(response) {
+              $location.path('articles/' + response._id);
+            });
 
-                this.title = '';
-                this.content = '';
-            } else {
-                $scope.submitted = true;
-            }
+            this.title = '';
+            this.content = '';
+          } else {
+            $scope.submitted = true;
+          }
         };
 
         $scope.remove = function(article) {
