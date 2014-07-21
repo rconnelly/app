@@ -1,28 +1,61 @@
-<section data-ng-controller="PricePlansController">
-    <form name="pricePlanForm" class="form-horizontal col-md-6" role="form" data-ng-submit="create(pricePlanForm.$valid)" novalidate>
+<section data-ng-controller="CustomersController">
+    <h2>Create Customer</h2>
+    <form name="customerCreateForm" class="form col-md-12 well" role="form" data-ng-submit="create(customerCreateForm.$valid)" novalidate>
 
-        <div class="form-group" ng-class="{ 'has-error' : submitted && pricePlanForm.name.$invalid }">
-            <label mean-token="'create-priceplan-name'" class="col-md-3 control-label">Name</label>
-            <div class="col-md-9">
-                <input name="name" type="text" class="form-control" data-ng-model="name" id="name" placeholder="Name" required>
-                <div ng-show="submitted && pricePlanForm.name.$invalid" class="help-block">
-                    <p ng-show="pricePlanForm.name.$error.required">Title is required</p>
-                </div>
-            </div>
-
-        </div>
-        <div class="form-group" ng-class="{ 'has-error' : submitted && pricePlanForm.description.$invalid }">
-            <label mean-token="'create-priceplan-description'" for="description" class="col-md-3 control-label">Description</label>
-            <div class="col-md-9">
-                <textarea name="description" data-ng-model="description" id="description" cols="30" rows="5" placeholder="Description" class="form-control" required></textarea>
-                <div ng-show="submitted && pricePlanForm.description.$invalid" class="help-block">
-                    <p ng-show="pricePlanForm.description.$error.required">Description is required</p>
+        <div class="row">
+            <div class="form-group" ng-class="{ 'has-error' : submitted && customerCreateForm.displayName.$invalid }">
+                <div class="col-md-6">
+                    <label mean-token="'create-customer-display-name'" class="control-label">Display Name</label>
+                    <input name="displayName" type="text" class="form-control" data-ng-model="displayName" id="displayName" placeholder="Display Name" required />
+                    <div ng-show="submitted && customerCreateForm.displayName.$invalid" class="help-block">
+                        <p ng-show="customerCreateForm.displayName.$error.required">Display name is required</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-3 col-md-9">
-                <button type="submit" class="btn btn-info">Submit</button>
+        <div class="row">
+            <div class="form-group" ng-class="{ 'has-error' : submitted && customerCreateForm.firstName.$invalid }">
+                <div class="col-md-3">
+                    <label mean-token="'create-customer-first-name'" class="control-label">First Name</label>
+                    <input name="firstName" type="text" class="form-control" data-ng-model="firstName" id="firstName" placeholder="First Name" required />
+                    <div ng-show="submitted && customerCreateForm.firstName.$invalid" class="help-block">
+                        <p ng-show="customerCreateForm.firstName.$error.required">First name is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : submitted && customerCreateForm.lastName.$invalid }">
+                <div class="col-md-3">
+                    <label mean-token="'create-customer-last-name'" class="control-label">Last Name</label>
+                    <input name="lastName" type="text" class="form-control" data-ng-model="lastName" id="lastName" placeholder="Last Name" required />
+                    <div ng-show="submitted && customerCreateForm.lastName.$invalid" class="help-block">
+                        <p ng-show="customerCreateForm.lastName.$error.required">Last name is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : submitted && customerCreateForm.email.$invalid }">
+                <div class="col-md-3">
+                    <label mean-token="'create-customer-email'" class="control-label">Email</label>
+                    <input name="email" type="text" class="form-control" data-ng-model="email" id="email" placeholder="Email" required />
+                    <div ng-show="submitted && customerCreateForm.email.$invalid" class="help-block">
+                        <p ng-show="customerCreateForm.email.$error.required">Email is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : submitted && customerCreateForm.email.$invalid }">
+                <div class="col-md-3">
+                    <label mean-token="'create-customer-mobile'" class="control-label">Mobile</label>
+                    <input name="mobile" type="text" class="form-control" data-ng-model="mobile" id="mobile" placeholder="Mobile" required />
+                    <div ng-show="submitted && customerCreateForm.mobile.$invalid" class="help-block">
+                        <p ng-show="customerCreateForm.mobile.$error.required">Mobile is required</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-info">Save</button>
+                </div>
             </div>
         </div>
     </form>

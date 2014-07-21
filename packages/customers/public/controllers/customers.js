@@ -1,22 +1,19 @@
 'use strict';
 
 angular.module('mean.customers').controller('CustomersController', ['$scope', ' $location', 'Global', 'Customers',
-    function($scope, $location, Global, Customers) {
-        $scope.global = Global;
-        $scope.package = {
-            name: 'customers'
-        };
+  function ($scope, $location, Global, Customers) {
+    $scope.global = Global;
+    $scope.package = {
+      name: 'customers'
+    };
 
-      $scope.goToCreateCustomer = function () {
-        //$location.path('customers/create')
-      }
-
-      $scope.create = function (isValid) {
-        if (isValid) {
-          var customer = new Customers({
-            displayName: this.displayName,
-            description: this.description,
-            contacts: [{
+    $scope.create = function (isValid) {
+      if (isValid) {
+        var customer = new Customers({
+          displayName: this.displayName,
+          description: this.description,
+          contacts: [
+            {
               title: this.title,
               firstName: this.firstName,
               lastName: this.lastName,
@@ -26,18 +23,19 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', ' 
               mobile: this.mobile,
               fax: this.fax,
               website: this.website
-            }]
-          });
+            }
+          ]
+        });
 
-          customer.$save(function (response) {
-            $location.path('customers');
-          });
+        customer.$save(function (response) {
+          $location.path('customers');
+        });
 
-          // this.name = '';
-          // this.description = '';
-        } else {
-          $scope.submitted = true;
-        }
-      };
-    }
+        // this.name = '';
+        // this.description = '';
+      } else {
+        $scope.submitted = true;
+      }
+    };
+  }
 ]);
