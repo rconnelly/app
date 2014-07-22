@@ -1,11 +1,33 @@
 'use strict';
 
-angular.module('mean.customers').controller('CustomersController', ['$scope', '$location', 'Global', 'Customers',
-  function ($scope, $location, Global, Customers) {
+angular.module('mean.customers').controller('CustomersController', ['$scope', '$location', '$filter', 'Global', 'ngTableParams', 'Customers',
+  function ($scope, $location, $filter, Global, ngTableParams, Customers) {
     $scope.global = Global;
     $scope.package = {
       name: 'customers'
     };
+
+    $scope.tableParams = new ngTableParams({
+      page: 1,            // show first page
+      count: 10,          // count per page
+      sorting: {
+        name: 'asc'     // initial sorting
+      }
+    }, {
+      total: 0,
+      getData: function($defer, params) {
+        // use build-in angular filter
+        Customers.query(function(customers) {
+            // update table params
+            params.total(customers.length);
+
+            var orderedData = params.sorting() ?
+              $filter('orderBy')(customers, params.orderBy()) : customers;
+
+            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        });
+      }
+    });
 
     $scope.create = function (newCustomer) {
       if (this.customerCreateForm.$valid) {
@@ -18,6 +40,10 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
       } else {
         $scope.submitted = true;
       }
+    };
+
+    $scope.cancel = function() {
+      $location.path('customers');
     };
 
     $scope.remove = function(customer) {

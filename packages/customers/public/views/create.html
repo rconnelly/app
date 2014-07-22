@@ -1,65 +1,83 @@
 <section data-ng-controller="CustomersController">
-    <h2>Create Customer</h2>
-    <form name="customerCreateForm" class="form-horizontal well well-lg" role="form" data-ng-submit="create(newCustomer)" novalidate>
 
-        <div class="form-group" ng-class="{ 'has-error' : submitted && customerCreateForm.companyName.$invalid }">
-            <label mean-token="'create-customer-company-name'" for="companyName" class="control-label col-md-3">Company Name</label>
-            <div class="col-md-9">
+    <h2>Create Customer</h2>
+    <form name="customerCreateForm" class="form well well-lg" role="form" data-ng-submit="create(newCustomer)" novalidate>
+        <div class="row">
+            <div class="form-group col-md-4" ng-class="{ 'has-error' : submitted && customerCreateForm.companyName.$invalid }">
+                <label mean-token="'create-customer-company-name'" for="companyName" class="control-label">Company Name</label>
                 <input name="companyName" type="text" class="form-control" data-ng-model="newCustomer.company.name" id="companyName" placeholder="required" required />
                 <div ng-show="submitted && customerCreateForm.companyName.$invalid" class="help-block">
                     <p ng-show="customerCreateForm.companyName.$error.required">Company name is required</p>
                 </div>
             </div>
         </div>
-        <div class="form-group" ng-class="{ 'has-error' : submitted && customerCreateForm.firstName.$invalid }">
-            <label mean-token="'create-customer-first-name'" class="control-label col-md-3">First Name</label>
-            <div class="col-md-9">
+
+        <div class="row">
+            <div class="form-group col-md-4" ng-class="{ 'has-error' : submitted && customerCreateForm.firstName.$invalid }">
+                <label mean-token="'create-customer-first-name'" class="control-label">First Name</label>
                 <input name="firstName" type="text" class="form-control" data-ng-model="newCustomer.contact.firstName" id="firstName" placeholder="required" required />
                 <div ng-show="submitted && customerCreateForm.firstName.$invalid" class="help-block">
                     <p ng-show="customerCreateForm.firstName.$error.required">First name is required</p>
                 </div>
             </div>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error' : submitted && customerCreateForm.lastName.$invalid }">
-            <label mean-token="'create-customer-last-name'" class="control-label col-md-3">Last Name</label>
-            <div class="col-md-9">
+
+            <div class="form-group col-md-4" ng-class="{ 'has-error' : submitted && customerCreateForm.lastName.$invalid }">
+                <label mean-token="'create-customer-last-name'" class="control-label">Last Name</label>
                 <input name="lastName" type="text" class="form-control" data-ng-model="newCustomer.contact.lastName" id="lastName" placeholder="required" required />
                 <div ng-show="submitted && customerCreateForm.lastName.$invalid" class="help-block">
                     <p ng-show="customerCreateForm.lastName.$error.required">Last name is required</p>
                 </div>
             </div>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error' : submitted && customerCreateForm.email.$invalid }">
 
-            <label mean-token="'create-customer-email'" class="control-label col-md-3">Email</label>
-
-            <div class="col-md-9">
+            <div class="form-group col-md-4" ng-class="{ 'has-error' : submitted && customerCreateForm.email.$invalid }">
+                <label mean-token="'create-customer-email'" class="control-label">Email</label>
                 <input name="email" type="email" class="form-control" data-ng-model="newCustomer.contact.email" id="email" placeholder="valid email" required />
                 <div ng-show="submitted && customerCreateForm.email.$invalid" class="help-block">
                     <p ng-show="customerCreateForm.email.$error.required">Email is required</p>
                     <p ng-show="customerCreateForm.email.$error.email">Email is not valid</p>
                 </div>
             </div>
-
         </div>
 
-        <div class="form-group" ng-class="{ 'has-error' : submitted && customerCreateForm.mobile.$invalid }">
-
-            <label mean-token="'create-customer-mobile'" class="control-label col-md-3">Mobile</label>
-
-            <div class="col-md-9">
-                <input name="mobile" type="text" class="form-control" data-ng-model="newCustomer.contact.mobile" id="mobile" placeholder="" required />
+        <div class="row">
+            <div class="form-group col-md-4" ng-class="{ 'has-error' : submitted && customerCreateForm.phone.$invalid }">
+                <label mean-token="'create-customer-phone'" class="control-label">Phone</label>
+                <input name="phone" type="text" class="form-control" data-ng-model="newCustomer.contact.phone" id="phone" placeholder="" />
+                <div ng-show="submitted && customerCreateForm.phone.$invalid" class="help-block">
+                    <p ng-show="customerCreateForm.phone.$error.required">Phone is required</p>
+                </div>
+            </div>
+            <div class="form-group col-md-4" ng-class="{ 'has-error' : submitted && customerCreateForm.mobile.$invalid }">
+                <label mean-token="'create-customer-mobile'" class="control-label">Mobile</label>
+                <input name="mobile" type="text" class="form-control" data-ng-model="newCustomer.contact.mobile" id="mobile" placeholder="" />
                 <div ng-show="submitted && customerCreateForm.mobile.$invalid" class="help-block">
                     <p ng-show="customerCreateForm.mobile.$error.required">Mobile is required</p>
+                </div>
+            </div>
+            <div class="form-group col-md-4" ng-class="{ 'has-error' : submitted && customerCreateForm.mobile.$invalid }">
+                <label mean-token="'create-customer-fax'" class="control-label">Fax</label>
+                <input name="fax" type="text" class="form-control" data-ng-model="newCustomer.contact.fax" id="fax" placeholder="" />
+                <div ng-show="submitted && customerCreateForm.fax.$invalid" class="help-block">
+                    <p ng-show="customerCreateForm.fax.$error.required">Mobile is required</p>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-12 text-center well-lg">
-                <button type="submit" class="btn btn-primary btn-lg">Save Customer</button>
+            <div class="col-md-12">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Messages</a></li>
+                </ul>
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-12 text-center well-lg">
+                <button type="button" class="btn btn-default btn-lg" data-ng-click="cancel()">Cancel</button>
+                <button type="submit" class="btn btn-primary btn-lg">Save Customer</button>
+            </div>
+        </div>
     </form>
 </section>

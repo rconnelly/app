@@ -24,7 +24,7 @@ Customers.register(function(app, auth, database) {
         menu: 'main'
     });
 
-
+  Customers.angularDependencies(['ngTable']);
 
     /**
     //Uncomment to use. Requires meanio@0.3.7 or above
