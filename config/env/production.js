@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    //db: 'mongodb://prorata:prorata1@ds027799.mongolab.com:27799/prorata-prod',
+    db: 'mongodb://prorata:prorata1@ds027799.mongolab.com:27799/prorata-prod',
     slack:{
       meandomain : 'meanio',
       meantoken : 'xoxp-2194933696-2194933708-2443321518-a2df23'
