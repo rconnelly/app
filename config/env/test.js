@@ -37,6 +37,6 @@ module.exports = {
         auth: {
             user: 'EMAIL_ID',
             pass: 'PASSWORD'
-        }
     }
+  }
 };

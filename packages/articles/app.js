@@ -13,8 +13,8 @@ var Articles = new Module('articles');
  */
 Articles.register(function(app, auth, database) {
 
-    //We enable routing. By default the Package Object is passed to the routes
-    Articles.routes(app, auth, database);
+  //We enable routing. By default the Package Object is passed to the routes
+  Articles.routes(app, auth, database);
 
     //We are adding a link to the main menu for all authenticated users
     /*Articles.menus.add({
@@ -29,14 +29,14 @@ Articles.register(function(app, auth, database) {
     });
     */
 
-    //Articles.aggregateAsset('js','/packages/system/public/services/menus.js',{group:'footer',absolute:true, weight:-9999});
-    Articles.aggregateAsset('js', 'test.js', {
-        group: 'footer',
-        weight: -1
-    });
+  //Articles.aggregateAsset('js','/packages/system/public/services/menus.js',{group:'footer',absolute:true, weight:-9999});
+  Articles.aggregateAsset('js', 'test.js', {
+    group: 'footer',
+    weight: -1
+  });
 
 
-    /*
+  /*
     //Uncomment to use. Requires meanio@0.3.7 or above
     // Save settings with callback
     // Use this for saving data from administration pages
@@ -53,7 +53,7 @@ Articles.register(function(app, auth, database) {
       //you now have the settings object
     });
     */
-    Articles.aggregateAsset('css', 'articles.css');
+  Articles.aggregateAsset('css', 'articles.css');
 
-    return Articles;
+  return Articles;
 });
