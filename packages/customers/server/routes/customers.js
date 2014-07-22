@@ -1,26 +1,25 @@
 'use strict';
 
-// The Package is past automatically as first parameter
-module.exports = function(Customers, app, auth, database) {
+var customers = require('../controllers/customers');
 
-    app.get('/customers/example/anyone', function(req, res, next) {
-        res.send('Anyone can access this');
-    });
+// Article authorization helpers
+var hasAuthorization = function(req, res, next) {
+  if (!req.user.isAdmin && req.article.user.id !== req.user.id) {
+    return res.send(401, 'User is not authorized');
+  }
+  next();
+};
 
-    app.get('/customers/example/auth', auth.requiresLogin, function(req, res, next) {
-        res.send('Only authenticated users can access this');
-    });
+module.exports = function(Customers, app, auth) {
 
-    app.get('/customers/example/admin', auth.requiresAdmin, function(req, res, next) {
-        res.send('Only users with Admin role can access this');
-    });
+  app.route('/customers')
+    .get(customers.all)
+    .post(auth.requiresLogin, customers.create);
+  app.route('/customers/:customersId')
+    .get(customers.show)
+    .put(auth.requiresLogin, hasAuthorization, customers.update)
+    .delete(auth.requiresLogin, hasAuthorization, customers.destroy);
 
-    app.get('/customers/example/render', function(req, res, next) {
-        Customers.render('index', {
-            package: 'customers'
-        }, function(err, html) {
-            //Rendering a view from the Package server/views
-            res.send(html);
-        });
-    });
+  // Finish with setting up the customerId param
+  app.param('customerId', customers.customer);
 };

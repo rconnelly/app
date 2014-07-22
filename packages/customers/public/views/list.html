@@ -1,3 +1,45 @@
-<div class="" data-ng-controller="CustomersController">
-    <a href="#!/customers/create" class="btn btn-primary" >Create Customer</a>
+<div class="" data-ng-controller="CustomersController" data-ng-init="find()">
+    <div class="pull-right well-lg">
+        <a href="#!/customers/create" class="btn btn-primary" >Create Customer</a>
+    </div>
+    <div class="table-responsive" data-ng-show="customers.length !== 0">
+        <table class="table table-striped">
+            <thead>
+            <th>Customer</th>
+            <th>Email</th>
+            <th></th>
+            <th></th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="customer in customers">
+                <td>
+                    <strong>{{customer.contact.firstName}} {{customer.contact.lastName}}</strong><br />
+
+                    {{customer.company.name}}
+                </td>
+                <td>
+                    {{customer.contact.email}}
+                </td>
+                <td></td>
+                <td class="">
+                    <a class="btn btn-default" data-ng-click="edit(customer);">
+                        Edit
+                    </a>
+                    <a class="btn btn-default" data-ng-click="manageSubscriptions(customer);">
+                        Subscriptions
+                    </a>
+                    <a class="btn" data-ng-click="remove(customer);">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+
+    <div class="well-lg" data-ng-show="customers.length === 0">
+        <h3>No Customers</h3>
+    </div>
 </div>

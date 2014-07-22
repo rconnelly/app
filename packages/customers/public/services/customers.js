@@ -1,9 +1,14 @@
 'use strict';
 
-angular.module('mean.customers').factory('Customers', [
-    function() {
-        return {
-            name: 'customers'
-        };
-    }
+//Customers service used for articles REST endpoint
+angular.module('mean.customers').factory('Customers', ['$resource',
+  function($resource) {
+    return $resource('customers/:customerId', {
+      customerId: '@_id'
+    }, {
+      update: {
+        method: 'PUT'
+      }
+    });
+  }
 ]);
