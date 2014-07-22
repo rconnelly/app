@@ -37,34 +37,35 @@ angular.module('mean.users')
     function($scope, $rootScope, $http, $location) {
       $scope.user = {};
 
-            $scope.register = function() {
-                $scope.usernameError = null;
-                $scope.registerError = null;
-                $http.post('/register', {
-                    email: $scope.user.email,
-                    password: $scope.user.password,
-                    confirmPassword: $scope.user.confirmPassword,
-                    username: $scope.user.email,
-                    name: $scope.user.name
-                })
-                .success(function() {
-                    // authentication OK
-                    $scope.registerError = 0;
-                    $rootScope.user = $scope.user;
-                    $rootScope.$emit('loggedin');
-                    $location.url('/');
-                })
-                .error(function(error) {
-                    // Error: authentication failed
-                    if (error === 'Username already taken') {
-                        $scope.usernameError = error;
-                    } else if (error === 'Email already taken'){
-                        $scope.emailError = error;
-                    else $scope.registerError = error;
-                });
-            };
-        }
-    ])
+      $scope.register = function() {
+        $scope.usernameError = null;
+        $scope.registerError = null;
+        $http.post('/register', {
+          email: $scope.user.email,
+          password: $scope.user.password,
+          confirmPassword: $scope.user.confirmPassword,
+          username: $scope.user.email,
+          name: $scope.user.name
+        })
+          .success(function() {
+            // authentication OK
+            $scope.registerError = 0;
+            $rootScope.user = $scope.user;
+            $rootScope.$emit('loggedin');
+            $location.url('/');
+          })
+          .error(function(error) {
+            // Error: authentication failed
+            if (error === 'Username already taken') {
+              $scope.usernameError = error;
+            } else if (error === 'Email already taken'){
+              $scope.emailError = error;
+            }
+            else $scope.registerError = error;
+          });
+      };
+    }
+  ])
     .controller('ForgotPasswordCtrl', ['$scope', '$rootScope', '$http', '$location',
         function($scope, $rootScope, $http, $location) {
             $scope.user = {};

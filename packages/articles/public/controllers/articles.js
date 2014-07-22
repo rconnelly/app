@@ -29,16 +29,9 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$st
     $scope.remove = function(article) {
       if (article) {
         article.$remove();
-              title: this.title,
-              content: this.content
-            });
-            article.$save(function(response) {
-              $location.path('articles/' + response._id);
-            });
 
         for (var i in $scope.articles) {
           if ($scope.articles[i] === article) {
-          } else {
             $scope.articles.splice(i, 1);
           }
         }
