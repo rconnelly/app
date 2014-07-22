@@ -70,6 +70,9 @@ var CustomerSchema = new Schema({
     address2: {
       type: String
     },
+    city: {
+      type: String
+    },
     state: {
       type: String
     },
@@ -85,6 +88,9 @@ var CustomerSchema = new Schema({
       type: String
     },
     address2: {
+      type: String
+    },
+    city: {
       type: String
     },
     state: {

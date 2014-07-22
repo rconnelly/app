@@ -1,3 +1,7 @@
 .customers-example h1: {
 	background-color: purple
 }
+
+.customer-details {
+    margin-top: 20px;
+}
