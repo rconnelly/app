@@ -63,11 +63,11 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
 
     $scope.manageSubscriptions = function(customer) {
 
-    }
+    };
 
     $scope.managePriceLists = function(customer) {
 
-    }
+    };
 
     $scope.remove = function(customer) {
       if (customer) {

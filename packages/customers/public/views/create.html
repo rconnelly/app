@@ -64,14 +64,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-3" ng-class="{ 'has-error' : submitted && customerCreateForm.mobile.$invalid }">
+                            <div class="form-group col-md-6" ng-class="{ 'has-error' : submitted && customerCreateForm.mobile.$invalid }">
                                 <label mean-token="'create-customer-mobile'" class="control-label">Mobile</label>
                                 <input name="mobile" type="text" class="form-control" data-ng-model="customer.contact.mobile" id="mobile" placeholder="" />
                                 <div ng-show="submitted && customerCreateForm.mobile.$invalid" class="help-block">
                                     <p ng-show="customerCreateForm.mobile.$error.required">Mobile is required</p>
                                 </div>
                             </div>
-                            <div class="form-group col-md-3" ng-class="{ 'has-error' : submitted && customerCreateForm.mobile.$invalid }">
+                            <div class="form-group col-md-6" ng-class="{ 'has-error' : submitted && customerCreateForm.mobile.$invalid }">
                                 <label mean-token="'create-customer-fax'" class="control-label">Fax</label>
                                 <input name="fax" type="text" class="form-control" data-ng-model="customer.contact.fax" id="fax" placeholder="" />
                                 <div ng-show="submitted && customerCreateForm.fax.$invalid" class="help-block">
