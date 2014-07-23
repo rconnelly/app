@@ -12,6 +12,6 @@
     "bootstrap": "3.1.1",
     "angular-bootstrap": "0.11.0",
     "angular-ui-router": "#master",
-    "bootswatch-dist": "3.2.0-yeti"
+    "app-theme": "git://github.com/prorata/app-theme.git"
   }
 }
