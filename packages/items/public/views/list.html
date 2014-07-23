@@ -11,13 +11,11 @@
         <table class="table table-striped table-bordered" ng-table="tableParams">
             <tbody>
             <tr ng-repeat="item in $data">
-                <td class="col-sm-3 text-center" data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
-                    <strong>{{item.name}}</strong>
+                <td class="col-sm-9 text-center" data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
+                    <strong>{{item.name}}</strong><br />
+                    {{ item.description }}
                 </td>
-                <td class="col-sm-5 text-center" data-title="'Description'" sortable="'description'" filter="{ 'description': 'text' }">
-                    {{item.description}}
-                </td>
-                <td class="col-sm-6 text-right">
+                <td class="col-sm-3 text-right">
                     <a class="btn btn-default" data-ng-click="edit(item);">
                         Edit
                     </a>

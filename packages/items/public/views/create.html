@@ -11,7 +11,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="form-group col-md-8" data-ng-class="{ 'has-error' : submitted && itemForm.companyName.$invalid }">
+                            <div class="form-group col-md-8" data-ng-class="{ 'has-error' : submitted && itemForm.itemName.$invalid }">
                                 <label mean-token="'create-item-name'" for="itemName" class="control-label">Name</label>
                                 <input name="itemName" type="text" class="form-control" data-ng-model="item.name" id="itemName" placeholder="required" required />
                                 <div ng-show="submitted && itemForm.itemName.$invalid" class="help-block">
@@ -22,7 +22,7 @@
                                 <label mean-token="'create-item-price'" for="itemPrice" class="control-label">Price</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">$</span>
-                                    <input name="itemName" type="text" class="form-control" data-ng-model="item.price" id="itemPrice" placeholder="required" required />
+                                    <input name="itemPrice" type="text" class="form-control" data-ng-model="item.price" id="itemPrice" placeholder="required" required />
                                 </div>
                                 <div ng-show="submitted && itemForm.itemPrice.$invalid" class="help-block">
                                     <p ng-show="itemForm.itemPrice.$error.required">Item price is required</p>
@@ -33,7 +33,7 @@
                             <div class="form-group col-md-8" data-ng-class="{ 'has-error' : submitted && itemForm.itemDescription.$invalid }">
 
                                 <label mean-token="'create-item-price'" for="itemPrice" class="control-label">Description</label>
-                            <textarea name="itemDescription" id="itemDescription" class="form-control"></textarea>
+                            <textarea name="itemDescription" id="itemDescription" data-ng-model="item.description" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>

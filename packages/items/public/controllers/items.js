@@ -33,9 +33,8 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
     });
 
     $scope.save = function (itemData) {
-      if (this.itemCreateForm.$valid) {
+      if (this.itemForm.$valid) {
         var c = new Items(itemData);
-        c.displayName = c.company.name;
 
         if(angular.isDefined($stateParams.itemId)) {
           c._id = $stateParams.itemId;

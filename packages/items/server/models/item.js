@@ -20,12 +20,19 @@ var ItemSchema = new Schema({
     required: true
   },
   description: {
-    type: Number
+    type: String
   },
   price: {
     type: Number
   }
 });
+
+/** Statics */
+ItemSchema.statics.load = function(id, cb) {
+  this.findOne({
+    _id: id
+  }).exec(cb);
+};
 
 /**
  * Plugins
