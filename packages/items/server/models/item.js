@@ -31,6 +31,6 @@ var ItemSchema = new Schema({
  * Plugins
  */
 
-mongoose.model('Items', ItemSchema);
+mongoose.model('Item', ItemSchema);
 
 ItemSchema.plugin(timestamps, {created: 'createdAt', lastUpdated: 'updatedAt'} );

@@ -1,0 +1,55 @@
+<section data-ng-controller="ItemsController" data-ng-init="initEdit()">
+
+    <h2>Create Item</h2>
+    <form name="itemForm" class="form" role="form" data-ng-submit="save(item)" novalidate>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Item Details</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="form-group col-md-8" data-ng-class="{ 'has-error' : submitted && itemForm.companyName.$invalid }">
+                                <label mean-token="'create-item-name'" for="itemName" class="control-label">Name</label>
+                                <input name="itemName" type="text" class="form-control" data-ng-model="item.name" id="itemName" placeholder="required" required />
+                                <div ng-show="submitted && itemForm.itemName.$invalid" class="help-block">
+                                    <p ng-show="itemForm.itemName.$error.required">Item name is required</p>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4" data-ng-class="{ 'has-error' : submitted && itemForm.itemPrice.$invalid }">
+                                <label mean-token="'create-item-price'" for="itemPrice" class="control-label">Price</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    <input name="itemName" type="text" class="form-control" data-ng-model="item.price" id="itemPrice" placeholder="required" required />
+                                </div>
+                                <div ng-show="submitted && itemForm.itemPrice.$invalid" class="help-block">
+                                    <p ng-show="itemForm.itemPrice.$error.required">Item price is required</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-8" data-ng-class="{ 'has-error' : submitted && itemForm.itemDescription.$invalid }">
+
+                                <label mean-token="'create-item-price'" for="itemPrice" class="control-label">Description</label>
+                            <textarea name="itemDescription" id="itemDescription" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class=" panel panel-default btn-toolbar">
+                    <div class="panel-body text-center">
+                        <button type="button" class="btn btn-default btn-lg" data-ng-click="cancel()">Cancel</button>
+                        <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>

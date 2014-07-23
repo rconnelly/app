@@ -1,0 +1,38 @@
+<div class="" data-ng-controller="ItemsController" data-ng-init="find()">
+
+    <div>
+        <div class="pull-right" style="margin-bottom: 20px">
+            <a href="#!/items/create" class="btn btn-primary btn-lg" >Create Item</a>
+        </div>
+        <h2>Items</h2>
+    </div>
+
+    <div class="table-responsive" data-ng-show="items.length !== 0">
+        <table class="table table-striped table-bordered" ng-table="tableParams">
+            <tbody>
+            <tr ng-repeat="item in $data">
+                <td class="col-sm-3 text-center" data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
+                    <strong>{{item.name}}</strong>
+                </td>
+                <td class="col-sm-5 text-center" data-title="'Description'" sortable="'description'" filter="{ 'description': 'text' }">
+                    {{item.description}}
+                </td>
+                <td class="col-sm-6 text-right">
+                    <a class="btn btn-default" data-ng-click="edit(item);">
+                        Edit
+                    </a>
+                    <a class="btn" data-ng-click="remove(item);">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+
+    <div class="well-lg" data-ng-show="items.length === 0">
+        <h3>No Items</h3>
+    </div>
+</div>
