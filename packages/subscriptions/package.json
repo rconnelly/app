@@ -1,9 +1,9 @@
 {
-    "name": "customers",
+    "name": "subscriptions",
     "version": "0.0.1",
-    "description": "Some description of customers",
+    "description": "Some description of subscriptions",
     "author": {
-        "name": "Ryan Connelly"
+        "name": "mean scaffold"
     },
     "mean": "0.4.0",
     "engines": {

@@ -1,9 +1,9 @@
 {
-    "name": "customers",
+    "name": "authorization",
     "version": "0.0.1",
-    "description": "Some description of customers",
+    "description": "Some description of authorization",
     "author": {
-        "name": "Ryan Connelly"
+        "name": "mean scaffold"
     },
     "mean": "0.4.0",
     "engines": {
