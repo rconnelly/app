@@ -12,10 +12,10 @@ var mongoose = require('mongoose'),
  * Find customer by id
  */
 exports.customer = function(req, res, next, id) {
-  Customer.load(id, function(err, article) {
+  Customer.load(id, function(err, customer) {
     if (err) return next(err);
-    if (!article) return next(new Error('Failed to load customer ' + id));
-    req.customer = article;
+    if (!customer) return next(new Error('Failed to load customer ' + id));
+    req.customer = customer;
     next();
   });
 };
@@ -74,17 +74,17 @@ exports.destroy = function(req, res) {
 };
 
 /**
- * Show an article
+ * Show an customer
  */
 exports.show = function(req, res) {
   res.json(req.customer);
 };
 
 /**
- * List of Articles
+ * List of customers
  */
 exports.all = function(req, res) {
-  Customer.find().sort('-created').exec(function(err, customers) {
+  Customer.find().sort('-createdAt').exec(function(err, customers) {
     if (err) {
       return res.json(500, {
         error: 'Cannot list the customers'

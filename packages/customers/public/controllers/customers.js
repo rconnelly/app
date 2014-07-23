@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.customers').controller('CustomersController', ['$scope', '$location', '$filter', 'Global', 'ngTableParams', 'Customers',
-  function ($scope, $location, $filter, Global, TableParams, Customers) {
+angular.module('mean.customers').controller('CustomersController', ['$scope', '$location', '$filter', '$stateParams', 'Global', 'ngTableParams', 'Customers',
+  function ($scope, $location, $filter, $stateParams, Global, TableParams, Customers) {
     $scope.global = Global;
     $scope.package = {
       name: 'customers'
@@ -32,13 +32,21 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
       }
     });
 
-    $scope.create = function (newCustomer) {
+    $scope.save = function (customerData) {
       if (this.customerCreateForm.$valid) {
-        var customer = new Customers(newCustomer);
-        customer.displayName = customer.company.name;
-        customer.$save(function (response) {
-          $location.path('customers');
-        });
+        var c = new Customers(customerData);
+        c.displayName = c.company.name;
+
+        if(angular.isDefined($stateParams.customerId)) {
+          c._id = $stateParams.customerId;
+          c.$update(function(response){
+            $location.path('customers');
+          });
+        } else {
+          c.$save(function (response) {
+            $location.path('customers');
+          });
+        }
 
       } else {
         $scope.submitted = true;
@@ -47,6 +55,10 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
 
     $scope.cancel = function() {
       $location.path('customers');
+    };
+
+    $scope.edit = function(customer) {
+      $location.path('customers/' + customer._id + '/edit');
     };
 
     $scope.remove = function(customer) {
@@ -63,6 +75,20 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
           $location.path('customers');
         });
       }
+    };
+
+    $scope.initEdit = function() {
+      if(angular.isDefined($stateParams.customerId)) {
+        this.findById($stateParams.customerId);
+      }
+    };
+
+    $scope.findById = function(cId) {
+      Customers.get({
+        customerId: cId
+      }, function(c) {
+        $scope.customer = c;
+      });
     };
 
     $scope.find = function() {

@@ -105,6 +105,14 @@ var CustomerSchema = new Schema({
   }
 });
 
+/** Statics */
+
+CustomerSchema.statics.load = function(id, cb) {
+  this.findOne({
+    _id: id
+  }).exec(cb);
+};
+
 /**
  * Plugins
  */

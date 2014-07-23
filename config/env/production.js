@@ -1,11 +1,19 @@
 'use strict';
 
 module.exports = {
-    db: 'mongodb://prorata:prorata1@ds027799.mongolab.com:27799/prorata-prod',
-    slack:{
-      meandomain : 'meanio',
-      meantoken : 'xoxp-2194933696-2194933708-2443321518-a2df23'
-    },
+  db: 'mongodb://prorata:prorata1@ds027799.mongolab.com:27799/prorata-prod',
+  redis: {
+    host: 'pub-redis-16767.us-east-1-2.3.ec2.garantiadata.com',
+    port: 16767,
+    options: { no_ready_check: true }
+  },
+  acl: {
+    prefix: 'prod'
+  },
+  slack:{
+    meandomain : 'meanio',
+    meantoken : 'xoxp-2194933696-2194933708-2443321518-a2df23'
+  },
   app: {
     name: 'MEAN - A Modern Stack - Production'
   },

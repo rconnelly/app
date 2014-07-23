@@ -24,16 +24,23 @@ angular.module('mean.customers').config(['$stateProvider',
       return deferred.promise;
     };
 
-    $stateProvider.state('list customers', {
+    $stateProvider
+      .state('list customers', {
       url: '/customers',
       templateUrl: 'customers/views/list.html',
       resolve: {
         loggedin: checkLoggedin
       }
-    });
-
-    $stateProvider.state('create customers', {
+    })
+      .state('create customer', {
       url: '/customers/create',
+      templateUrl: 'customers/views/create.html',
+      resolve: {
+        loggedin: checkLoggedin
+      }
+    })
+      .state('edit customer', {
+      url: '/customers/:customerId/edit',
       templateUrl: 'customers/views/create.html',
       resolve: {
         loggedin: checkLoggedin

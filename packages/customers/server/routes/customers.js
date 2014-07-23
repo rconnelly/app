@@ -1,6 +1,7 @@
 'use strict';
 
 var customers = require('../controllers/customers');
+//var acl = require('acl');
 
 // Article authorization helpers
 var hasAuthorization = function(req, res, next) {
@@ -15,11 +16,12 @@ module.exports = function(Customers, app, auth) {
   app.route('/customers')
     .get(customers.all)
     .post(auth.requiresLogin, customers.create);
-  app.route('/customers/:customersId')
+  app.route('/customers/:customerId')
     .get(customers.show)
     .put(auth.requiresLogin, hasAuthorization, customers.update)
     .delete(auth.requiresLogin, hasAuthorization, customers.destroy);
 
   // Finish with setting up the customerId param
   app.param('customerId', customers.customer);
+
 };
