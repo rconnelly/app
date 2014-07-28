@@ -38,7 +38,7 @@ angular.module('mean.customers').controller('PriceListController', ['$scope', '$
 
         //$scope.customerItem = customer.priceList;
       });
-    }
+    };
 
     $scope.initList = function() {
       Customers.get({ customerId: $stateParams.customerId }, function(customer) {
