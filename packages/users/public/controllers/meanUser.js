@@ -4,7 +4,7 @@ angular.module('mean.users')
     function($scope, $rootScope, $http, $location) {
       // This object will be filled by the form
       $scope.user = {};
-
+      $rootScope.bodyClass = 'account-bg';
       // Register the login() function
       $scope.login = function() {
         $http.post('/login', {
