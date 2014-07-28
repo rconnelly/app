@@ -5,7 +5,10 @@
  */
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-  timestamps = require('mongoose-times');
+  timestamps = require('mongoose-times'),
+  ObjectId = mongoose.Schema.Types.ObjectId;
+
+//var CustomerItem = mongoose.model('CustomerItem');
 
 /**
  * Validations
@@ -102,7 +105,20 @@ var CustomerSchema = new Schema({
     country: {
       type: String
     }
-  }
+  },
+  priceList: [{
+    defaultQty: {
+      type: Number
+    },
+    price: {
+      type: Number
+    },
+    item: {
+      type: ObjectId,
+      required: true,
+      ref: 'Item'
+    }
+  }]
 });
 
 /** Statics */

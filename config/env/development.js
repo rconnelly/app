@@ -3,7 +3,8 @@
 module.exports = {
 
     //db: 'mongodb://prorata:prorata1@ds027799.mongolab.com:27799/prorata-prod',
-    db: 'mongodb://prorata:prorata1@ds027819.mongolab.com:27819/prorata-dev',
+    //db: 'mongodb://prorata:prorata1@ds027819.mongolab.com:27819/prorata-dev',
+    db: 'mongodb://prorata:prorata1@localhost:27017/prorata',
     redis: {
       host: 'pub-redis-16767.us-east-1-2.3.ec2.garantiadata.com',
       port: 16767,

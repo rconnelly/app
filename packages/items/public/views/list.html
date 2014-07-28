@@ -11,7 +11,7 @@
         <table class="table table-striped table-bordered" ng-table="tableParams">
             <tbody>
             <tr ng-repeat="item in $data">
-                <td class="col-sm-9 text-center" data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
+                <td class="col-sm-9" data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
                     <strong>{{item.name}}</strong><br />
                     {{ item.description }}
                 </td>

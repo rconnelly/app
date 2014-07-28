@@ -1,0 +1,39 @@
+<section data-ng-controller="PriceListController" data-ng-init="initEdit()">
+
+    <h2>Create Customer</h2>
+    <form name="customerItemForm" class="form" role="form" data-ng-submit="save(customerItem)" novalidate>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Item</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="form-group col-md-6" data-ng-class="{ 'has-error' : submitted && customerItemForm.itemName.$invalid }">
+                                <label mean-token="'create-customer-item-name'" for="itemName" class="control-label">Item Name</label>
+                                <input name="itemName" type="text" class="form-control" data-ng-model="customerItem.itemName" id="itemName" placeholder="required" required />
+                                <div ng-show="submitted && customerItemForm.itemName.$invalid" class="help-block">
+                                    <p ng-show="customerItemForm.itemName.$error.required">An item is required</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class=" panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-12 text-center btn-toolbar">
+                        <button type="button" class="btn btn-default btn-lg" data-ng-click="cancel()">Cancel</button>
+                        <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>

@@ -26,26 +26,40 @@ angular.module('mean.customers').config(['$stateProvider',
 
     $stateProvider
       .state('list customers', {
-      url: '/customers',
-      templateUrl: 'customers/views/list.html',
-      resolve: {
-        loggedin: checkLoggedin
-      }
-    })
+        url: '/customers',
+        templateUrl: 'customers/views/list.html',
+        resolve: {
+          loggedin: checkLoggedin
+        }
+      })
       .state('create customer', {
-      url: '/customers/create',
-      templateUrl: 'customers/views/create.html',
-      resolve: {
-        loggedin: checkLoggedin
-      }
-    })
+        url: '/customers/create',
+        templateUrl: 'customers/views/create.html',
+        resolve: {
+          loggedin: checkLoggedin
+        }
+      })
       .state('edit customer', {
-      url: '/customers/:customerId/edit',
-      templateUrl: 'customers/views/create.html',
-      resolve: {
-        loggedin: checkLoggedin
-      }
-    });
+        url: '/customers/:customerId/edit',
+        templateUrl: 'customers/views/create.html',
+        resolve: {
+          loggedin: checkLoggedin
+        }
+      })
+      .state('list price list', {
+        url: '/customers/:customerId/pricelist',
+        templateUrl: 'customers/views/pricelist.html',
+        resolve: {
+          loggedin: checkLoggedin
+        }
+      })
+      .state('create customer item', {
+        url: '/customers/:customerId/pricelist/create',
+        templateUrl: 'customers/views/createcustomeritem.html',
+        resolve: {
+          loggedin: checkLoggedin
+        }
+      });
 
   }
 ]);
