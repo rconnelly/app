@@ -1,5 +1,7 @@
 'use strict';
 
+// New Relic
+require('newrelic');
 // Requires meanio
 var mean = require('meanio');
 
