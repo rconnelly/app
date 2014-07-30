@@ -12,7 +12,16 @@
                         <div class="row">
                             <div class="form-group col-md-6" data-ng-class="{ 'has-error' : submitted && customerItemForm.itemName.$invalid }">
                                 <label mean-token="'create-customer-item-name'" for="itemName" class="control-label">Item Name</label>
-                                <input name="itemName" type="text" class="form-control" data-ng-model="customerItem.itemName" id="itemName" placeholder="required" required />
+
+                                <!-- input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http"
+                                       typeahead="address for address in getLocation($viewValue)"
+                                       typeahead-loading="loadingLocations" class="form-control" -->
+
+                                <input type="text" name="itemName" class="form-control" data-ng-model="customerItem.itemName"
+                                       typeahead="item for item in findItems($viewValue) | filter:$viewValue | limitTo:8"
+                                       typeahead-loading="loadingLocations" id="itemName" placeholder="required" required />
+
+                                <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
                                 <div ng-show="submitted && customerItemForm.itemName.$invalid" class="help-block">
                                     <p ng-show="customerItemForm.itemName.$error.required">An item is required</p>
                                 </div>

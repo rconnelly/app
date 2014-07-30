@@ -10,11 +10,12 @@ module.exports = {
       port: 16767,
       options: { no_ready_check: true }
     },
+    debug: true,
     acl: {
       prefix: 'dev'
     },
     app: {
-        name: 'MEAN - FullStack JS - Development'
+        name: 'ProRata - Revenue Recognition for Subscription-Based Businesses (Development)'
     },
     facebook: {
         clientID: 'APP_ID',

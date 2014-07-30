@@ -15,7 +15,7 @@ module.exports = {
     meantoken : 'xoxp-2194933696-2194933708-2443321518-a2df23'
   },
   app: {
-    name: 'MEAN - A Modern Stack - Production'
+    name: 'ProRata - Revenue Recognition for Subscription-Based Businesses'
   },
   facebook: {
     clientID: 'APP_ID',

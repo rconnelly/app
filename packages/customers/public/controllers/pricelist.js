@@ -1,13 +1,25 @@
 'use strict';
 
-angular.module('mean.customers').controller('PriceListController', ['$scope', '$location', '$filter', '$stateParams', 'Global', 'ngTableParams', 'Customers',
-  function ($scope, $location, $filter, $stateParams, Global, TableParams, Customers) {
+angular.module('mean.customers').controller('PriceListController', ['$scope', '$location', '$filter', '$stateParams', 'Global', 'ngTableParams', 'Customers','Items',
+  function ($scope, $location, $filter, $stateParams, Global, TableParams, Customers, Items) {
     $scope.global = Global;
     $scope.package = {
       name: 'pricelist'
     };
 
     $scope.customerId = $stateParams.customerId;
+
+    $scope.selected = undefined;
+
+    $scope.findItems = function(value){
+      return Items.query({name: value}).$promise.then(function(results) {
+        var items = [];
+        angular.forEach(results, function (item) {
+          items.push(item.name);
+        });
+        return items;
+      });
+    };
 
     $scope.tableParams = new TableParams({
       page: 1,            // show first page

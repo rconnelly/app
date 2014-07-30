@@ -12,7 +12,7 @@ module.exports = {
   },
   port: 3001,
   app: {
-    name: 'MEAN - A Modern Stack - Test'
+    name: 'ProRata - Revenue Recognition for Subscription-Based Businesses'
   },
   facebook: {
     clientID: 'APP_ID',

@@ -20,6 +20,7 @@ exports.item = function(req, res, next, id) {
   });
 };
 
+
 /**
  * Create an article
  */
@@ -83,8 +84,12 @@ exports.show = function(req, res) {
 /**
  * List of items
  */
-exports.all = function(req, res) {
-  Item.find().sort('-createdAt').exec(function(err, items) {
+exports.query = function(req, res) {
+  var query = {};
+  if (!!req.query.name) {
+    query = { name: new RegExp(req.query.name, 'i') };
+  }
+  Item.find(query).sort('-createdAt').exec(function (err, items) {
     if (err) {
       return res.json(500, {
         error: 'Cannot list the items'
