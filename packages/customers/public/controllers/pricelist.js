@@ -1,7 +1,9 @@
 'use strict';
 
-angular.module('mean.customers').controller('PriceListController', ['$scope', '$location', '$filter', '$stateParams', 'Global', 'ngTableParams', 'Customers','Items',
-  function ($scope, $location, $filter, $stateParams, Global, TableParams, Customers, Items) {
+angular.module('mean.customers').controller('PriceListController', ['$scope', '$location', '$filter', '$stateParams', '$window',
+  'Global', 'ngTableParams', 'Customers','Items',
+  function ($scope, $location, $filter, $stateParams, $window,
+            Global, TableParams, Customers, Items) {
     $scope.global = Global;
     $scope.package = {
       name: 'pricelist'
@@ -15,7 +17,7 @@ angular.module('mean.customers').controller('PriceListController', ['$scope', '$
       return Items.query({name: value}).$promise.then(function(results) {
         var items = [];
         angular.forEach(results, function (item) {
-          items.push(item.name);
+          items.push(item);
         });
         return items;
       });
@@ -45,9 +47,12 @@ angular.module('mean.customers').controller('PriceListController', ['$scope', '$
       }
     });
 
+    $scope.cancel = function() {
+      $window.history.back();
+    };
+
     $scope.initEdit = function() {
       Customers.get({ customerId: $stateParams.customerId }, function(customer) {
-
         //$scope.customerItem = customer.priceList;
       });
     };

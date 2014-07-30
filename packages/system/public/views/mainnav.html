@@ -5,10 +5,6 @@
         <i class="fa fa-bars"></i>
     </a>
     <nav class="collapse mainnav-collapse" collapse="isMainMenuCollapsed" role="navigation">
-        <form class="mainnav-form pull-right" role="search">
-            <input type="text" class="form-control input-md mainnav-search-query" placeholder="Search">
-            <button class="btn btn-sm mainnav-form-btn"><i class="fa fa-search"></i></button>
-        </form>
         <ul class="mainnav-menu">
             <li data-ng-repeat="item in menus.main" ui-route="/{{item.link}}" ng-class="{active: $uiRoute, dropdown: true}">
                 <a mean-token="item.link" ui-sref='{{item.link}}'>{{item.title}}</a>

@@ -22,8 +22,8 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
     // Query server for menus and check permissions
     queryMenu('main', defaultMainMenu);
 
-    $scope.isBannerCollapsed = false;
-    $scope.isMainMenuCollapsed = false;
+    $scope.isBannerCollapsed = true;
+    $scope.isMainMenuCollapsed = true;
 
     $rootScope.$on('loggedin', function() {
 

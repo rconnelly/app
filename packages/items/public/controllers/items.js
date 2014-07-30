@@ -7,6 +7,8 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
       name: 'items'
     };
 
+    $scope.pageTitle = 'Create Item';
+
     $scope.tableParams = new TableParams({
       page: 1,            // show first page
       count: 10,          // count per page
@@ -78,6 +80,7 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
 
     $scope.initEdit = function() {
       if(angular.isDefined($stateParams.itemId)) {
+        $scope.pageTitle = 'Edit Item';
         this.findById($stateParams.itemId);
       }
     };

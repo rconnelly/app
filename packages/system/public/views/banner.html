@@ -2,7 +2,7 @@
 <header class="navbar navbar-inverse" role="banner" data-ng-controller="HeaderController">
     <div class="container">
         <div class="navbar-header">
-            <button class="navbar-toggle" type="button">
+            <button class="navbar-toggle" type="button" ng-click="isBannerCollapsed = !isBannerCollapsed">
                 <span class="sr-only">Toggle navigation</span>
                 <i class="fa fa-cog"></i>
             </button>
@@ -11,7 +11,7 @@
                ProRata
             </a>
         </div> <!-- /.navbar-header -->
-        <nav class="collapse navbar-collapse" role="navigation">
+        <nav class="collapse navbar-collapse" role="navigation" collapse="isBannerCollapsed">
 
             <ul class="nav navbar-nav noticebar navbar-left" data-ng-show="global.authenticated" >
 
