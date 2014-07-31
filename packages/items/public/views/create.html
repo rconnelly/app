@@ -31,9 +31,18 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-8" data-ng-class="{ 'has-error' : submitted && itemForm.itemDescription.$invalid }">
-
                                 <label mean-token="'create-item-price'" for="itemPrice" class="control-label">Description</label>
                             <textarea name="itemDescription" id="itemDescription" data-ng-model="item.description" class="form-control"></textarea>
+                            </div>
+
+                            <div class="form-group col-md-4" data-ng-class="{ 'has-error' : submitted && itemForm.itemTerm.$invalid }">
+                                <label mean-token="'create-item-term'" for="itemTerm" class="control-label">Term</label>
+                                <select name="itemTerm" class="form-control" id="itemTerm" data-ng-model="item.term"
+                                        ng-options="itemTerm for itemTerm in itemTerms" required></select>
+
+                                <div ng-show="submitted && itemForm.itemTerm.$invalid" class="help-block">
+                                    <p ng-show="itemForm.itemTerm.$error.required">Item term is required</p>
+                                </div>
                             </div>
                         </div>
                     </div>

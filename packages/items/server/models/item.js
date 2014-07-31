@@ -23,7 +23,12 @@ var ItemSchema = new Schema({
     type: String
   },
   price: {
-    type: Number
+    type: Number,
+    required: true
+  },
+  term: {
+    type: String,
+    required: true
   }
 });
 
@@ -36,6 +41,10 @@ ItemSchema.statics.load = function(id, cb) {
 
 ItemSchema.statics.query = function (name, cb) {
   this.find({ name: new RegExp(name, 'i') }, cb);
+};
+
+ItemSchema.statics.terms = function (cb) {
+  cb(['Once','Monthly', 'Bi-Monthly','Quarterly','Yearly']);
 };
 
 /**

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.items').controller('ItemsController', ['$scope', '$location', '$filter', '$stateParams', 'Global', 'ngTableParams', 'Items',
-  function ($scope, $location, $filter, $stateParams, Global, TableParams, Items) {
+angular.module('mean.items').controller('ItemsController', ['$scope', '$location', '$filter', '$stateParams', 'Global', 'ngTableParams', 'Items','ItemTerms',
+  function ($scope, $location, $filter, $stateParams, Global, TableParams, Items, ItemTerms) {
     $scope.global = Global;
     $scope.package = {
       name: 'items'
@@ -33,6 +33,13 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
         });
       }
     });
+
+    $scope.getItemTerms = function() {
+      ItemTerms.query(function(itemTerms){
+        console.log(itemTerms);
+        $scope.itemTerms = itemTerms;
+      });
+    };
 
     $scope.save = function (itemData) {
       if (this.itemForm.$valid) {
@@ -79,6 +86,7 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
     };
 
     $scope.initEdit = function() {
+      this.getItemTerms();
       if(angular.isDefined($stateParams.itemId)) {
         $scope.pageTitle = 'Edit Item';
         this.findById($stateParams.itemId);

@@ -21,6 +21,9 @@ module.exports = function(Customers, app, auth) {
     .put(auth.requiresLogin, hasAuthorization, items.update)
     .delete(auth.requiresLogin, hasAuthorization, items.destroy);
 
+  app.route('/itemterms')
+    .get(items.terms);
+
   // Finish with setting up the itemId param
   app.param('itemId', items.item);
 

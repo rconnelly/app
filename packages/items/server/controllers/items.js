@@ -49,7 +49,7 @@ exports.update = function(req, res) {
   item.save(function(err) {
     if (err) {
       return res.json(500, {
-        error: 'Cannot update the item'
+        error: 'Cannot update the item ' + err
       });
     }
     res.json(item);
@@ -79,6 +79,12 @@ exports.destroy = function(req, res) {
  */
 exports.show = function(req, res) {
   res.json(req.item);
+};
+
+exports.terms = function(req, res) {
+  Item.terms(function(terms) {
+    res.json(terms);
+  });
 };
 
 /**
