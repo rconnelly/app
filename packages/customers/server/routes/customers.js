@@ -4,14 +4,6 @@ var customers = require('../controllers/customers'),
   priceItems = require('../controllers/priceitems');
 //var acl = require('acl');
 
-// Article authorization helpers
-var hasAuthorization = function(req, res, next) {
-  if (!req.user.isAdmin && req.article.user.id !== req.user.id) {
-    return res.send(401, 'User is not authorized');
-  }
-  next();
-};
-
 module.exports = function(Customers, app, auth) {
 
   app.route('/customers')
@@ -23,12 +15,14 @@ module.exports = function(Customers, app, auth) {
     .post(auth.requiresLogin, priceItems.create);
 
   app.route('/customers/:customerId/priceitems/:priceId')
-    .get(auth.requiresLogin, priceItems.show);
+    .get(auth.requiresLogin, priceItems.show)
+    .put(auth.requiresLogin, priceItems.update)
+    .put(auth.requiresLogin, priceItems.destroy);
 
   app.route('/customers/:customerId')
     .get(auth.requiresLogin, customers.show)
-    .put(auth.requiresLogin, hasAuthorization, customers.update)
-    .delete(auth.requiresLogin, hasAuthorization, customers.destroy);
+    .put(auth.requiresLogin, customers.update)
+    .delete(auth.requiresLogin, customers.destroy);
 
   // Finish with setting up the customerId param
   app.param('customerId', customers.customer);

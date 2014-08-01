@@ -5,7 +5,8 @@
  */
 var mongoose = require('mongoose'),
   PriceItem = mongoose.model('PriceItem'),
-  Customer = mongoose.model('Customer');
+  Customer = mongoose.model('Customer'),
+  _ = require('lodash');
 
 /**
  * Create a price item
@@ -34,7 +35,40 @@ exports.all = function(req, res) {
       return res.json(500, err);
     }
     res.json(customer.priceItems);
+  });
+};
 
+/**
+ * Update an price item
+ */
+exports.update = function(req, res) {
+  var customer = req.customer;
+  var data = req.body;
+  if(data.item._id)
+    data.item = data.item._id;
+
+  var priceItem = customer.priceItems.id(data._id);
+  priceItem = _.extend(priceItem, data);
+
+  customer.save(function(err) {
+    if (err) {
+      return res.json(500, err);
+    }
+    res.json(priceItem);
+  });
+};
+
+/**
+ * Delete an price item
+ */
+exports.destroy = function(req, res) {
+  var customer = req.customer;
+  var priceItem = customer.priceItems.id(req.params.priceId).remove();
+  customer.remove(function(err) {
+    if (err) {
+      return res.json(500, err);
+    }
+    res.json(priceItem);
   });
 };
 

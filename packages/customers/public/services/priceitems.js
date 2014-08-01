@@ -4,7 +4,7 @@
 angular.module('mean.customers').factory('PriceItems', ['$resource',
   function($resource) {
     return $resource('customers/:customerId/priceitems/:priceId', {
-      customerItemId: '@_id',
+      priceId: '@_id',
       customerId: '@customerId'
     }, {
       update: {

@@ -16,9 +16,14 @@ angular.module('mean.customers').controller('PriceItemsController', ['$rootScope
     $scope.save = function (item) {
       if (this.customerItemForm.$valid) {
         var priceItem = new PriceItems(item);
+        priceItem.customerId = $stateParams.customerId;
         if(!angular.isDefined(priceItem._id)) {
-          priceItem.customerId = $stateParams.customerId;
           priceItem.$save(function () {
+            $window.history.back();
+          });
+        }
+        else {
+          priceItem.$update(function () {
             $window.history.back();
           });
         }
@@ -69,9 +74,11 @@ angular.module('mean.customers').controller('PriceItemsController', ['$rootScope
     };
 
     $scope.initEdit = function() {
-      PriceItems.get({ customerId: $stateParams.customerId, priceId: $stateParams.priceId }, function(priceItem) {
-        $scope.priceItem = priceItem;
-      });
+      if(angular.isDefined($stateParams.priceId)) {
+        PriceItems.get({ customerId: $stateParams.customerId, priceId: $stateParams.priceId }, function (priceItem) {
+          $scope.priceItem = priceItem;
+        });
+      }
     };
 
     $scope.initList = function() {
