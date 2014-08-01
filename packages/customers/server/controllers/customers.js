@@ -21,7 +21,7 @@ exports.customer = function(req, res, next, id) {
 };
 
 /**
- * Create an article
+ * Create an customer
  */
 exports.create = function(req, res) {
   var customer = new Customer(req.body);
@@ -48,7 +48,7 @@ exports.update = function(req, res) {
   customer.save(function(err) {
     if (err) {
       return res.json(500, {
-        error: 'Cannot update the customer'
+        error: 'Cannot update the customer ' + err
       });
     }
     res.json(customer);

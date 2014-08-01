@@ -1,7 +1,8 @@
-<section data-ng-controller="PriceListController" data-ng-init="initEdit()">
+<section data-ng-controller="PriceItemsController" data-ng-init="initEdit()">
 
     <h2>Create Price List Item</h2>
-    <form name="customerItemForm" class="form" role="form" data-ng-submit="save(customerItem)" novalidate>
+    <h3 data-ng-bind="customer.displayName"></h3>
+    <form name="customerItemForm" class="form" role="form" data-ng-submit="save(priceItem)" novalidate>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -13,18 +14,20 @@
                             <div class="form-group col-md-6" data-ng-class="{ 'has-error' : submitted && customerItemForm.itemName.$invalid }">
                                 <label mean-token="'create-customer-item-name'" for="itemName" class="control-label">Item Name</label>
 
-                                <input type="text" name="itemName" class="form-control" data-ng-model="customerItem.item"
+                                <input type="text" name="itemName" class="form-control" data-ng-model="priceItem.item"
                                        typeahead="item as item.name for item in findItems($viewValue) | filter:$viewValue | limitTo:8"
-                                       id="itemName" placeholder="required" required />
+                                       id="itemName" placeholder="required" data-ng-disabled="editMode" required />
                                 <div ng-show="submitted && customerItemForm.itemName.$invalid" class="help-block">
                                     <p ng-show="customerItemForm.itemName.$error.required">An item is required</p>
                                 </div>
                             </div>
                             <div class="form-group col-md-offset-2 col-md-4" data-ng-class="{ 'has-error' : submitted && customerItemForm.price.$invalid }">
                                 <label mean-token="'create-customer-item-name'" for="itemName" class="control-label">Price</label>
-
-                                <input type="text" name="price" class="form-control" data-ng-model="customerItem.price"
-                                       id="price" placeholder="required" required />
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    <input type="text" name="price" class="form-control" data-ng-model="priceItem.price"
+                                           id="price" placeholder="required" required />
+                                </div>
                                 <div ng-show="submitted && customerItemForm.price.$invalid" class="help-block">
                                     <p ng-show="customerItemForm.price.$error.required">An item is required</p>
                                 </div>

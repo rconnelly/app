@@ -6,9 +6,7 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   timestamps = require('mongoose-times'),
-  ObjectId = mongoose.Schema.Types.ObjectId;
-
-//var CustomerItem = mongoose.model('CustomerItem');
+  PriceItem = require('./priceitem').Schema;
 
 /**
  * Validations
@@ -106,19 +104,7 @@ var CustomerSchema = new Schema({
       type: String
     }
   },
-  priceList: [{
-    defaultQty: {
-      type: Number
-    },
-    price: {
-      type: Number
-    },
-    item: {
-      type: ObjectId,
-      required: true,
-      ref: 'Item'
-    }
-  }]
+  priceItems: [PriceItem]
 });
 
 /** Statics */
@@ -133,7 +119,7 @@ CustomerSchema.statics.load = function(id, cb) {
  * Plugins
  */
 
-mongoose.model('Customer', CustomerSchema);
+module.exports = mongoose.model('Customer', CustomerSchema);
 
 CustomerSchema.plugin(timestamps, {created: 'createdAt', lastUpdated: 'updatedAt'} );
 //InvoiceSchema.plugin(autoIncrement.plugin, { model: 'Invoice', field: 'invoiceNumber' });

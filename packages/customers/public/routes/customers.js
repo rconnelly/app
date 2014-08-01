@@ -47,15 +47,22 @@ angular.module('mean.customers').config(['$stateProvider',
         }
       })
       .state('list price list', {
-        url: '/customers/:customerId/pricelist',
-        templateUrl: 'customers/views/pricelist.html',
+        url: '/customers/:customerId/priceitems',
+        templateUrl: 'customers/views/priceitem/list.html',
         resolve: {
           loggedin: checkLoggedin
         }
       })
       .state('create customer item', {
-        url: '/customers/:customerId/pricelist/create',
-        templateUrl: 'customers/views/createcustomeritem.html',
+        url: '/customers/:customerId/priceitems/create',
+        templateUrl: 'customers/views/priceitem/create.html',
+        resolve: {
+          loggedin: checkLoggedin
+        }
+      })
+      .state('edit customer item', {
+        url: '/customers/:customerId/priceitems/:priceId/edit',
+        templateUrl: 'customers/views/priceitem/create.html',
         resolve: {
           loggedin: checkLoggedin
         }
