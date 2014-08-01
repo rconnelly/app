@@ -17,7 +17,8 @@ var mongoose = require('mongoose'),
 var ItemSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   description: {
     type: String
