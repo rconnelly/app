@@ -70,19 +70,8 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
     };
 
     $scope.remove = function(customer) {
-      if (customer) {
-        customer.$remove();
-
-        for (var i in $scope.customers) {
-          if ($scope.customers[i] === customer) {
-            $scope.customers.splice(i, 1);
-          }
-        }
-      } else {
-        $scope.customers.$remove(function(response) {
-          $location.path('customers');
-        });
-      }
+      customer.$remove();
+      $scope.tableParams.reload();
     };
 
     $scope.initEdit = function() {

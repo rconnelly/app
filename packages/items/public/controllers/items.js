@@ -70,19 +70,8 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
     };
 
     $scope.remove = function(item) {
-      if (item) {
-        item.$remove();
-
-        for (var i in $scope.items) {
-          if ($scope.items[i] === item) {
-            $scope.items.splice(i, 1);
-          }
-        }
-      } else {
-        $scope.items.$remove(function(response) {
-          $location.path('items');
-        });
-      }
+      item.$remove();
+      $scope.tableParams.reload();
     };
 
     $scope.initEdit = function() {
