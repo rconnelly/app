@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   timestamps = require('mongoose-times'),
+  PriceItem = require('../../../customers/server/models/priceitem').Schema,
   ObjectId = mongoose.Schema.Types.ObjectId;
 
 /**
@@ -20,15 +21,13 @@ var SubscriptionSchema = new Schema({
     type: ObjectId,
     required: true
   },
-  description: {
-    type: String
-  },
-  price: {
-    type: Number,
+  priceItems: [PriceItem],
+  startDate: {
+    type: Date,
     required: true
   },
-  term: {
-    type: String,
+  endDate: {
+    type: Date,
     required: true
   }
 });

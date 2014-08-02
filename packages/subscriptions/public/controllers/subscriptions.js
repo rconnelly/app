@@ -6,5 +6,11 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
         $scope.package = {
             name: 'subscriptions'
         };
+
+      $scope.find = function() {
+        Subscriptions.query(function(subscriptions) {
+          $scope.subscriptions = subscriptions;
+        });
+      };
     }
 ]);

@@ -1,9 +1,15 @@
 'use strict';
 
-angular.module('mean.subscriptions').factory('Subscriptions', [
-    function() {
-        return {
-            name: 'subscriptions'
-        };
+//Items service used for items REST endpoint
+angular.module('mean.items')
+  .factory('Subscriptions', ['$resource',
+    function($resource) {
+      return $resource('subscriptions/:subscriptionId', {
+        itemId: '@_id'
+      }, {
+        update: {
+          method: 'PUT'
+        }
+      });
     }
-]);
+  ]);

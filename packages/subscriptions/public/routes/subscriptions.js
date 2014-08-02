@@ -2,9 +2,9 @@
 
 angular.module('mean.subscriptions').config(['$stateProvider',
     function($stateProvider) {
-        $stateProvider.state('subscriptions example page', {
-            url: '/subscriptions/example',
-            templateUrl: 'subscriptions/views/index.html'
+        $stateProvider.state('list subscriptions', {
+            url: '/subscriptions',
+            templateUrl: 'subscriptions/views/list.html'
         });
     }
 ]);
