@@ -15,8 +15,8 @@
                     <strong>{{item.name}}</strong><br />
                     {{ item.description }}
                 </td>
-                <td class="col-sm-2 text-center" data-title="'Term'" sortable="'term'" data-filter="{ 'term': 'text' }">
-                    {{item.term}}
+                <td class="col-sm-2 text-center" data-title="'Rev Rec Template'" sortable="'revRecTemplate'" data-filter="{ 'revRecTemplate': 'text' }">
+                    {{item.revRecTemplate}}
                 </td>
                 <td class="col-sm-2 text-right" data-title="'Price'" sortable="'price'" data-filter="{ 'price': 'text' }">
                     {{item.price | currency}}
@@ -25,7 +25,7 @@
                     <a class="btn btn-default" data-ng-click="edit(item);">
                         Edit
                     </a>
-                    <a class="btn btn-danger" data-ng-click="remove(customerItem);">
+                    <a class="btn btn-danger" data-ng-click="remove(item);">
                         Delete
                     </a>
                 </td>
@@ -36,7 +36,7 @@
     </div>
 
 
-    <div class="well-lg" data-ng-show="items.length === 0">
+    <div class="well-lg well text-center" data-ng-show="items.length === 0">
         <h3>No Items</h3>
     </div>
 </div>

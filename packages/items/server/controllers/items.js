@@ -87,6 +87,13 @@ exports.terms = function(req, res) {
   });
 };
 
+exports.revRecTemplates = function(req, res) {
+  Item.revRecTemplates(function(scheds) {
+    res.json(scheds);
+  });
+};
+
+
 /**
  * List of items
  */

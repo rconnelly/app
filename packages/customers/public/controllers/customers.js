@@ -63,7 +63,8 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
     };
 
     $scope.manageSubscriptions = function(customer) {
-
+      console.log('subscriptions?customerId=' + customer._id);
+      $location.path('subscriptions?customerId=' + customer._id);
     };
 
     $scope.managePriceLists = function(customer) {

@@ -21,7 +21,8 @@ Subscriptions.register(function(app, auth, database) {
         title: 'Subscriptions',
         link: 'list subscriptions',
         roles: ['authenticated'],
-        menu: 'main'
+        menu: 'main',
+        priority: 90
     });
 
     /**

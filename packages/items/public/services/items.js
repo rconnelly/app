@@ -17,4 +17,9 @@ angular.module('mean.items')
     function($resource) {
       return $resource('itemterms');
     }
+  ])
+  .factory('RevRecSchedules', ['$resource',
+    function($resource) {
+      return $resource('rrtemplates');
+    }
   ]);

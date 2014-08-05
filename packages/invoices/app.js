@@ -21,7 +21,8 @@ Invoices.register(function(app, auth, database) {
         title: 'Invoices',
         link: 'list invoices',
         roles: ['authenticated'],
-        menu: 'main'
+        menu: 'main',
+        priority: 20
     });
 
     /**

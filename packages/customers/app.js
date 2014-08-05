@@ -21,7 +21,8 @@ Customers.register(function(app, auth, database) {
         title: 'Customers',
         link: 'list customers',
         roles: ['authenticated'],
-        menu: 'main'
+        menu: 'main',
+        priority: 100
     });
 
   Customers.angularDependencies(['ngTable']);

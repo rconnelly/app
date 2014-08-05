@@ -35,13 +35,13 @@
                             <textarea name="itemDescription" id="itemDescription" data-ng-model="item.description" class="form-control"></textarea>
                             </div>
 
-                            <div class="form-group col-md-4" data-ng-class="{ 'has-error' : submitted && itemForm.itemTerm.$invalid }">
-                                <label mean-token="'create-item-term'" for="itemTerm" class="control-label">Term</label>
-                                <select name="itemTerm" class="form-control" id="itemTerm" data-ng-model="item.term"
-                                        ng-options="itemTerm for itemTerm in itemTerms" required></select>
+                            <div class="form-group col-md-4" data-ng-class="{ 'has-error' : submitted && itemForm.revRecTemplate.$invalid }">
+                                <label mean-token="'create-item-rrsched'" for="revRecTemplate" class="control-label">Rev Rec Template</label>
+                                <select name="revRecTemplate" class="form-control" id="revRecTemplate" data-ng-model="item.revRecTemplate"
+                                        ng-options="rrs for rrs in revRecs" required></select>
 
-                                <div ng-show="submitted && itemForm.itemTerm.$invalid" class="help-block">
-                                    <p ng-show="itemForm.itemTerm.$error.required">Item term is required</p>
+                                <div ng-show="submitted && itemForm.revRecTemplate.$invalid" class="help-block">
+                                    <p ng-show="itemForm.revRecTemplate.$error.required">Revenue Recognition Template is required</p>
                                 </div>
                             </div>
                         </div>

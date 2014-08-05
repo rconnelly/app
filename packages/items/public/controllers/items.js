@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.items').controller('ItemsController', ['$scope', '$location', '$filter', '$stateParams', 'Global', 'ngTableParams', 'Items','ItemTerms',
-  function ($scope, $location, $filter, $stateParams, Global, TableParams, Items, ItemTerms) {
+angular.module('mean.items').controller('ItemsController', ['$scope', '$location', '$filter', '$stateParams', 'Global', 'ngTableParams', 'Items','RevRecSchedules',
+  function ($scope, $location, $filter, $stateParams, Global, TableParams, Items, RevRecSchedules) {
     $scope.global = Global;
     $scope.package = {
       name: 'items'
@@ -35,9 +35,9 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
       }
     });
 
-    $scope.getItemTerms = function() {
-      ItemTerms.query(function(itemTerms){
-        $scope.itemTerms = itemTerms;
+    $scope.getSchedules = function() {
+      RevRecSchedules.query(function(s){
+        $scope.revRecs = s;
       });
     };
 
@@ -70,12 +70,13 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
     };
 
     $scope.remove = function(item) {
-      item.$remove();
-      $scope.tableParams.reload();
+      item.$delete(function(result) {
+        $scope.tableParams.reload();
+      });
     };
 
     $scope.initEdit = function() {
-      this.getItemTerms();
+      this.getSchedules();
       if(angular.isDefined($stateParams.itemId)) {
         $scope.pageTitle = 'Edit Item';
         this.findById($stateParams.itemId);

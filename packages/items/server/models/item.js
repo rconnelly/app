@@ -27,7 +27,7 @@ var ItemSchema = new Schema({
     type: Number,
     required: true
   },
-  term: {
+  revRecTemplate: {
     type: String,
     required: true
   }
@@ -54,6 +54,10 @@ ItemSchema.statics.query = function (query, cb) {
 
 ItemSchema.statics.terms = function (cb) {
   cb(['Once','Monthly', 'Bi-Monthly','Quarterly','Yearly']);
+};
+
+ItemSchema.statics.revRecTemplates = function (cb) {
+  cb(['Once','12 Month', 'Evenly Applied']);
 };
 
 /**

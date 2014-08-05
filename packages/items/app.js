@@ -21,7 +21,8 @@ Items.register(function(app, auth, database) {
         title: 'Items',
         link: 'list items',
         roles: ['authenticated'],
-        menu: 'main'
+        menu: 'main',
+        priority: 10
     });
 
     /**

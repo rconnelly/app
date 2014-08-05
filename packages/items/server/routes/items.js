@@ -16,6 +16,9 @@ module.exports = function(Customers, app, auth) {
   app.route('/itemterms')
     .get(items.terms);
 
+  app.route('/rrtemplates')
+    .get(items.revRecTemplates);
+
   // Finish with setting up the itemId param
   app.param('itemId', items.item);
 };
