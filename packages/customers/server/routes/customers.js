@@ -17,7 +17,7 @@ module.exports = function(Customers, app, auth) {
   app.route('/customers/:customerId/priceitems/:priceId')
     .get(auth.requiresLogin, priceItems.show)
     .put(auth.requiresLogin, priceItems.update)
-    .put(auth.requiresLogin, priceItems.destroy);
+    .delete(auth.requiresLogin, priceItems.destroy);
 
   app.route('/customers/:customerId')
     .get(auth.requiresLogin, customers.show)

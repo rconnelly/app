@@ -16,6 +16,7 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
         name: 'asc'     // initial sorting
       }
     }, {
+      counts: 0,
       total: 0,
       getData: function($defer, params) {
         // use build-in angular filter
@@ -36,7 +37,6 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
 
     $scope.getItemTerms = function() {
       ItemTerms.query(function(itemTerms){
-        console.log(itemTerms);
         $scope.itemTerms = itemTerms;
       });
     };

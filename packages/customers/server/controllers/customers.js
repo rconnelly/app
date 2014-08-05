@@ -28,9 +28,7 @@ exports.create = function(req, res) {
 
   customer.save(function(err) {
     if (err) {
-      return res.json(500, {
-        error: 'Cannot save the customer' + err
-      });
+      return res.json(500, err);
     }
     res.json(customer);
 
@@ -47,9 +45,7 @@ exports.update = function(req, res) {
 
   customer.save(function(err) {
     if (err) {
-      return res.json(500, {
-        error: 'Cannot update the customer ' + err
-      });
+      return res.json(500,err);
     }
     res.json(customer);
 
@@ -61,15 +57,11 @@ exports.update = function(req, res) {
  */
 exports.destroy = function(req, res) {
   var customer = req.customer;
-
   customer.remove(function(err) {
     if (err) {
-      return res.json(500, {
-        error: 'Cannot delete the customer'
-      });
+      return res.json(500, err);
     }
     res.json(customer);
-
   });
 };
 
@@ -86,11 +78,10 @@ exports.show = function(req, res) {
 exports.all = function(req, res) {
   Customer.find().sort('-createdAt').exec(function(err, customers) {
     if (err) {
-      return res.json(500, {
-        error: 'Cannot list the customers'
-      });
+      return res.json(500, err);
     }
     res.json(customers);
 
   });
 };
+

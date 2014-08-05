@@ -12,4 +12,8 @@ angular.module('mean.items')
         }
       });
     }
+  ]).factory('BillingSchedules', ['$resource',
+    function($resource) {
+      return $resource('billingschedules');
+    }
   ]);

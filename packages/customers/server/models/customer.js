@@ -6,7 +6,8 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   timestamps = require('mongoose-times'),
-  PriceItem = require('./priceitem').Schema;
+  PriceItem = require('./priceitem').Schema,
+  _ = require('lodash');
 
 /**
  * Validations
@@ -106,6 +107,21 @@ var CustomerSchema = new Schema({
   },
   priceItems: [PriceItem]
 });
+
+/** Custom validation */
+CustomerSchema.pre('save', function (next) {
+
+  var newList = _.unique(this.priceItems, false, function(priceItem){
+    return priceItem.item;
+  });
+
+  if(newList.length !== this.priceItems.length) {
+    var error = new mongoose.Error.ValidationError('An item with that name already exists');
+    return next(error);
+  }
+  next();
+});
+
 
 /** Statics */
 

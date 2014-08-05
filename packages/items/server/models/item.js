@@ -40,8 +40,16 @@ ItemSchema.statics.load = function(id, cb) {
   }).exec(cb);
 };
 
-ItemSchema.statics.query = function (name, cb) {
-  this.find({ name: new RegExp(name, 'i') }, cb);
+ItemSchema.statics.query = function (query, cb) {
+  var q = {};
+  if(!!query.name) {
+    q.name = new RegExp(query.name, 'i');
+  }
+
+  if(!!query.term){
+    q.term = query.term;
+  }
+  return this.find(q, cb);
 };
 
 ItemSchema.statics.terms = function (cb) {

@@ -16,7 +16,7 @@
 
                                 <input type="text" name="itemName" class="form-control" data-ng-model="priceItem.item"
                                        typeahead="item as item.name for item in findItems($viewValue) | filter:$viewValue | limitTo:8"
-                                       id="itemName" placeholder="required" data-ng-disabled="editMode" required />
+                                       id="itemName" placeholder="required" data-ng-disabled="isItemNameFieldDisabled" required />
                                 <div ng-show="submitted && customerItemForm.itemName.$invalid" class="help-block">
                                     <p ng-show="customerItemForm.itemName.$error.required">An item is required</p>
                                 </div>

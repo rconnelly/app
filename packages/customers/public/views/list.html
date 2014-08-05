@@ -12,9 +12,9 @@
             <tbody>
             <tr ng-repeat="customer in $data">
                 <td class="col-sm-7" data-title="'Customer'" sortable="'company.name'" filter="{ 'company.name': 'text' }">
-                    <strong>{{customer.contact.firstName}} {{customer.contact.lastName}}</strong><br />
-                    {{customer.contact.email}} <br />
-                    {{customer.company.name}}
+                    <strong>{{customer.company.name}}</strong><br />
+                    {{customer.contact.firstName}} {{customer.contact.lastName}}<br />
+                    {{customer.contact.email}}
                 </td>
                 <td class="col-sm-5 text-right">
 
@@ -27,8 +27,8 @@
                     <a class="btn btn-default" data-ng-click="manageSubscriptions(customer);">
                         Subscriptions
                     </a>
-                    <a class="btn" data-ng-click="remove(customer);">
-                        <i class="glyphicon glyphicon-trash"></i>
+                    <a class="btn btn-danger" data-ng-click="remove(customer);">
+                        Delete
                     </a>
                 </td>
             </tr>

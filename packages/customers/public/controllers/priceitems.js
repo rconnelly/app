@@ -9,7 +9,6 @@ angular.module('mean.customers').controller('PriceItemsController', ['$rootScope
       name: 'priceitems'
     };
     $scope.customerId = $stateParams.customerId;
-    $scope.editMode = $stateParams.priceId;
     $scope.items = [];
     $scope.selected = undefined;
 
@@ -32,6 +31,14 @@ angular.module('mean.customers').controller('PriceItemsController', ['$rootScope
       }
     };
 
+    $scope.remove = function(item){
+      var priceItem = new PriceItems(item);
+      priceItem.customerId = $stateParams.customerId;
+      priceItem.$delete(function(){
+        $scope.tableParams.reload();
+      });
+    };
+
     $scope.findItems = function(value){
       return Items.query({name: value}).$promise.then(function(results) {
         var items = [];
@@ -50,6 +57,7 @@ angular.module('mean.customers').controller('PriceItemsController', ['$rootScope
       }
     }, {
       total: 0,
+      counts: 0,
       getData: function($defer, params) {
         // use built-in angular filter
         PriceItems.query({ customerId: $stateParams.customerId }, function(priceItems) {
@@ -77,6 +85,7 @@ angular.module('mean.customers').controller('PriceItemsController', ['$rootScope
       if(angular.isDefined($stateParams.priceId)) {
         PriceItems.get({ customerId: $stateParams.customerId, priceId: $stateParams.priceId }, function (priceItem) {
           $scope.priceItem = priceItem;
+          $scope.isItemNameFieldDisabled = $stateParams.priceId && !!priceItem.item;
         });
       }
     };

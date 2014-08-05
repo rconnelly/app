@@ -16,12 +16,13 @@ exports.create = function(req, res) {
   data.item = data.item._id;
   var priceItem = new PriceItem(data);
   var customer = req.customer;
-  var item = customer.priceItems.push(priceItem);
-  customer.save(function(err) {
+
+  customer.priceItems.push(priceItem);
+  customer.save(function (err) {
     if (err) {
       return res.json(500, err);
     }
-    res.json(item);
+    res.json(priceItem);
   });
 };
 
@@ -64,7 +65,7 @@ exports.update = function(req, res) {
 exports.destroy = function(req, res) {
   var customer = req.customer;
   var priceItem = customer.priceItems.id(req.params.priceId).remove();
-  customer.remove(function(err) {
+  customer.save(function(err) {
     if (err) {
       return res.json(500, err);
     }

@@ -15,19 +15,20 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
       }
     }, {
       total: 0,
+      counts: 0,
       getData: function($defer, params) {
         // use build-in angular filter
         Customers.query(function(customers) {
-            // update table params
+          // update table params
 
           params.total(customers.length);
-            var filteredData = params.filter() ? $filter('filter')(customers,params.filter()) : customers;
+          var filteredData = params.filter() ? $filter('filter')(customers,params.filter()) : customers;
 
-            var orderedData = params.sorting() ?
-              $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+          var orderedData = params.sorting() ?
+            $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
 
 
-            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         });
       }
     });
@@ -70,8 +71,10 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
     };
 
     $scope.remove = function(customer) {
-      customer.$remove();
-      $scope.tableParams.reload();
+      //customer.$remove();
+      customer.$delete(function(){
+        $scope.tableParams.reload();
+      });
     };
 
     $scope.initEdit = function() {

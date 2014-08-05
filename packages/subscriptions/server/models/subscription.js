@@ -32,6 +32,10 @@ var SubscriptionSchema = new Schema({
   }
 });
 
+SubscriptionSchema.statics.billingSchedules = function (cb) {
+  cb(['Monthly', 'Quarterly', 'Yearly']);
+};
+
 /** Statics */
 SubscriptionSchema.statics.load = function(id, cb) {
   this.findOne({
@@ -42,7 +46,6 @@ SubscriptionSchema.statics.load = function(id, cb) {
 SubscriptionSchema.statics.query = function (name, cb) {
   this.find({ name: new RegExp(name, 'i') }, cb);
 };
-
 
 /**
  * Plugins

@@ -91,11 +91,7 @@ exports.terms = function(req, res) {
  * List of items
  */
 exports.query = function(req, res) {
-  var query = {};
-  if (!!req.query.name) {
-    query = { name: new RegExp(req.query.name, 'i') };
-  }
-  Item.find(query).sort('-createdAt').exec(function (err, items) {
+  Item.query(req.query).sort('-createdAt').exec(function (err, items) {
     if (err) {
       return res.json(500, {
         error: 'Cannot list the items'
