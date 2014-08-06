@@ -8,7 +8,14 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
             name: 'subscriptions'
         };
 
+      $scope.subscriptions = [];
+      $scope.subscription = {items:[]};
+      $scope.items = [];
+      $scope.format = 'shortDate';
+      $scope.itemEditId = -1;
+
       $scope.init = function(){
+        this.getItems();
         this.initBillingSchedules();
         this.pageTitle = (!$stateParams.subscriptionId) ? 'Create Subscription' : 'Edit Subscription';
         this.minDate = new Date();
@@ -33,15 +40,38 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
         $window.history.back();
       };
 
-      $scope.findItems = function(value, term){
-        console.log('value: ' + value + ' term: ' + term);
-        return Items.query({name: value, term: term}).$promise.then(function(results) {
-          var items = [];
-          angular.forEach(results, function (item) {
-            items.push(item);
-          });
-          return items;
+      $scope.getItems = function() {
+        Items.query(function(s){
+          $scope.items = s;
         });
+      };
+
+      $scope.removeItem = function(item) {
+        var idx = this.subscription.items.indexOf(item);
+        this.subscription.items.splice(idx,1);
+        this.tableParams.reload();
+      };
+
+      $scope.editItem = function(item) {
+        item.$edit = true;
+      };
+
+      $scope.doneEdit = function(item) {
+        item.$edit = false;
+      };
+
+      $scope.saveEdit = function(item) {
+        //$scope.itemEditId = item._id;
+        item.$edit = false;
+      };
+
+      $scope.addItem = function(item) {
+        if(!item || this.subscription.items.indexOf(item) !== -1)
+          return;
+
+        item.qty = 1;
+        this.subscription.items.push(item);
+        this.tableParams.reload();
       };
 
       $scope.tableParams = new TableParams({
@@ -54,7 +84,7 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
         counts: 0,
         total: 0,
         getData: function($defer, params) {
-          var orderedData = [];
+          var orderedData = $scope.subscription.items;
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });

@@ -6,18 +6,18 @@ var items = require('../controllers/items');
 module.exports = function(Customers, app, auth) {
 
   app.route('/items')
-    .get(items.query)
+    .get(auth.requiresLogin, items.query)
     .post(auth.requiresLogin, items.create);
   app.route('/items/:itemId')
-    .get(items.show)
+    .get(auth.requiresLogin, items.show)
     .put(auth.requiresLogin, items.update)
     .delete(auth.requiresLogin, items.destroy);
 
   app.route('/itemterms')
-    .get(items.terms);
+    .get(auth.requiresLogin, items.terms);
 
   app.route('/rrtemplates')
-    .get(items.revRecTemplates);
+    .get(auth.requiresLogin, items.revRecTemplates);
 
   // Finish with setting up the itemId param
   app.param('itemId', items.item);

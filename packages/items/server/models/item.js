@@ -30,6 +30,18 @@ var ItemSchema = new Schema({
   revRecTemplate: {
     type: String,
     required: true
+  },
+  setupFee: {
+    type: Number,
+    default: 0
+  },
+  recurringPeriod: {
+    type: Number,
+    required: true
+  },
+  recurringPeriodType: {
+   type: String,
+    required: true
   }
 });
 

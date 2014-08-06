@@ -10,24 +10,20 @@
         <h5>Sign up in 30 seconds. No credit card required.</h5>
         <form ng-submit="register()" class="form account-form">
             <div class="form-group">
-                <label for="name" class="placeholder-hidden">Your Name</label>
-                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" tabindex="1" ng-model="user.name">
+                <label for="name" class="control-label">Full Name</label>
+                <input type="text" name="name" class="form-control" id="name" placeholder="required" tabindex="1" ng-model="user.name">
             </div> <!-- /.form-group -->
 
             <div class="form-group">
-                <label for="email" class="placeholder-hidden">Email Address</label>
-                <input type="text" class="form-control" name="email" id="email" placeholder="Your Email" tabindex="2" ng-model="user.email">
+                <label for="email" class="control-label">Email Address</label>
+                <input type="text" class="form-control" name="email" id="email" placeholder="must be a valid email" tabindex="2" ng-model="user.email">
             </div> <!-- /.form-group -->
 
             <div class="form-group">
-                <label for="password" class="placeholder-hidden">Password</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="Password" tabindex="3" ng-model="user.password">
+                <label for="password" class="control-label">Password</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="6-20 characters in length" tabindex="3" ng-model="user.password">
             </div> <!-- /.form-group -->
 
-            <div class="form-group">
-                <label for="confirmPassword" class="placeholder-hidden">Password</label>
-                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Retype Password" tabindex="4" ng-model="user.confirmPassword">
-            </div> <!-- /.form-group -->
 
             <div class="form-group">
                 <label class="checkbox-inline">

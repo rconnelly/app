@@ -29,11 +29,14 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
           var orderedData = params.sorting() ?
             $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
 
-
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         });
       }
     });
+
+    $scope.getRecurringPeriodTypes = function(){
+      $scope.recurringPeriodTypes = [{type:'month', name:'Month(s)'},{type:'day', name:'Days(s)'}];
+    };
 
     $scope.getSchedules = function() {
       RevRecSchedules.query(function(s){
@@ -76,6 +79,7 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
     };
 
     $scope.initEdit = function() {
+      this.getRecurringPeriodTypes();
       this.getSchedules();
       if(angular.isDefined($stateParams.itemId)) {
         $scope.pageTitle = 'Edit Item';

@@ -29,9 +29,7 @@ exports.create = function(req, res) {
 
   item.save(function(err) {
     if (err) {
-      return res.json(500, {
-        error: 'Cannot save the item' + err
-      });
+      return res.json(500, err);
     }
     res.json(item);
 
@@ -48,9 +46,7 @@ exports.update = function(req, res) {
 
   item.save(function(err) {
     if (err) {
-      return res.json(500, {
-        error: 'Cannot update the item ' + err
-      });
+      return res.json(500, err);
     }
     res.json(item);
 
@@ -65,9 +61,7 @@ exports.destroy = function(req, res) {
 
   item.remove(function(err) {
     if (err) {
-      return res.json(500, {
-        error: 'Cannot delete the item'
-      });
+      return res.json(500, err);
     }
     res.json(item);
 

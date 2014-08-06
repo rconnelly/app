@@ -43,7 +43,6 @@ angular.module('mean.users')
         $http.post('/register', {
           email: $scope.user.email,
           password: $scope.user.password,
-          confirmPassword: $scope.user.confirmPassword,
           username: $scope.user.email,
           name: $scope.user.name
         })

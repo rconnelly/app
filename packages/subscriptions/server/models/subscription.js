@@ -29,6 +29,24 @@ var SubscriptionSchema = new Schema({
   endDate: {
     type: Date,
     required: true
+  },
+  items: {
+    name: {
+      type: String,
+      required: true
+    },
+    qty: {
+      type: Number,
+      required: true
+    },
+    price: {
+      type: Number,
+      required: true
+    },
+    revRecTemplate: {
+      type: String,
+      required: true
+    }
   }
 });
 
@@ -43,8 +61,8 @@ SubscriptionSchema.statics.load = function(id, cb) {
   }).exec(cb);
 };
 
-SubscriptionSchema.statics.query = function (name, cb) {
-  this.find({ name: new RegExp(name, 'i') }, cb);
+SubscriptionSchema.statics.query = function (cb) {
+  this.find({ }, cb);
 };
 
 /**
