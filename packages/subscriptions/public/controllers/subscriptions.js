@@ -13,21 +13,45 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
       $scope.items = [];
       $scope.format = 'shortDate';
       $scope.itemEditId = -1;
+      $scope.total = 0;
+      $scope.pageTitle = (!$stateParams.subscriptionId) ? 'Create Subscription' : 'Edit Subscription';
+
+      $scope.initList = function(){
+
+      };
 
       $scope.init = function(){
-        this.getItems();
+        this.initSubscription($stateParams.subscriptionId);
+        this.initItems();
         this.initBillingSchedules();
-        this.pageTitle = (!$stateParams.subscriptionId) ? 'Create Subscription' : 'Edit Subscription';
         this.minDate = new Date();
       };
 
-      $scope.find = function() {
-        Subscriptions.query(function(subscriptions) {
-          $scope.subscriptions = subscriptions;
+      $scope.initSubscription = function(subscriptionId){
+        Subscriptions.get({subscriptionId:subscriptionId}, function(subscription){
+          $scope.subscription = subscription;
+          $scope.itemListData.reload();
         });
       };
 
       $scope.save = function(subscription){
+        if (this.subscriptionForm.$valid) {
+          var s = new Subscriptions(subscription);
+
+          if(angular.isDefined($stateParams.subscriptionId)) {
+            s._id = $stateParams.subscriptionId;
+            s.$update(function(response){
+              $location.path('subscriptions/list');
+            });
+          } else {
+            s.$save(function (response) {
+              $location.path('subscriptions/list');
+            });
+          }
+
+        } else {
+          $scope.submitted = true;
+        }
       };
 
       $scope.initBillingSchedules = function() {
@@ -40,7 +64,9 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
         $window.history.back();
       };
 
-      $scope.getItems = function() {
+      /** Items
+       * */
+      $scope.initItems = function() {
         Items.query(function(s){
           $scope.items = s;
         });
@@ -49,7 +75,7 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
       $scope.removeItem = function(item) {
         var idx = this.subscription.items.indexOf(item);
         this.subscription.items.splice(idx,1);
-        this.tableParams.reload();
+        this.itemListData.reload();
       };
 
       $scope.editItem = function(item) {
@@ -61,7 +87,6 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
       };
 
       $scope.saveEdit = function(item) {
-        //$scope.itemEditId = item._id;
         item.$edit = false;
       };
 
@@ -71,10 +96,42 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
 
         item.qty = 1;
         this.subscription.items.push(item);
-        this.tableParams.reload();
+        $scope.updateTotals($scope.subscription,function(){
+          $scope.itemListData.reload();
+        });
       };
 
-      $scope.tableParams = new TableParams({
+      // Watch subscription items for changes
+      $scope.$watch(
+        'subscription.items',
+        function() {
+          $scope.updateTotals($scope.subscription);
+        },
+        true
+      );
+
+      $scope.updateTotals = function(subscription,cb) {
+        Subscriptions.calculateTotals(subscription, function(result){
+          // copy over total and extended only
+          $scope.subscription.total = result.total;
+          for(var i = 0; i < $scope.subscription.items.length; i++){
+            if(angular.isDefined(result.items[i]))
+              $scope.subscription.items[i].extended = result.items[i].extended;
+          }
+          if(!!cb)
+            cb();
+        });
+      };
+
+      $scope.editSubscription = function(subscription) {
+        $location.path('subscriptions/' + subscription._id);
+      };
+
+      $scope.removeSubscription = function(subscription){
+        subscription.$remove();
+      };
+
+      $scope.itemListData = new TableParams({
         page: 1,            // show first page
         count: 10,          // count per page
         sorting: {
@@ -86,6 +143,32 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
         getData: function($defer, params) {
           var orderedData = $scope.subscription.items;
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+      });
+
+      $scope.subscriptionListData = new TableParams({
+        page: 1,            // show first page
+        count: 10,          // count per page
+        sorting: {
+          name: 'asc'     // initial sorting
+        }
+      }, {
+        counts: 0,
+        total: 0,
+        getData: function($defer, params) {
+          Subscriptions.query(function(subscriptions) {
+            // update table params
+            $scope.subscriptions = subscriptions;
+
+            params.total(subscriptions.length);
+            var filteredData = params.filter() ? $filter('filter')(subscriptions,params.filter()) : subscriptions;
+
+            var orderedData = params.sorting() ?
+              $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+
+
+            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+          });
         }
       });
 

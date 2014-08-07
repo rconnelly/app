@@ -51,11 +51,11 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
         if(angular.isDefined($stateParams.itemId)) {
           c._id = $stateParams.itemId;
           c.$update(function(response){
-            $location.path('items');
+            $location.path('items/list');
           });
         } else {
           c.$save(function (response) {
-            $location.path('items');
+            $location.path('items/list');
           });
         }
 
@@ -65,7 +65,7 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
     };
 
     $scope.cancel = function() {
-      $location.path('items');
+      $location.path('items/list');
     };
 
     $scope.edit = function(item) {

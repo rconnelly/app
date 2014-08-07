@@ -11,7 +11,7 @@
         <table class="table table-striped table-bordered" ng-table="tableParams">
             <tbody>
             <tr ng-repeat="item in $data">
-                <td class="col-sm-2 text-center" data-title="'Name'" data-sortable="'name'" data-filter="{ 'name': 'text' }">
+                <td class="col-sm-3 text-left" data-title="'Name'" data-sortable="'name'" data-filter="{ 'name': 'text' }">
                     <strong>{{item.name}}</strong><br />
                     {{ item.description }}
                 </td>
@@ -25,15 +25,18 @@
                 </td>
                 <td class="col-sm-2 text-right" data-title="'Price'" sortable="'price'" data-filter="{ 'price': 'text' }">
                     {{item.price | currency}}<br />
-                    <span class="setup-fee">Setup Fee: {{ item.setupFee | currency }}</span>
+                    <span class="setup-fee" ng-show="item.setupFee">Setup Fee: {{ item.setupFee | currency }}</span>
                 </td>
-                <td class="col-sm-4 text-center">
-                    <a class="btn btn-default" data-ng-click="edit(item);">
-                        Edit
-                    </a>
-                    <a class="btn btn-danger" data-ng-click="remove(item);">
-                        Delete
-                    </a>
+                <td class="col-sm-3 text-right">
+
+                    <div class="btn-group">
+                        <a class="btn btn-default" data-ng-click="edit(item);">
+                            Edit
+                        </a>
+                        <a class="btn btn-danger" data-ng-click="remove(item);">
+                            Delete
+                        </a>
+                    </div>
                 </td>
             </tr>
             </tbody>

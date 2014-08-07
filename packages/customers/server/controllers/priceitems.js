@@ -13,7 +13,9 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
   var data = req.body;
-  data.item = data.item._id;
+  if(!!data.item._id) // convert object to ref
+    data.item = data.item._id;
+
   var priceItem = new PriceItem(data);
   var customer = req.customer;
 

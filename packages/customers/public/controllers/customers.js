@@ -41,11 +41,11 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
         if(angular.isDefined($stateParams.customerId)) {
           c._id = $stateParams.customerId;
           c.$update(function(response){
-            $location.path('customers');
+            $location.path('customers/list');
           });
         } else {
           c.$save(function (response) {
-            $location.path('customers');
+            $location.path('customers/list');
           });
         }
 
@@ -55,7 +55,7 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
     };
 
     $scope.cancel = function() {
-      $location.path('customers');
+      $location.path('customers/list');
     };
 
     $scope.edit = function(customer) {
@@ -63,8 +63,7 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
     };
 
     $scope.manageSubscriptions = function(customer) {
-      console.log('subscriptions?customerId=' + customer._id);
-      $location.path('subscriptions?customerId=' + customer._id);
+      $location.path('subscriptions/list');
     };
 
     $scope.managePriceLists = function(customer) {

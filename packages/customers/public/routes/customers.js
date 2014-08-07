@@ -26,7 +26,7 @@ angular.module('mean.customers').config(['$stateProvider',
 
     $stateProvider
       .state('list customers', {
-        url: '/customers',
+        url: '/customers/list',
         templateUrl: 'customers/views/list.html',
         resolve: {
           loggedin: checkLoggedin

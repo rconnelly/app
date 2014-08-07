@@ -20,16 +20,30 @@ exports.subscription = function(req, res, next, id) {
   });
 };
 
+/** Calculate the items in the subscription and return a total. */
+exports.calculateTotals = function(req,res)
+{
+  req.checkBody('subscription.customer', 'Customer must be a string').isAlphanumeric();
+  //req.checkBody('subscription.items', 'Subscriptions items are required to calculate total').isLength(1);
+  var subscription = req.body;
+  Subscription.calculateTotals(subscription);
+  res.json(subscription);
+};
+
 /**
- * Create an article
+ * Create an subscription
  */
 exports.create = function(req, res) {
-  var subscription = new Subscription(req.body);
+  // TODO: Add validation
+
+  var data = req.body;
+  if(!!data.customer._id) // convert object to ref
+    data.customer = data.customer._id;
+
+  var subscription = new Subscription(data);
   subscription.save(function(err) {
     if (err) {
-      return res.json(500, {
-        error: 'Cannot save the subscription' + err
-      });
+      return res.json(500, err);
     }
     res.json(subscription);
   });
@@ -39,13 +53,13 @@ exports.create = function(req, res) {
  * Update an subscription
  */
 exports.update = function(req, res) {
+  // TODO: Add validation
+
   var subscription = req.subscription;
   subscription = _.extend(subscription, req.body);
   subscription.save(function(err) {
     if (err) {
-      return res.json(500, {
-        error: 'Cannot update the subscription ' + err
-      });
+      return res.json(500, err);
     }
     res.json(subscription);
 
@@ -60,9 +74,7 @@ exports.destroy = function(req, res) {
 
   subscription.remove(function(err) {
     if (err) {
-      return res.json(500, {
-        error: 'Cannot delete the subscription'
-      });
+      return res.json(500, err);
     }
     res.json(subscription);
   });
@@ -89,7 +101,7 @@ exports.query = function(req, res) {
   if (!!req.query.name) {
     query = { name: new RegExp(req.query.name, 'i') };
   }
-  Subscription.find(query).sort('-createdAt').exec(function (err, subscriptions) {
+  Subscription.find(query).populate({path: 'customer'}).sort('-createdAt').exec(function (err, subscriptions) {
     if (err) {
       return res.json(500, err);
     }
