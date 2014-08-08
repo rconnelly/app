@@ -28,6 +28,8 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
       };
 
       $scope.initSubscription = function(subscriptionId){
+        if(!$stateParams.subscriptionId)
+          return;
         Subscriptions.get({subscriptionId:subscriptionId}, function(subscription){
           $scope.subscription = subscription;
           $scope.itemListData.reload();
@@ -128,7 +130,9 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
       };
 
       $scope.removeSubscription = function(subscription){
-        subscription.$remove();
+        subscription.$remove(function(result){
+          $scope.subscriptionListData.reload();
+        });
       };
 
       $scope.itemListData = new TableParams({

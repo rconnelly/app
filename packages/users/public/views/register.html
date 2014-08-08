@@ -6,22 +6,34 @@
     <div class="alert alert-danger animated fadeIn" ng-show="emailError">{{emailError}}</div>
 
     <div class="account-body">
-        <h3>Get Started with your free 30 day trial.</h3>
-        <h5>Sign up in 30 seconds. No credit card required.</h5>
-        <form ng-submit="register()" class="form account-form">
-            <div class="form-group">
+        <h3 class="text-center">Get Started with your free 30 day trial.</h3>
+        <h5 class="text-center">Sign up in 30 seconds. No credit card required.</h5>
+        <form ng-submit="register()" name="registerForm" class="form" novalidate>
+            <div class="form-group" data-ng-class="{ 'has-error' : submitted && registerForm.name.$invalid }">
                 <label for="name" class="control-label">Full Name</label>
-                <input type="text" name="name" class="form-control" id="name" placeholder="required" tabindex="1" ng-model="user.name">
+                <input type="text" name="name" class="form-control" id="name" placeholder="required" tabindex="1" ng-model="user.name" required>
+                <ul ng-show="submitted && registerForm.name.$invalid" class="error-list">
+                    <li class="required" ng-show="registerForm.name.$error.required">Required</li>
+                </ul>
             </div> <!-- /.form-group -->
 
-            <div class="form-group">
-                <label for="email" class="control-label">Email Address</label>
-                <input type="text" class="form-control" name="email" id="email" placeholder="must be a valid email" tabindex="2" ng-model="user.email">
+            <div class="form-group" data-ng-class="{ 'has-error' : submitted && registerForm.email.$invalid }">
+                <label for="email" class="control-label text-left">Email Address</label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="must be a valid email" tabindex="2" ng-model="user.email" required>
+                <ul ng-show="submitted && registerForm.email.$invalid" class="error-list">
+                    <li class="required" ng-show="registerForm.email.$error.required">Required</li>
+                    <li class="required" ng-show="registerForm.email.$error.email">Invalid email address</li>
+                </ul>
             </div> <!-- /.form-group -->
 
-            <div class="form-group">
+            <div class="form-group" data-ng-class="{ 'has-error' : submitted && registerForm.password.$invalid }">
                 <label for="password" class="control-label">Password</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="6-20 characters in length" tabindex="3" ng-model="user.password">
+                <input type="password" class="form-control" name="password" id="password" placeholder="6-20 characters in length" maxlength="20" ng-minlength="6" ng-maxlength="20"
+                       tabindex="3" ng-model="user.password" required>
+                <ul ng-show="submitted && registerForm.password.$invalid" class="error-list">
+                    <li class="required" ng-show="registerForm.password.$error.required">Required</li>
+                    <li class="required" ng-show="registerForm.password.$error.minlength || registerForm.password.$error.maxlength">Invalid password</li>
+                </ul>
             </div> <!-- /.form-group -->
 
 

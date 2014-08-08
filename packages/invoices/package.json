@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "description": "Some description of invoices",
     "author": {
-        "name": "mean scaffold"
+        "name": "Ryan Connelly"
     },
     "mean": "0.4.0",
     "engines": {
