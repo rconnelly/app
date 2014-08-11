@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
+  ObjectId = mongoose.Schema.Types.ObjectId,
   crypto = require('crypto');
 
 /**
@@ -45,6 +46,10 @@ var UserSchema = new Schema({
     unique: true,
     match: [/.+\@.+\..+/, 'Please enter a valid email'],
     validate: [validateUniqueEmail, 'E-mail address is already in-use']
+  },
+  account: {
+    type: ObjectId,
+    ref: 'Account'
   },
   username: {
     type: String,

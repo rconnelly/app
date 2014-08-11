@@ -1,26 +1,21 @@
 'use strict';
 
+var invoices = require('../controllers/invoices');
+
 // The Package is past automatically as first parameter
-module.exports = function(Invoices, app, auth, database) {
+module.exports = function(Subscriptions, app, auth, database) {
+  app.route('/invoices')
+    .get(auth.requiresLogin, invoices.query)
+    .post(auth.requiresLogin, invoices.create);
 
-    app.get('/invoices/example/anyone', function(req, res, next) {
-        res.send('Anyone can access this');
-    });
+  app.route('/actions/invoices/calculatetotals')
+    .post(auth.requiresLogin, invoices.calculateTotals);
 
-    app.get('/invoices/example/auth', auth.requiresLogin, function(req, res, next) {
-        res.send('Only authenticated users can access this');
-    });
+  app.route('/invoices/:subscriptionId')
+    .get(auth.requiresLogin, invoices.show)
+    .delete(auth.requiresLogin, invoices.destroy)
+    .put(auth.requiresLogin, invoices.update);
 
-    app.get('/invoices/example/admin', auth.requiresAdmin, function(req, res, next) {
-        res.send('Only users with Admin role can access this');
-    });
-
-    app.get('/invoices/example/render', function(req, res, next) {
-        Invoices.render('index', {
-            package: 'invoices'
-        }, function(err, html) {
-            //Rendering a view from the Package server/views
-            res.send(html);
-        });
-    });
+  // Finish with setting up the subscriptionId param
+  app.param('invoiceId', invoices.invoice);
 };

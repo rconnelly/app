@@ -1,7 +1,7 @@
-<section data-ng-controller="SubscriptionsController" data-ng-init="init()">
+<section data-ng-controller="InvoicesController" data-ng-init="initEdit()">
 
     <h2>{{ pageTitle }}</h2>
-    <form name="subscriptionForm" class="form" role="form" data-ng-submit="save(subscription)" novalidate>
+    <form name="invoiceForm" class="form" role="form" data-ng-submit="save(invoice)" novalidate>
 
         <div class="row">
             <div class="col-md-12">
@@ -11,20 +11,20 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="form-group col-md-4" data-ng-class="{ 'has-error' : submitted && subscriptionForm.customerName.$invalid }">
-                                <label mean-token="'create-subscription-customer'" for="customerName" class="control-label">Customer</label>
-                                <input type="text" name="customerName" class="form-control" data-ng-model="subscription.customer"
+                            <div class="form-group col-md-6" data-ng-class="{ 'has-error' : submitted && invoiceForm.customerName.$invalid }">
+                                <label mean-token="'create-invoice-customer'" for="customerName" class="control-label">Customer</label>
+                                <input type="text" name="customerName" class="form-control" data-ng-model="invoice.customer"
                                        typeahead="customer as customer.displayName for customer in findCustomers($viewValue) | filter:$viewValue | limitTo:8"
                                        id="customerName" placeholder="required" required />
-                                <ul ng-show="submitted && subscriptionForm.customerName.$invalid" class="error-list">
-                                    <li class="required" ng-show="subscriptionForm.customerName.$error.required">Required</li>
+                                <ul ng-show="submitted && invoiceForm.customerName.$invalid" class="error-list">
+                                    <li class="required" ng-show="invoiceForm.customerName.$error.required">Required</li>
                                 </ul>
                             </div>
-                            <div class="form-group col-md-4" data-ng-class="{ 'has-error' : submitted && subscriptionForm.startDate.$invalid }">
-                                <label mean-token="'create-item-start-date'" for="startDate" class="control-label">Start Date</label>
+                            <div class="form-group col-md-2 col-md-offset-2" data-ng-class="{ 'has-error' : submitted && invoiceForm.startDate.$invalid }">
+                                <label mean-token="'create-invoice-start-date'" for="startDate" class="control-label">Invoice Date</label>
                                 <div class="input-group">
-                                    <input type="text" name="startDate" id="startDate" class="form-control" datepicker-popup="{{format}}" ng-model="subscription.startDate" is-open="startDateOpened"
-                                           min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"
+                                    <input type="text" name="startDate" id="startDate" class="form-control" datepicker-popup="{{format}}" ng-model="invoice.startDate" is-open="startDateOpened"
+                                           min-date="minStartDate" max-date="maxStartDate" datepicker-options="dateOptions" placeholder="mm/dd/yyyy"
                                            ng-required="true" close-text="Close" />
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" ng-click="openStartDate($event)">
@@ -32,23 +32,53 @@
                                         </button>
                                     </span>
                                 </div>
-                                <ul ng-show="submitted && subscriptionForm.startDate.$invalid" class="error-list">
-                                    <li class="required" ng-show="subscriptionForm.startDate.$error.required">Required</li>
+                                <ul ng-show="submitted && invoiceForm.startDate.$invalid" class="error-list">
+                                    <li class="required" ng-show="invoiceForm.startDate.$error.required">Required</li>
                                 </ul>
                             </div>
-                            <div class="form-group col-md-4" data-ng-class="{ 'has-error' : submitted && subscriptionForm.memo.$invalid }">
-                                <label mean-token="'create-item-memo'" for="memo" class="control-label">Memo</label>
-                                <textarea name="memo" id="memo" data-ng-model="subscription.memo" class="form-control"></textarea>
+                            <div class="form-group col-md-2" data-ng-class="{ 'has-error' : submitted && invoiceForm.terms.$invalid }">
+                                <label mean-token="'create-invoice-terms'" for="terms" class="control-label">Terms</label>
+                                <select name="terms" id="terms" class="form-control"></select>
+                                <ul ng-show="submitted && invoiceForm.terms.$invalid" class="error-list">
+                                    <li class="required" ng-show="invoiceForm.terms.$error.required">Required</li>
+                                </ul>
+                            </div>
+                            <!-- <div class="form-group col-md-2" data-ng-class="{ 'has-error' : submitted && invoiceForm.dueDate.$invalid }">
+                                <label mean-token="'create-invoice-due-date'" for="dueDate" class="control-label">Due Date</label>
+                                <div class="input-group">
+                                    <input type="text" name="dueDate" id="dueDate" class="form-control" datepicker-popup="{{format}}" ng-model="invoice.dueDate" is-open="dueDateOpened"
+                                           min-date="minDueDate" max-date="maxDueDate" datepicker-options="dateOptions"
+                                           ng-required="true" close-text="Close" placeholder="mm/dd/yyyy" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="openDueDate($event)">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <ul ng-show="submitted && invoiceForm.dueDate.$invalid" class="error-list">
+                                    <li class="required" ng-show="invoiceForm.dueDate.$error.required">Required</li>
+                                </ul>
+                            </div>
+                            -->
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6" data-ng-class="{ 'has-error' : submitted && invoiceForm.memo.$invalid }">
+                                <label mean-token="'create-item-customer-message'" for="memo" class="control-label">Customer Message</label>
+                                <textarea name="customerMessage" id="customerMessage" data-ng-model="invoice.customerMessage" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group col-md-6" data-ng-class="{ 'has-error' : submitted && invoiceForm.memo.$invalid }">
+                                <label mean-token="'create-item-memo'" for="memo" class="control-label">Invoice Memo</label>
+                                <textarea name="memo" id="memo" data-ng-model="invoice.memo" class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="well-lg well text-center" data-ng-show="subscription.items.length === 0">
+                                <div class="well-lg well text-center" data-ng-show="invoice.items.length === 0">
                                     <h3>No Items</h3>
                                     <h5>Select items or discounts below to be added</h5>
                                 </div>
 
-                                <div class="table-responsive" data-ng-show="subscription.items.length !== 0">
+                                <div class="table-responsive" data-ng-show="invoice.items.length !== 0">
                                     <table class="table table-striped table-bordered" ng-table="itemListData">
                                         <tbody ng-repeat="item in $data">
                                         <tr>
@@ -105,14 +135,14 @@
 
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-md-8" data-ng-class="{ 'has-error' : submitted && subscriptionForm.newDiscount.$invalid }">
+                                    <div class="form-group col-md-8" data-ng-class="{ 'has-error' : submitted && invoiceForm.newDiscount.$invalid }">
                                         <select name="newDiscount" class="form-control" id="newDiscount" data-ng-model="newItem"
                                                 ng-options="">
                                             <option value="" selected disabled>Discounts</option>
                                         </select>
 
-                                        <div ng-show="submitted && subscriptionForm.itemName.$invalid" class="help-block">
-                                            <p ng-show="subscriptionForm.itemName.$error.required">An item is required</p>
+                                        <div ng-show="submitted && invoiceForm.itemName.$invalid" class="help-block">
+                                            <p ng-show="invoiceForm.itemName.$error.required">An item is required</p>
                                         </div>
                                     </div>
 
@@ -129,7 +159,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-offset-6 col-md-6">
-                                        <h3>Total: {{subscription.total | currency}}</h3>
+                                        <h3>Total: {{invoice.total | currency}}</h3>
                                     </div>
                                 </div>
                             </div>

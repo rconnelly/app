@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
   Subscription = mongoose.model('Subscription'),
+  Item = mongoose.model('Item'),
   _ = require('lodash');
 
 
@@ -26,7 +27,7 @@ exports.calculateTotals = function(req,res)
   req.checkBody('subscription.customer', 'Customer must be a string').isAlphanumeric();
   //req.checkBody('subscription.items', 'Subscriptions items are required to calculate total').isLength(1);
   var subscription = req.body;
-  Subscription.calculateTotals(subscription);
+  Item.calculateTotals(subscription);
   res.json(subscription);
 };
 
