@@ -44,6 +44,9 @@ var InvoiceSchema = new Schema({
   memo: {
     type: String
   },
+  total: {
+    type: Number
+  },
   items: []
 });
 

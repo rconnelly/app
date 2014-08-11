@@ -50,6 +50,7 @@ exports.create = function(req, res) {
   if(!!data.customer._id) // convert object to ref
     data.customer = data.customer._id;
 
+  Item.calculateTotals(data);
   var invoice = new Invoice(data);
   invoice.save(function(err) {
     if (err) {
@@ -67,6 +68,7 @@ exports.update = function(req, res) {
 
   var invoice = req.invoice;
   invoice = _.extend(invoice, req.body);
+  Item.calculateTotals(invoice);
   invoice.save(function(err) {
     if (err) {
       return res.json(500, err);
