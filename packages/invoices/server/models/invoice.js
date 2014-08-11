@@ -38,6 +38,9 @@ var InvoiceSchema = new Schema({
     type: Date,
     required: true
   },
+  invoiceNumber: {
+    type: String
+  },
   message: {
     type: String
   },

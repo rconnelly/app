@@ -11,13 +11,16 @@
         <table class="table table-striped table-bordered" ng-table="invoiceListData">
             <tbody>
             <tr ng-repeat="invoice in $data">
+                <td class="col-sm-2 text-center" data-title="'Invoice Number'" sortable="'invoice.customer.invoiceNumber'" filter="{ 'invoice.customer.invoiceNumber': 'text' }">
+                    {{invoice.invoiceNumber}}
+                </td>
                 <td class="col-sm-2 text-center" data-title="'Customer'" sortable="'invoice.customer.displayName'" filter="{ 'invoice.customer.displayName': 'text' }">
                     {{invoice.customer.displayName}}
                 </td>
                 <td class="col-sm-2 text-center" data-title="'Invoice Date'" sortable="'invoice.startDate'" filter="{ 'invoice.startDate': 'text' }">
                     {{invoice.invoiceDate | date:'mediumDate'}}
                 </td>
-                <td class="col-sm-4 text-center" data-title="'Description'" sortable="'invoice.description'" filter="{ 'invoice.description': 'text' }">
+                <td class="col-sm-2 text-center" data-title="'Description'" sortable="'invoice.description'" filter="{ 'invoice.description': 'text' }">
                     {{invoice.items[0].name}}
                 </td>
                 <td class="col-sm-2 text-center" data-title="'Total'" sortable="'invoice.total'" filter="{ 'invoice.total': 'text' }">
