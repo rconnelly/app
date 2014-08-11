@@ -10,6 +10,10 @@ angular.module('mean.invoices').config(['$stateProvider',
       .state('invoice create', {
         url: '/invoices/create',
         templateUrl: 'invoices/views/edit.html'
+      })
+      .state('invoice edit', {
+        url: '/invoices/:invoiceId/edit',
+        templateUrl: 'invoices/views/edit.html'
       });
   }
 ]);

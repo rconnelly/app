@@ -46,7 +46,6 @@ exports.defaultDueDate = function(req,res)
  */
 exports.create = function(req, res) {
   // TODO: Add validation
-
   var data = req.body;
   if(!!data.customer._id) // convert object to ref
     data.customer = data.customer._id;

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.invoices').controller('InvoicesController', ['$scope', '$stateParams', '$state', '$filter', 'Customers', 'Items', 'Global', 'Invoices','ngTableParams',
-    function($scope, $stateParams, $state, $filter, Customers, Items, Global, Invoices, TableParams) {
+angular.module('mean.invoices').controller('InvoicesController', ['$scope', '$stateParams', '$state', '$filter', 'Global', 'Customers', 'Items', 'InvoiceTerms','Invoices', 'ngTableParams',
+    function($scope, $stateParams, $state, $filter, Global, Customers, Items, InvoiceTerms, Invoices, TableParams) {
         $scope.global = Global;
         $scope.package = {
             name: 'invoices'
@@ -15,10 +15,28 @@ angular.module('mean.invoices').controller('InvoicesController', ['$scope', '$st
       /****** Init **********/
 
       $scope.initEdit = function() {
+        this.initInvoice();
         this.initItems();
+        this.initTerms();
       };
 
       $scope.initList = function() {
+      };
+
+      $scope.initInvoice = function() {
+        if(!$stateParams.invoiceId)
+          return;
+
+        Invoices.get({invoiceId: $stateParams.invoiceId}, function(invoice){
+          $scope.invoice = invoice;
+          $scope.itemListData.reload();
+        });
+      };
+
+      $scope.initTerms = function() {
+        InvoiceTerms.query(function(s){
+          $scope.termsList = s;
+        });
       };
 
       $scope.initItems = function() {
@@ -28,6 +46,24 @@ angular.module('mean.invoices').controller('InvoicesController', ['$scope', '$st
       };
 
       /****** Create / Edit **********/
+
+      $scope.save = function(invoice){
+        if (this.invoiceForm.$valid) {
+          var i = new Invoices(invoice);
+          if(angular.isDefined($stateParams.invoiceId)) {
+            i._id = $stateParams.invoiceId;
+            i.$update(function(response){
+              $state.go('invoice');
+            });
+          } else {
+            i.$save(function (response) {
+              $state.go('invoice');
+            });
+          }
+        } else {
+          $scope.submitted = true;
+        }
+      };
 
       $scope.findCustomers = function(value){
         return Customers.query({companyName: value}).$promise.then(function(results) {
@@ -122,6 +158,10 @@ angular.module('mean.invoices').controller('InvoicesController', ['$scope', '$st
       };
 
       /****** List **********/
+
+      $scope.editInvoice = function(invoice){
+        $state.go('invoice edit', {invoiceId: invoice._id });
+      };
 
       $scope.invoiceListData = new TableParams({
         page: 1,            // show first page

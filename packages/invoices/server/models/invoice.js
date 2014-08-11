@@ -34,6 +34,10 @@ var InvoiceSchema = new Schema({
     required: true,
     ref: 'InvoiceTerms'
   },
+  invoiceDate: {
+    type: Date,
+    required: true
+  },
   message: {
     type: String
   },
@@ -47,7 +51,7 @@ var InvoiceSchema = new Schema({
 InvoiceSchema.statics.load = function(id, cb) {
   this.findOne({
     _id: id
-  }).exec(cb);
+  }).populate({path: 'customer'}).exec(cb);
 };
 
 InvoiceSchema.statics.getDefaultDueDate = function(startDate, terms, cb) {

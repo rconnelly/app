@@ -3,9 +3,8 @@
 /*
  * Defining the Package
  */
-var Module = require('meanio').Module;
-
-var Invoices = new Module('invoices');
+var Module = require('meanio').Module,
+  Invoices = new Module('invoices');
 
 /*
  * All MEAN packages require registration
@@ -46,6 +45,7 @@ Invoices.register(function(app, auth, database) {
         //you now have the settings object
     });
     */
+
 
     return Invoices;
 });

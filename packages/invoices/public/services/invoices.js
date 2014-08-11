@@ -14,6 +14,10 @@ angular.module('mean.invoices') .factory('Invoices', ['$resource',
       }
     });
   }
+]).factory('InvoiceTerms', ['$resource',
+  function($resource) {
+    return $resource('invoiceterms');
+  }
 ]);
 
 // /actions/invoices/calculatetotals

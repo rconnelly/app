@@ -14,8 +14,8 @@
                 <td class="col-sm-3 text-center" data-title="'Customer'" sortable="'invoice.customer.displayName'" filter="{ 'invoice.customer.displayName': 'text' }">
                     {{invoice.customer.displayName}}
                 </td>
-                <td class="col-sm-3 text-center" data-title="'Start Date'" sortable="'invoice.startDate'" filter="{ 'invoice.startDate': 'text' }">
-                    {{invoice.startDate | date:'mediumDate'}}
+                <td class="col-sm-3 text-center" data-title="'Invoice Date'" sortable="'invoice.startDate'" filter="{ 'invoice.startDate': 'text' }">
+                    {{invoice.invoiceDate | date:'mediumDate'}}
                 </td>
                 <td class="col-sm-3 text-center" data-title="'Description'" sortable="'invoice.description'" filter="{ 'invoice.description': 'text' }">
                     {{invoice.items[0].name}}

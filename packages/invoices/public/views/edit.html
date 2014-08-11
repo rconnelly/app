@@ -23,7 +23,7 @@
                             <div class="form-group col-md-2 col-md-offset-2" data-ng-class="{ 'has-error' : submitted && invoiceForm.startDate.$invalid }">
                                 <label mean-token="'create-invoice-start-date'" for="startDate" class="control-label">Invoice Date</label>
                                 <div class="input-group">
-                                    <input type="text" name="startDate" id="startDate" class="form-control" datepicker-popup="{{format}}" ng-model="invoice.startDate" is-open="startDateOpened"
+                                    <input type="text" name="startDate" id="startDate" class="form-control" datepicker-popup="{{format}}" ng-model="invoice.invoiceDate" is-open="startDateOpened"
                                            min-date="minStartDate" max-date="maxStartDate" datepicker-options="dateOptions" placeholder="mm/dd/yyyy"
                                            ng-required="true" close-text="Close" />
                                     <span class="input-group-btn">
@@ -38,7 +38,8 @@
                             </div>
                             <div class="form-group col-md-2" data-ng-class="{ 'has-error' : submitted && invoiceForm.terms.$invalid }">
                                 <label mean-token="'create-invoice-terms'" for="terms" class="control-label">Terms</label>
-                                <select name="terms" id="terms" class="form-control"></select>
+                                <select name="terms" id="terms" class="form-control" data-ng-model="invoice.terms"
+                                        ng-options="terms._id as terms.name for terms in termsList" required></select>
                                 <ul ng-show="submitted && invoiceForm.terms.$invalid" class="error-list">
                                     <li class="required" ng-show="invoiceForm.terms.$error.required">Required</li>
                                 </ul>
