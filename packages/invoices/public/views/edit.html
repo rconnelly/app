@@ -1,6 +1,11 @@
 <section data-ng-controller="InvoicesController" data-ng-init="initEdit()">
 
-    <h2>{{ pageTitle }}</h2>
+    <h2>
+        <a ui-sref="invoice" class="btn btn-default btn-margin-right">
+            <i class="fa fa-arrow-left"></i>
+            Go Back</a>
+        {{ pageTitle }}
+    </h2>
     <form name="invoiceForm" class="form" role="form" data-ng-submit="save(invoice)" novalidate>
 
         <div class="row">

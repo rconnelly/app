@@ -19,7 +19,7 @@ Items.register(function(app, auth, database) {
     //We are adding a link to the main menu for all authenticated users
     Items.menus.add({
         title: 'Items',
-        link: 'list items',
+        link: 'items',
         roles: ['authenticated'],
         menu: 'main',
         priority: 10

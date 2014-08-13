@@ -2,7 +2,7 @@
 
 angular.module('mean.subscriptions').config(['$stateProvider',
   function($stateProvider) {
-    $stateProvider.state('list subscriptions', {
+    $stateProvider.state('subscriptions', {
       url: '/subscriptions/list',
       templateUrl: 'subscriptions/views/list.html'
     })

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.items').controller('ItemsController', ['$scope', '$location', '$filter', '$stateParams', 'Global', 'ngTableParams', 'Items','RevRecSchedules','SubscriptionTypes',
-  function ($scope, $location, $filter, $stateParams, Global, TableParams, Items, RevRecSchedules, SubscriptionTypes) {
+angular.module('mean.items').controller('ItemsController', ['$scope', '$location', '$filter', '$state', '$stateParams', 'Global', 'ngTableParams', 'Items','RevRecSchedules','SubscriptionTypes',
+  function ($scope, $location, $filter, $state, $stateParams, Global, TableParams, Items, RevRecSchedules, SubscriptionTypes) {
     $scope.global = Global;
     $scope.package = {
       name: 'items'
@@ -56,11 +56,11 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
         if(angular.isDefined($stateParams.itemId)) {
           c._id = $stateParams.itemId;
           c.$update(function(response){
-            $location.path('items/list');
+            $state.go('items');
           });
         } else {
           c.$save(function (response) {
-            $location.path('items/list');
+            $state.go('items');
           });
         }
 
@@ -70,7 +70,7 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
     };
 
     $scope.cancel = function() {
-      $location.path('items/list');
+      $location.path('items');
     };
 
     $scope.edit = function(item) {

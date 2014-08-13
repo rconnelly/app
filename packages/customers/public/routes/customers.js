@@ -25,7 +25,7 @@ angular.module('mean.customers').config(['$stateProvider',
     };
 
     $stateProvider
-      .state('list customers', {
+      .state('customers', {
         url: '/customers/list',
         templateUrl: 'customers/views/list.html',
         resolve: {

@@ -25,7 +25,7 @@ angular.module('mean.items').config(['$stateProvider',
     };
 
     $stateProvider
-      .state('list items', {
+      .state('items', {
         url: '/items/list',
         templateUrl: 'items/views/list.html',
         resolve: {

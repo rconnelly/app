@@ -75,11 +75,11 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
           if(angular.isDefined($stateParams.subscriptionId)) {
             s._id = $stateParams.subscriptionId;
             s.$update(function(response){
-              $state.go('list subscriptions');
+              $state.go('subscriptions');
             });
           } else {
             s.$save(function (response) {
-              $state.go('list subscriptions');
+              $state.go('subscriptions');
             });
           }
 

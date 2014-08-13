@@ -19,7 +19,7 @@ Subscriptions.register(function(app, auth, database) {
     //We are adding a link to the main menu for all authenticated users
     Subscriptions.menus.add({
         title: 'Subscriptions',
-        link: 'list subscriptions',
+        link: 'subscriptions',
         roles: ['authenticated'],
         menu: 'main',
         priority: 90

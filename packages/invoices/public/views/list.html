@@ -12,7 +12,7 @@
             <tbody>
             <tr ng-repeat="invoice in $data">
                 <td class="col-sm-1 text-center" data-title="'Number'" sortable="'invoice.customer.invoiceNumber'" filter="{ 'invoice.customer.invoiceNumber': 'text' }">
-                    {{invoice.invoiceNumber}}
+                    <a class="pointer" ng-click="viewInvoice(invoice)">{{invoice.invoiceNumber}}</a>
                 </td>
                 <td class="col-sm-2 text-center" data-title="'Customer'" sortable="'invoice.customer.displayName'" filter="{ 'invoice.customer.displayName': 'text' }">
                     {{invoice.customer.displayName}}

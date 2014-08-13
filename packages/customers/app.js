@@ -19,7 +19,7 @@ Customers.register(function(app, auth, database) {
     //We are adding a link to the main menu for all authenticated users
     Customers.menus.add({
         title: 'Customers',
-        link: 'list customers',
+        link: 'customers',
         roles: ['authenticated'],
         menu: 'main',
         priority: 100

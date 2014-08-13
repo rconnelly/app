@@ -1,6 +1,11 @@
 <section data-ng-controller="SubscriptionsController" data-ng-init="init()">
 
-    <h2>{{ pageTitle }}</h2>
+    <h2>
+        <a ui-sref="subscriptions" class="btn btn-default btn-margin-right">
+            <i class="fa fa-arrow-left"></i>
+            Go Back</a>
+
+        {{ pageTitle }}</h2>
     <form name="subscriptionForm" class="form" role="form" data-ng-submit="save(subscription)" novalidate>
 
         <div class="row">

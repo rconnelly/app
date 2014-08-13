@@ -1,12 +1,11 @@
 <section data-ng-controller="InvoicesController" data-ng-init="initView()">
 
     <h2>
+        <a ui-sref="invoice" class="btn btn-default btn-margin-right">
+            <i class="fa fa-arrow-left"></i>
+            Go Back</a>
          View Invoice
     </h2>
-
-    <a ui-sref="invoice">
-        <i class="fa fa-arrow-left"></i>
-        Go Back</a>
 
     <div class="row">
         <div class="col-md-6" id="client-address">
@@ -31,7 +30,7 @@
                 <tbody ng-repeat="item in $data">
                 <tr>
                     <td class="col-sm-3 text-left" data-title="'Name'" data-filter="{ 'name': 'text' }">
-                        <strong>{{item.name}}</strong><br />
+                       <strong>{{item.name}}</strong><br />
                         {{ item.description }}
                     </td>
                     <td class="col-sm-3 text-center" data-title="'Qty'" data-filter="{ 'qty': 'text' }">

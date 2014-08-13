@@ -41,11 +41,11 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
         if(angular.isDefined($stateParams.customerId)) {
           c._id = $stateParams.customerId;
           c.$update(function(response){
-            $location.path('customers/list');
+            $location.path('customers');
           });
         } else {
           c.$save(function (response) {
-            $location.path('customers/list');
+            $location.path('customers');
           });
         }
 
