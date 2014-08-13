@@ -70,7 +70,7 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
     };
 
     $scope.cancel = function() {
-      $location.path('items');
+      $state.go('items');
     };
 
     $scope.edit = function(item) {
