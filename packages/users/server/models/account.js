@@ -18,6 +18,54 @@ var AccountSchema = new Schema({
   name: {
     type: String,
     required: true
+  },
+  company: {
+    name: {
+      type: String
+    }
+  },
+  billingAddress: {
+    address1: {
+      type: String
+    },
+    address2: {
+      type: String
+    },
+    city: {
+      type: String
+    },
+    state: {
+      type: String
+    },
+    postalCode: {
+      type: String
+    },
+    country: {
+      type: String
+    }
+  },
+  shippingAddress: {
+    sameAsBilling: {
+      type: Boolean
+    },
+    address1: {
+      type: String
+    },
+    address2: {
+      type: String
+    },
+    city: {
+      type: String
+    },
+    state: {
+      type: String
+    },
+    postalCode: {
+      type: String
+    },
+    country: {
+      type: String
+    }
   }
 });
 

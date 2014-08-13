@@ -33,17 +33,11 @@ var ItemSchema = new Schema({
     type: String,
     required: true
   },
-  setupFee: {
-    type: Number,
-    default: 0
-  },
-  recurringPeriod: {
-    type: Number,
-    required: true
-  },
-  recurringPeriodType: {
-   type: String,
-    required: true
+  subscriptionType: { // FIXME: should change to a ref
+    name: {
+      type: String,
+      required: true
+    }
   }
 });
 
@@ -55,15 +49,7 @@ ItemSchema.statics.load = function(id, cb) {
 };
 
 ItemSchema.statics.query = function (query, cb) {
-  var q = {};
-  if(!!query.name) {
-    q.name = new RegExp(query.name, 'i');
-  }
-
-  if(!!query.term){
-    q.term = query.term;
-  }
-  return this.find(q, cb);
+  return this.find(query, cb);
 };
 
 /** Calculates extended prices and total of a item collection.
@@ -83,8 +69,8 @@ ItemSchema.statics.calculateTotals = function (itemCollection) {
   itemCollection.total = total.longValue();
 };
 
-ItemSchema.statics.interval = function (cb) {
-  cb(['Once', 'Monthly', 'Bi-Monthly','Quarterly','Yearly']);
+ItemSchema.statics.subscriptionTypes = function (cb) {
+  cb([{ name: 'Once' }, {name: 'Monthly'}, {name: 'Quarterly' },{ name: 'Yearly' }]);
 };
 
 ItemSchema.statics.terms = function (cb) {

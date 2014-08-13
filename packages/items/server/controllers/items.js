@@ -75,6 +75,12 @@ exports.show = function(req, res) {
   res.json(req.item);
 };
 
+exports.subscriptionTypes = function(req, res) {
+  Item.subscriptionTypes(function(intervals) {
+    res.json(intervals);
+  });
+};
+
 exports.terms = function(req, res) {
   Item.terms(function(terms) {
     res.json(terms);
@@ -92,7 +98,16 @@ exports.revRecTemplates = function(req, res) {
  * List of items
  */
 exports.query = function(req, res) {
-  Item.query(req.query).sort('-createdAt').exec(function (err, items) {
+  var q = req.query;
+  if(!!q.subscriptionType)
+  {
+    q.subscriptionType = { name: q.subscriptionType };
+  }
+  if(!!q.name) {
+    q.name = new RegExp(q.name, 'i');
+  }
+
+  Item.query(q).sort('-createdAt').exec(function (err, items) {
     if (err) {
       return res.json(500, {
         error: 'Cannot list the items'

@@ -8,11 +8,11 @@ angular.module('mean.subscriptions').config(['$stateProvider',
     })
       .state('create subscriptions', {
         url: '/subscriptions/create',
-        templateUrl: 'subscriptions/views/create.html'
+        templateUrl: 'subscriptions/views/edit.html'
       })
       .state('edit subscription', {
         url: '/subscriptions/:subscriptionId',
-        templateUrl: 'subscriptions/views/create.html'
+        templateUrl: 'subscriptions/views/edit.html'
       });
   }
 ]);

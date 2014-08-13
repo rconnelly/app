@@ -1,13 +1,14 @@
 'use strict';
 
-angular.module('mean.subscriptions').controller('SubscriptionsController', ['$scope', '$window', '$location', '$filter', '$stateParams',
-  'Global', 'Subscriptions', 'Customers','Items', 'BillingSchedules','ngTableParams',
-    function($scope, $window, $location, $filter, $stateParams, Global, Subscriptions, Customers, Items, BillingSchedules,TableParams) {
+angular.module('mean.subscriptions').controller('SubscriptionsController', ['$scope', '$window', '$location', '$filter', '$state', '$stateParams', '$q',
+  'Global', 'Subscriptions', 'Customers','Items', 'BillingSchedules','SubscriptionTypes','ngTableParams',
+    function($scope, $window, $location, $filter, $state, $stateParams, $q, Global, Subscriptions, Customers, Items, BillingSchedules,SubscriptionTypes,TableParams) {
         $scope.global = Global;
         $scope.package = {
             name: 'subscriptions'
         };
 
+      $scope.itemOptionName = 'Items';
       $scope.subscriptions = [];
       $scope.subscription = {items:[]};
       $scope.items = [];
@@ -21,8 +22,8 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
       };
 
       $scope.init = function(){
+        this.getSubscriptionTypes();
         this.initSubscription($stateParams.subscriptionId);
-        this.initItems();
         this.initBillingSchedules();
         this.minDate = new Date();
       };
@@ -36,6 +37,37 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
         });
       };
 
+      $scope.getSubscriptionTypes = function(cb) {
+        var deferred = $q.defer();
+        SubscriptionTypes.query(function(s){
+          $scope.subscriptionTypes = s;
+          deferred.resolve();
+          if(!!cb)
+            cb();
+        });
+        return deferred.promise;
+      };
+
+      $scope.$watch(
+        'subscription.subscriptionType',
+        function() {
+          if(!!$scope.subscription.subscriptionType) {
+            $scope.itemOptionName = 'Items (' + $scope.subscription.subscriptionType.name + ')';
+            $scope.getItemsBySubscriptionType($scope.subscription.subscriptionType.name);
+          }
+        },
+        true
+      );
+
+      $scope.getItemsBySubscriptionType = function(subscriptionType) {
+        if(!subscriptionType)
+          return;
+
+        Items.query({subscriptionType: subscriptionType},function(s){
+          $scope.items = s;
+        });
+      };
+
       $scope.save = function(subscription){
         if (this.subscriptionForm.$valid) {
           var s = new Subscriptions(subscription);
@@ -43,11 +75,11 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
           if(angular.isDefined($stateParams.subscriptionId)) {
             s._id = $stateParams.subscriptionId;
             s.$update(function(response){
-              $location.path('subscriptions/list');
+              $state.go('list subscriptions');
             });
           } else {
             s.$save(function (response) {
-              $location.path('subscriptions/list');
+              $state.go('list subscriptions');
             });
           }
 
@@ -68,11 +100,6 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
 
       /** Items
        * */
-      $scope.initItems = function() {
-        Items.query(function(s){
-          $scope.items = s;
-        });
-      };
 
       $scope.removeItem = function(item) {
         var idx = this.subscription.items.indexOf(item);

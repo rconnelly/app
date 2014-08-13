@@ -14,6 +14,11 @@ angular.module('mean.invoices').controller('InvoicesController', ['$scope', '$st
 
       /****** Init **********/
 
+      $scope.initView = function() {
+        this.initInvoice();
+        this.initItems();
+      };
+
       $scope.initEdit = function() {
         this.initInvoice();
         this.initItems();
@@ -45,7 +50,7 @@ angular.module('mean.invoices').controller('InvoicesController', ['$scope', '$st
         });
       };
 
-      /****** Create / Edit **********/
+      /****** Create / Edit / View **********/
 
       $scope.save = function(invoice){
         if (this.invoiceForm.$valid) {
@@ -151,6 +156,20 @@ angular.module('mean.invoices').controller('InvoicesController', ['$scope', '$st
         }
       });
 
+      /****** View **********/
+
+      $scope.itemViewListData = new TableParams({
+        page: 1            // show first page
+      }, {
+        counts: 0,
+        total: 0,
+        getData: function($defer, params) {
+          var orderedData = $scope.invoice.items;
+          params.total(orderedData.length);
+          $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+      });
+
       /****** Common ********/
 
       $scope.cancel = function($event) {
@@ -161,6 +180,10 @@ angular.module('mean.invoices').controller('InvoicesController', ['$scope', '$st
 
       $scope.editInvoice = function(invoice){
         $state.go('invoice edit', {invoiceId: invoice._id });
+      };
+
+      $scope.viewInvoice = function(invoice) {
+        $state.go('invoice view', {invoiceId: invoice._id });
       };
 
       $scope.invoiceListData = new TableParams({

@@ -27,6 +27,18 @@ var SubscriptionSchema = new Schema({
     type: Date,
     required: true
   },
+  invoiceMessage: {
+    type: String
+  },
+  memo: {
+    type: String
+  },
+  subscriptionType: { // FIXME: should change to a ref
+    name: {
+      type: String,
+      required: true
+    }
+  },
   items: [
     {
       name: {

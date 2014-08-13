@@ -15,17 +15,14 @@
                     <strong>{{item.name}}</strong><br />
                     {{ item.description }}
                 </td>
-                <td class="col-sm-2 text-center" data-title="'Recurs'" sortable="'recurringPeriod'" data-filter="{ 'recurringPeriod': 'text' }">
-                    <ng-pluralize count="item.recurringPeriod" when="{'1': 'Every {} {{item.recurringPeriodType}}',
-                    'other':'Every {} {{item.recurringPeriodType}}s'}"></ng-pluralize>
-
+                <td class="col-sm-2 text-center" data-title="'Subscription Period'" sortable="'subscriptionType'" data-filter="{ 'subscriptionType': 'text' }">
+                    {{item.subscriptionType.name}}
                 </td>
                 <td class="col-sm-2 text-center" data-title="'Rev Rec'" sortable="'revRecTemplate'" data-filter="{ 'revRecTemplate': 'text' }">
                     {{item.revRecTemplate}}
                 </td>
                 <td class="col-sm-2 text-right" data-title="'Price'" sortable="'price'" data-filter="{ 'price': 'text' }">
-                    {{item.price | currency}}<br />
-                    <span class="setup-fee" ng-show="item.setupFee">Setup Fee: {{ item.setupFee | currency }}</span>
+                    {{item.price | currency}}
                 </td>
                 <td class="col-sm-3 text-right">
 

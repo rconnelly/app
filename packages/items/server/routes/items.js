@@ -16,6 +16,9 @@ module.exports = function(Customers, app, auth) {
   app.route('/itemterms')
     .get(auth.requiresLogin, items.terms);
 
+  app.route('/subscriptiontypes')
+    .get(auth.requiresLogin, items.subscriptionTypes);
+
   app.route('/rrtemplates')
     .get(auth.requiresLogin, items.revRecTemplates);
 

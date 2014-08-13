@@ -63,7 +63,6 @@ exports.update = function(req, res) {
       return res.json(500, err);
     }
     res.json(subscription);
-
   });
 };
 

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.items').controller('ItemsController', ['$scope', '$location', '$filter', '$stateParams', 'Global', 'ngTableParams', 'Items','RevRecSchedules',
-  function ($scope, $location, $filter, $stateParams, Global, TableParams, Items, RevRecSchedules) {
+angular.module('mean.items').controller('ItemsController', ['$scope', '$location', '$filter', '$stateParams', 'Global', 'ngTableParams', 'Items','RevRecSchedules','SubscriptionTypes',
+  function ($scope, $location, $filter, $stateParams, Global, TableParams, Items, RevRecSchedules, SubscriptionTypes) {
     $scope.global = Global;
     $scope.package = {
       name: 'items'
@@ -44,10 +44,15 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
       });
     };
 
+    $scope.getSubscriptionTypes = function() {
+      SubscriptionTypes.query(function(s){
+        $scope.subscriptionTypes = s;
+      });
+    };
+
     $scope.save = function (itemData) {
       if (this.itemForm.$valid) {
         var c = new Items(itemData);
-
         if(angular.isDefined($stateParams.itemId)) {
           c._id = $stateParams.itemId;
           c.$update(function(response){
@@ -81,6 +86,7 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
     $scope.initEdit = function() {
       this.getRecurringPeriodTypes();
       this.getSchedules();
+      this.getSubscriptionTypes();
       if(angular.isDefined($stateParams.itemId)) {
         $scope.pageTitle = 'Edit Item';
         this.findById($stateParams.itemId);

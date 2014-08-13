@@ -28,38 +28,19 @@
                                     <li class="required" ng-show="itemForm.itemPrice.$error.required">Required</li>
                                 </ul>
                             </div>
-                            <div class="form-group col-md-2" data-ng-class="{ 'has-error' : submitted && itemForm.recurringPeriod.$invalid }">
-                                <label mean-token="'create-item-recurringPeriod'" for="itemName" class="control-label">Every</label>
-                                <input name="recurringPeriod" type="text" class="form-control" data-ng-model="item.recurringPeriod" id="recurringPeriod" placeholder="" required />
-                                <ul ng-show="submitted && itemForm.recurringPeriod.$invalid" class="error-list">
-                                    <li class="required" ng-show="itemForm.recurringPeriod.$error.required">Required</li>
-                                </ul>
-                            </div>
-                            <div class="form-group col-md-2" data-ng-class="{ 'has-error' : submitted && itemForm.recurringPeriodType.$invalid }">
-                                <label mean-token="'create-item-recurring-type-period'" for="itemName" class="control-label"></label>
-                                <select name="recurringPeriodType" class="form-control" id="recurringPeriodType" data-ng-model="item.recurringPeriodType"
-                                        ng-options="type.type as type.name for type in recurringPeriodTypes" required></select>
-
-                                <ul ng-show="submitted && itemForm.recurringPeriodType.$invalid" class="error-list">
-                                    <li class="required" ng-show="itemForm.recurringPeriodType.$error.required">Required</li>
+                            <div class="form-group col-md-4" data-ng-class="{ 'has-error' : submitted && itemForm.subscriptionType.$invalid }">
+                                <label mean-token="'create-item-subscription-type'" for="subscriptionType" class="control-label">Subscription Period</label>
+                                <select name="subscriptionType" class="form-control" id="subscriptionType" data-ng-model="item.subscriptionType"
+                                        ng-options="type as type.name for type in subscriptionTypes" ng-required="true"></select>
+                                <ul ng-show="submitted && itemForm.subscriptionType.$invalid" class="error-list">
+                                    <li class="required" ng-show="itemForm.subscriptionType.$error.required">Required</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-5" data-ng-class="{ 'has-error' : submitted && itemForm.itemDescription.$invalid }">
+                            <div class="form-group col-md-8" data-ng-class="{ 'has-error' : submitted && itemForm.itemDescription.$invalid }">
                                 <label mean-token="'create-item-item-description'" for="itemDescription" class="control-label">Description</label>
                             <textarea name="itemDescription" id="itemDescription" data-ng-model="item.description" class="form-control"></textarea>
-                            </div>
-
-                            <div class="form-group col-md-3" data-ng-class="{ 'has-error' : submitted && itemForm.itemSetupFee.$invalid }">
-                                <label mean-token="'create-item-price'" for="itemPrice" class="control-label">Setup Fee</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">$</span>
-                                    <input name="itemSetupFee" type="text" class="form-control" data-ng-model="item.setupFee" id="itemSetupFee" placeholder="" />
-                                </div>
-                                <ul ng-show="submitted && itemForm.itemSetupFee.$invalid" class="error-list">
-                                    <li class="required" ng-show="itemForm.itemSetupFee.$error.required">Required</li>
-                                </ul>
                             </div>
 
                             <div class="form-group col-md-4" data-ng-class="{ 'has-error' : submitted && itemForm.revRecTemplate.$invalid }">

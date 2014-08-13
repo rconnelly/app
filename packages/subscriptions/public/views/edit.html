@@ -11,7 +11,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="form-group col-md-4" data-ng-class="{ 'has-error' : submitted && subscriptionForm.customerName.$invalid }">
+                            <div class="form-group col-md-3" data-ng-class="{ 'has-error' : submitted && subscriptionForm.customerName.$invalid }">
                                 <label mean-token="'create-subscription-customer'" for="customerName" class="control-label">Customer</label>
                                 <input type="text" name="customerName" class="form-control" data-ng-model="subscription.customer"
                                        typeahead="customer as customer.displayName for customer in findCustomers($viewValue) | filter:$viewValue | limitTo:8"
@@ -20,11 +20,19 @@
                                     <li class="required" ng-show="subscriptionForm.customerName.$error.required">Required</li>
                                 </ul>
                             </div>
-                            <div class="form-group col-md-4" data-ng-class="{ 'has-error' : submitted && subscriptionForm.startDate.$invalid }">
-                                <label mean-token="'create-item-start-date'" for="startDate" class="control-label">Start Date</label>
+                            <div class="form-group col-md-3" data-ng-class="{ 'has-error' : submitted && subscriptionForm.subscriptionType.$invalid }">
+                                <label mean-token="'create-subscription-type'" for="subscriptionType" class="control-label">Subscription Period</label>
+                                <select name="subscriptionType" class="form-control" id="subscriptionType" data-ng-model="subscription.subscriptionType"
+                                        ng-options="type as type.name for type in subscriptionTypes track by type.name" required></select>
+                                <ul ng-show="submitted && subscriptionForm.subscriptionType.$invalid" class="error-list">
+                                    <li class="required" ng-show="subscriptionForm.subscriptionType.$error.required">Required</li>
+                                </ul>
+                            </div>
+                            <div class="form-group col-md-3" data-ng-class="{ 'has-error' : submitted && subscriptionForm.startDate.$invalid }">
+                                <label mean-token="'create-subscription-start-date'" for="startDate" class="control-label">Start Date</label>
                                 <div class="input-group">
                                     <input type="text" name="startDate" id="startDate" class="form-control" datepicker-popup="{{format}}" ng-model="subscription.startDate" is-open="startDateOpened"
-                                           min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"
+                                        max-date="maxDate" datepicker-options="dateOptions"
                                            ng-required="true" close-text="Close" />
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" ng-click="openStartDate($event)">
@@ -35,10 +43,23 @@
                                 <ul ng-show="submitted && subscriptionForm.startDate.$invalid" class="error-list">
                                     <li class="required" ng-show="subscriptionForm.startDate.$error.required">Required</li>
                                 </ul>
-                            </div>
-                            <div class="form-group col-md-4" data-ng-class="{ 'has-error' : submitted && subscriptionForm.memo.$invalid }">
-                                <label mean-token="'create-item-memo'" for="memo" class="control-label">Memo</label>
+                            </div><div class="form-group col-md-3" data-ng-class="{ 'has-error' : submitted && subscriptionForm.endDate.$invalid }">
+                            <label mean-token="'create-subscription-end-date'" class="control-label">End Date</label>
+                            <span class="">{{subscription.endDate}}</span>
+                            <ul ng-show="submitted && subscriptionForm.endDate.$invalid" class="error-list">
+                                <li class="required" ng-show="subscriptionForm.endDate.$error.required">Required</li>
+                            </ul>
+                        </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6" data-ng-class="{ 'has-error' : submitted && subscriptionForm.memo.$invalid }">
+                                <label mean-token="'create-subscription-memo'" for="memo" class="control-label">Memo</label>
                                 <textarea name="memo" id="memo" data-ng-model="subscription.memo" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group col-md-6" data-ng-class="{ 'has-error' : submitted && subscriptionForm.invoiceMessage.$invalid }">
+                                <label mean-token="'create-subscription-invoice-message'" for="invoiceMessage" class="control-label">Invoice Message</label>
+                                <textarea name="invoiceMessage" id="invoiceMessage" data-ng-model="subscription.invoiceMessage" class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="row">
@@ -95,7 +116,7 @@
                                     <div class="form-group col-md-8">
                                         <select name="newItem" class="form-control" id="newItem" data-ng-model="newItem"
                                                 ng-options="item as item.name for item in items">
-                                            <option value="" selected disabled>Items</option>
+                                            <option value="" selected disabled>{{itemOptionName}}</option>
                                         </select>
                                     </div>
 
@@ -105,15 +126,11 @@
 
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-md-8" data-ng-class="{ 'has-error' : submitted && subscriptionForm.newDiscount.$invalid }">
+                                    <div class="form-group col-md-8">
                                         <select name="newDiscount" class="form-control" id="newDiscount" data-ng-model="newItem"
                                                 ng-options="">
                                             <option value="" selected disabled>Discounts</option>
                                         </select>
-
-                                        <div ng-show="submitted && subscriptionForm.itemName.$invalid" class="help-block">
-                                            <p ng-show="subscriptionForm.itemName.$error.required">An item is required</p>
-                                        </div>
                                     </div>
 
                                     <div class="form-group col-md-4">

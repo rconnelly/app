@@ -13,6 +13,11 @@ angular.module('mean.items')
       });
     }
   ])
+  .factory('SubscriptionTypes', ['$resource',
+    function($resource) {
+      return $resource('subscriptiontypes');
+    }
+  ])
   .factory('ItemTerms', ['$resource',
     function($resource) {
       return $resource('itemterms');

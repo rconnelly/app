@@ -11,16 +11,22 @@
         <table class="table table-striped table-bordered" ng-table="subscriptionListData" data-ng-hide="subscriptions.length === 0">
             <tbody>
             <tr ng-repeat="subscription in $data">
-                <td class="col-sm-3 text-left" data-title="'Customer'" sortable="'subscription.customer.displayName'" filter="{ 'subscription.customer.displayName': 'text' }">
+                <td class="col-sm-2 text-left" data-title="'Customer'" sortable="'subscription.customer.displayName'" filter="{ 'subscription.customer.displayName': 'text' }">
                     <strong>{{subscription.customer.displayName}}</strong>
                 </td>
-                <td class="col-sm-3 text-center" data-title="'Start Date'" sortable="'subscription.startDate'" filter="{ 'subscription.startDate': 'text' }">
+                <td class="col-sm-2 text-center" data-title="'Subscription Period'" sortable="'subscriptionType'" data-filter="{ 'subscriptionType': 'text' }">
+                    {{subscription.subscriptionType.name}}
+                </td>
+                <td class="col-sm-2 text-center" data-title="'Start Date'" sortable="'subscription.startDate'" filter="{ 'subscription.startDate': 'text' }">
                     {{subscription.startDate | date:'mediumDate'}}
                 </td>
-                <td class="col-sm-3 text-center" data-title="'Description'" sortable="'subscription.description'" filter="{ 'subscription.description': 'text' }">
+                <td class="col-sm-2 text-center" data-title="'End Date'" sortable="'subscription.endDate'" filter="{ 'subscription.endDate': 'text' }">
+                    {{subscription.endDate | date:'mediumDate'}}
+                </td>
+                <td class="col-sm-2 text-center" data-title="'Description'" sortable="'subscription.description'" filter="{ 'subscription.description': 'text' }">
                     {{subscription.items[0].name}}
                 </td>
-                <td class="col-sm-3 text-right">
+                <td class="col-sm-2 text-right">
                     <div class="btn-toolbar">
                         <a class="btn btn-default" data-ng-click="editSubscription(subscription);">
                             Edit

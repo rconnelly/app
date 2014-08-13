@@ -34,14 +34,14 @@ angular.module('mean.items').config(['$stateProvider',
       })
       .state('create item', {
         url: '/items/create',
-        templateUrl: 'items/views/create.html',
+        templateUrl: 'items/views/edit.html',
         resolve: {
           loggedin: checkLoggedin
         }
       })
       .state('edit item', {
         url: '/items/:itemId/edit',
-        templateUrl: 'items/views/create.html',
+        templateUrl: 'items/views/edit.html',
         resolve: {
           loggedin: checkLoggedin
         }

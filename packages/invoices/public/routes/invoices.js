@@ -14,6 +14,10 @@ angular.module('mean.invoices').config(['$stateProvider',
       .state('invoice edit', {
         url: '/invoices/:invoiceId/edit',
         templateUrl: 'invoices/views/edit.html'
+      })
+      .state('invoice view', {
+        url: '/invoices/:invoiceId/view',
+        templateUrl: 'invoices/views/view.html'
       });
   }
 ]);

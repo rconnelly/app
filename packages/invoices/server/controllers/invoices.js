@@ -106,6 +106,15 @@ exports.billingSchedules = function(req, res) {
 };
 
 /**
+ * View an invoice without signing in
+ */
+exports.render = function(req, res) {
+  res.render('index', {});
+  //res.json(req.invoice);
+};
+
+
+/**
  * List of invoices
  */
 exports.query = function(req, res) {

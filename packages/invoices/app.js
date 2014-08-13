@@ -12,40 +12,48 @@ var Module = require('meanio').Module,
  */
 Invoices.register(function(app, auth, database) {
 
-    //We enable routing. By default the Package Object is passed to the routes
-    Invoices.routes(app, auth, database);
+  //We enable routing. By default the Package Object is passed to the routes
+  Invoices.routes(app, auth, database);
 
-    //We are adding a link to the main menu for all authenticated users
-    Invoices.menus.add({
-        title: 'Invoices',
-        link: 'invoice',
-        roles: ['authenticated'],
-        menu: 'main',
-        priority: 20
-    });
+  //We are adding a link to the main menu for all authenticated users
+  Invoices.menus.add({
+    title: 'Invoices',
+    link: 'invoice',
+    roles: ['authenticated'],
+    menu: 'main',
+    priority: 20
+  });
 
-    /**
-    //Uncomment to use. Requires meanio@0.3.7 or above
-    // Save settings with callback
-    // Use this for saving data from administration pages
-    Invoices.settings({
+  Invoices.menus.add({
+    title: 'Invoices',
+    link: 'invoice',
+    roles: [],
+    menu: 'guest',
+    priority: 20
+  });
+
+  /**
+   //Uncomment to use. Requires meanio@0.3.7 or above
+   // Save settings with callback
+   // Use this for saving data from administration pages
+   Invoices.settings({
         'someSetting': 'some value'
     }, function(err, settings) {
         //you now have the settings object
     });
 
-    // Another save settings example this time with no callback
-    // This writes over the last settings.
-    Invoices.settings({
+   // Another save settings example this time with no callback
+   // This writes over the last settings.
+   Invoices.settings({
         'anotherSettings': 'some value'
     });
 
-    // Get settings. Retrieves latest saved settigns
-    Invoices.settings(function(err, settings) {
+   // Get settings. Retrieves latest saved settigns
+   Invoices.settings(function(err, settings) {
         //you now have the settings object
     });
-    */
+   */
 
 
-    return Invoices;
+  return Invoices;
 });

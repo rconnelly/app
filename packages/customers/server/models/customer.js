@@ -86,6 +86,9 @@ var CustomerSchema = new Schema({
     }
   },
   shippingAddress: {
+    sameAsBilling: {
+      type: Boolean
+    },
     address1: {
       type: String
     },
