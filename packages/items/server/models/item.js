@@ -54,7 +54,7 @@ ItemSchema.statics.query = function (query, cb) {
 
 /** Calculates extended prices and total of a item collection.
  *  An item collection is any object with an item array property. */
-ItemSchema.statics.calculateTotals = function (itemCollection) {
+ItemSchema.statics.calculateTotals = function (itemCollection, cb) {
   var mathContext = BD.MathContext.DECIMAL64(); // half even rounding
   var total = new BD.BigDecimal(0, mathContext);
   _.forEach(itemCollection.items, function(item) {
@@ -67,6 +67,9 @@ ItemSchema.statics.calculateTotals = function (itemCollection) {
   });
   total.setScale(2);
   itemCollection.total = total.longValue();
+
+  if(!!cb)
+    cb(itemCollection);
 };
 
 ItemSchema.statics.subscriptionTypes = function (cb) {

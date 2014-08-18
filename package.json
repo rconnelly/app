@@ -91,7 +91,11 @@
     "acl": "^0.4.2",
     "redis": "^0.11.0",
     "newrelic": "^1.9.0",
-    "bigdecimal": "^0.6.1"
+    "bigdecimal": "^0.6.1",
+    "mongoose-currency": "0.0.4",
+    "mongo-migrate": "^0.1.0",
+    "install": "^0.1.7",
+    "npm": "^1.4.23"
   },
   "devDependencies": {
     "grunt-karma": "^0.8.2",

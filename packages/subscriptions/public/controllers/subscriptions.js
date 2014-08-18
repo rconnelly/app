@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('mean.subscriptions').controller('SubscriptionsController', ['$scope', '$window', '$location', '$filter', '$state', '$stateParams', '$q',
+angular.module('mean.subscriptions').controller('SubscriptionsController', ['$scope', '$window', '$location', '$filter', '$state', '$stateParams', '$q','lodash',
   'Global', 'Subscriptions', 'Customers','Items', 'BillingSchedules','SubscriptionTypes','ngTableParams',
-    function($scope, $window, $location, $filter, $state, $stateParams, $q, Global, Subscriptions, Customers, Items, BillingSchedules,SubscriptionTypes,TableParams) {
+    function($scope, $window, $location, $filter, $state, $stateParams, $q, _, Global, Subscriptions, Customers, Items, BillingSchedules,SubscriptionTypes,TableParams) {
         $scope.global = Global;
         $scope.package = {
             name: 'subscriptions'
@@ -16,6 +16,7 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
       $scope.itemEditId = -1;
       $scope.total = 0;
       $scope.pageTitle = (!$stateParams.subscriptionId) ? 'Create Subscription' : 'Edit Subscription';
+      $scope.editMode = !!$stateParams.subscriptionId;
 
       $scope.initList = function(){
 
@@ -120,14 +121,25 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
       };
 
       $scope.addItem = function(item) {
-        if(!item || this.subscription.items.indexOf(item) !== -1)
+        if(!item)
           return;
 
-        item.qty = 1;
-        this.subscription.items.push(item);
+        var existingItem = _.find(this.subscription.items,function(itm){
+          return (itm._id === item._id);
+        },this);
+
+        if(!!existingItem) {
+          existingItem.qty++;
+        } else {
+          item.qty = 1;
+          this.subscription.items.push(item);
+        }
+
         $scope.updateTotals($scope.subscription,function(){
-          $scope.itemListData.reload();
+          if(!existingItem)
+            $scope.itemListData.reload();
         });
+
       };
 
       // Watch subscription items for changes
@@ -196,7 +208,6 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
 
             var orderedData = params.sorting() ?
               $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
-
 
             $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
           });

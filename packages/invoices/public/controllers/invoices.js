@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('mean.invoices').controller('InvoicesController', ['$scope', '$stateParams', '$state', '$filter', 'Global', 'Customers', 'Items', 'InvoiceTerms','Invoices', 'ngTableParams',
-    function($scope, $stateParams, $state, $filter, Global, Customers, Items, InvoiceTerms, Invoices, TableParams) {
+angular.module('mean.invoices').controller('InvoicesController', ['$scope', '$stateParams', '$state', '$filter', 'lodash',  'Global', 'Customers', 'Items',
+  'InvoiceTerms','Invoices', 'ngTableParams',
+    function($scope, $stateParams, $state, $filter, _, Global, Customers, Items, InvoiceTerms, Invoices, TableParams) {
         $scope.global = Global;
         $scope.package = {
             name: 'invoices'
@@ -95,8 +96,9 @@ angular.module('mean.invoices').controller('InvoicesController', ['$scope', '$st
       };
 
       $scope.removeItem = function(item) {
-        var idx = this.invoice.items.indexOf(item);
-        this.invoices.items.splice(idx,1);
+        this.invoice.items = _.reject(this.invoice.items,function(itm){
+          return itm === item;
+        },this);
         this.itemListData.reload();
       };
 
@@ -113,14 +115,25 @@ angular.module('mean.invoices').controller('InvoicesController', ['$scope', '$st
       };
 
       $scope.addItem = function(item) {
-        if(!item || this.invoice.items.indexOf(item) !== -1)
+        if(!item)
           return;
 
-        item.qty = 1;
-        this.invoice.items.push(item);
+        var existingItem = _.find(this.invoice.items,function(itm){
+          return (itm._id === item._id);
+        },this);
+
+        if(!!existingItem) {
+          existingItem.qty++;
+        } else {
+          item.qty = 1;
+          this.invoice.items.push(item);
+        }
+
         $scope.updateTotals($scope.invoice,function(){
-          $scope.itemListData.reload();
+          if(!existingItem)
+            $scope.itemListData.reload();
         });
+
       };
 
       $scope.$watch('invoice.items', function() {

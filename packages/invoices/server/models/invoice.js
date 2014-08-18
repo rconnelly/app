@@ -55,13 +55,18 @@ var InvoiceSchema = new Schema({
 
 /** Statics */
 InvoiceSchema.statics.load = function(id, cb) {
-  this.findOne({
+  return this.findOne({
     _id: id
   }).populate({path: 'customer'}).exec(cb);
 };
 
 InvoiceSchema.statics.getDefaultDueDate = function(startDate, terms, cb) {
+
 };
+
+/**
+ * Middleware
+ */
 
 /**
  * Plugins

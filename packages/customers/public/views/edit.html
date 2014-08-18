@@ -1,6 +1,11 @@
 <section data-ng-controller="CustomersController" data-ng-init="initEdit()">
 
-    <h2>Create Customer</h2>
+    <h2>
+        <a ui-sref="customers" class="btn btn-default btn-margin-right" mean-token="'back-button'">
+            <i class="fa fa-arrow-left"></i>
+            Back</a>
+        {{ pageTitle }}
+    </h2>
     <form name="customerCreateForm" class="form" role="form" data-ng-submit="save(customer)" novalidate>
 
         <div class="row">
@@ -18,9 +23,7 @@
                                     <p ng-show="customerCreateForm.companyName.$error.required">Company name is required</p>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
 

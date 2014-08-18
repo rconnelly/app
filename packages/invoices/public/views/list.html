@@ -20,14 +20,17 @@
                 <td class="col-sm-2 text-center" data-title="'Invoice Date'" sortable="'invoice.startDate'" filter="{ 'invoice.startDate': 'text' }">
                     {{invoice.invoiceDate | date:'mediumDate'}}
                 </td>
-                <td class="col-sm-3 text-center" data-title="'Description'" sortable="'invoice.description'" filter="{ 'invoice.description': 'text' }">
+                <td class="col-sm-2 text-center" data-title="'Description'" sortable="'invoice.description'" filter="{ 'invoice.description': 'text' }">
                     {{invoice.items[0].name}}
                 </td>
                 <td class="col-sm-1 text-center" data-title="'Total'" sortable="'invoice.total'" filter="{ 'invoice.total': 'text' }">
                     {{invoice.total | currency}}
                 </td>
-                <td class="col-sm-3 text-right">
+                <td class="col-sm-4 text-right">
                     <div class="btn-toolbar">
+                        <a class="btn btn-secondary" data-ng-click="recognizeInvoice(invoice);" ng-disabled="true">
+                            Recognize
+                        </a>
                         <a class="btn btn-default" data-ng-click="viewInvoice(invoice);">
                             View
                         </a>

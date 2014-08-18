@@ -6,7 +6,7 @@
     </a>
     <nav class="collapse mainnav-collapse" collapse="isMainMenuCollapsed" role="navigation">
         <ul class="mainnav-menu">
-            <li data-ng-repeat="item in menus.main" ui-route="/{{item.link}}" ng-class="{active: $uiRoute, dropdown: true}">
+            <li data-ng-repeat="item in menus.main|orderBy:'-priority'" ui-route="/{{item.link}}" ng-class="{active: isActive(item), dropdown: true, 'is-open': true}">
                 <a mean-token="item.link" ui-sref='{{item.link}}'>{{item.title}}</a>
             </li>
         </ul>

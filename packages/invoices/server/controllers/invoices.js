@@ -50,13 +50,14 @@ exports.create = function(req, res) {
   if(!!data.customer._id) // convert object to ref
     data.customer = data.customer._id;
 
-  Item.calculateTotals(data);
-  var invoice = new Invoice(data);
-  invoice.save(function(err) {
-    if (err) {
-      return res.json(500, err);
-    }
-    res.json(invoice);
+  Item.calculateTotals(data, function(result) {
+    var invoice = new Invoice(result);
+    invoice.save(function(err) {
+      if (err) {
+        return res.json(500, err);
+      }
+      res.json(invoice);
+    });
   });
 };
 
@@ -65,16 +66,15 @@ exports.create = function(req, res) {
  */
 exports.update = function(req, res) {
   // TODO: Add validation
-
   var invoice = req.invoice;
   invoice = _.extend(invoice, req.body);
-  Item.calculateTotals(invoice);
-  invoice.save(function(err) {
-    if (err) {
-      return res.json(500, err);
-    }
-    res.json(invoice);
-
+  Item.calculateTotals(invoice, function(inv){
+    inv.save(function(err) {
+      if (err) {
+        return res.json(500, err);
+      }
+      res.json(inv);
+    });
   });
 };
 
@@ -110,9 +110,7 @@ exports.billingSchedules = function(req, res) {
  */
 exports.render = function(req, res) {
   res.render('index', {});
-  //res.json(req.invoice);
 };
-
 
 /**
  * List of invoices

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.system').controller('HeaderController', ['$scope', '$rootScope', 'Global', 'Menus',
-  function($scope, $rootScope, Global, Menus) {
+angular.module('mean.system').controller('HeaderController', ['$scope', '$rootScope', '$location', 'Global', 'Menus',
+  function($scope, $rootScope, $location, Global, Menus) {
     $scope.global = Global;
     $scope.menus = {};
 
@@ -24,6 +24,10 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
 
     $scope.isBannerCollapsed = true;
     $scope.isMainMenuCollapsed = true;
+
+    $scope.isActive = function(item) {
+      return !!$location.path().match(item.link);
+    };
 
     $rootScope.$on('loggedin', function() {
 

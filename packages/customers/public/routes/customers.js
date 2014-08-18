@@ -34,18 +34,20 @@ angular.module('mean.customers').config(['$stateProvider',
       })
       .state('create customer', {
         url: '/customers/create',
-        templateUrl: 'customers/views/create.html',
+        templateUrl: 'customers/views/edit.html',
         resolve: {
           loggedin: checkLoggedin
         }
       })
       .state('edit customer', {
         url: '/customers/:customerId/edit',
-        templateUrl: 'customers/views/create.html',
+        templateUrl: 'customers/views/edit.html',
         resolve: {
           loggedin: checkLoggedin
         }
       })
+
+      // TODO: Remove price list support
       .state('list price list', {
         url: '/customers/:customerId/priceitems',
         templateUrl: 'customers/views/priceitem/list.html',

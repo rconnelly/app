@@ -1,9 +1,9 @@
 <section data-ng-controller="InvoicesController" data-ng-init="initEdit()">
 
     <h2>
-        <a ui-sref="invoice" class="btn btn-default btn-margin-right">
+        <a ui-sref="invoice" class="btn btn-default btn-margin-right" mean-token="'back-button'">
             <i class="fa fa-arrow-left"></i>
-            Go Back</a>
+            Back</a>
         {{ pageTitle }}
     </h2>
     <form name="invoiceForm" class="form" role="form" data-ng-submit="save(invoice)" novalidate>
@@ -103,11 +103,13 @@
                                             </td>
                                             <td class="col-sm-2 text-center" data-title="'Qty'" sortable="'qty'" data-filter="{ 'qty': 'text' }">
                                                 <span ng-if="!item.$edit">{{item.qty}}</span>
-                                                <div ng-if="item.$edit"><input type="text" name="editItemPrice" id="editItemPrice" class="form-control text-center"
+                                                <div ng-if="item.$edit"><input type="text" name="editItemQty" id="editItemQty" class="form-control text-center"
                                                                                ng-model="item.qty" value="{{item.qty}}"></div>
                                             </td>
                                             <td class="col-sm-2 text-center" data-title="'Price'" sortable="'price'" data-filter="{ 'price': 'text' }">
-                                                {{item.price | currency}}
+                                                <span ng-if="!item.$edit">{{item.price | currency}}</span>
+                                                <div ng-if="item.$edit"><input type="text" name="editItemPrice" id="editItemPrice" class="form-control text-center"
+                                                                               ng-model="item.price" value="{{item.price}}"></div>
                                             </td>
                                             <td class="col-sm-2 text-center" data-title="'Extended'" sortable="'extended'" data-filter="{ 'extended': 'text' }">
                                                 {{item.extended | currency}}

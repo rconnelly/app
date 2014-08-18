@@ -6,8 +6,11 @@
 var mongoose = require('mongoose'),
   Subscription = mongoose.model('Subscription'),
   Item = mongoose.model('Item'),
+  SubscriptionPeriod = mongoose.model('SubscriptionPeriod'),
   _ = require('lodash');
 
+
+/********* MIDDLEWARE ***************/
 
 /**
  * Find subscription by id
@@ -21,15 +24,42 @@ exports.subscription = function(req, res, next, id) {
   });
 };
 
-/** Calculate the items in the subscription and return a total. */
+/**
+ * Calculate the items in the subscription and return a total.
+ * */
 exports.calculateTotals = function(req,res)
 {
   req.checkBody('subscription.customer', 'Customer must be a string').isAlphanumeric();
-  //req.checkBody('subscription.items', 'Subscriptions items are required to calculate total').isLength(1);
+
   var subscription = req.body;
-  Item.calculateTotals(subscription);
-  res.json(subscription);
+  Item.calculateTotals(subscription, function(result){
+    res.json(result);
+  });
 };
+
+/********* ACTIONS ***************/
+
+/**
+ * Return the end date given
+ * */
+exports.getEndDate = function(req,res) {
+  req.checkQuery('startDate','Start date is must be a date').isDate();
+  // TODO: should abstract to custom mongo object id validator
+  req.checkQuery('subscriptionPeriodId','Subscription period is required').matches('^[0-9a-fA-F]{24}$'); // check if object id
+
+  var startDate = new Date(req.query.startdate);
+  var subscriptionPeriodId = req.query.subscriptionPeriodId;
+
+  SubscriptionPeriod.load(subscriptionPeriodId)
+    .then(function(subscriptionPeriod){
+      return subscriptionPeriod.getEndDate(startDate);
+    })
+    .then(function(endDate) {
+      res.json(endDate);
+    });
+};
+
+/********* CRUD ***************/
 
 /**
  * Create an subscription
@@ -98,6 +128,7 @@ exports.billingSchedules = function(req, res) {
  */
 exports.query = function(req, res) {
   var query = {};
+
   if (!!req.query.name) {
     query = { name: new RegExp(req.query.name, 'i') };
   }

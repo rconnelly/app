@@ -1,11 +1,13 @@
 'use strict';
 
-angular.module('mean.customers').controller('CustomersController', ['$scope', '$location', '$filter', '$stateParams', 'Global', 'ngTableParams', 'Customers',
-  function ($scope, $location, $filter, $stateParams, Global, TableParams, Customers) {
+angular.module('mean.customers').controller('CustomersController', ['$scope', '$location', '$filter', '$state', '$stateParams', 'Global', 'ngTableParams', 'Customers',
+  function ($scope, $location, $filter, $state, $stateParams, Global, TableParams, Customers) {
     $scope.global = Global;
     $scope.package = {
       name: 'customers'
     };
+
+    $scope.pageTitle = (!!$stateParams.customerId) ? 'Edit Customer' : 'Create Customer';
 
     $scope.tableParams = new TableParams({
       page: 1,            // show first page
@@ -41,11 +43,11 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
         if(angular.isDefined($stateParams.customerId)) {
           c._id = $stateParams.customerId;
           c.$update(function(response){
-            $location.path('customers');
+            $state.go('customers');
           });
         } else {
           c.$save(function (response) {
-            $location.path('customers');
+            $state.go('customers');
           });
         }
 
@@ -63,7 +65,7 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
     };
 
     $scope.manageSubscriptions = function(customer) {
-      $location.path('subscriptions/list');
+      $state.go('subscriptions');
     };
 
     $scope.managePriceLists = function(customer) {

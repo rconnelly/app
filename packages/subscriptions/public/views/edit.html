@@ -3,7 +3,7 @@
     <h2>
         <a ui-sref="subscriptions" class="btn btn-default btn-margin-right">
             <i class="fa fa-arrow-left"></i>
-            Go Back</a>
+            Back</a>
 
         {{ pageTitle }}</h2>
     <form name="subscriptionForm" class="form" role="form" data-ng-submit="save(subscription)" novalidate>
@@ -28,7 +28,7 @@
                             <div class="form-group col-md-3" data-ng-class="{ 'has-error' : submitted && subscriptionForm.subscriptionType.$invalid }">
                                 <label mean-token="'create-subscription-type'" for="subscriptionType" class="control-label">Subscription Period</label>
                                 <select name="subscriptionType" class="form-control" id="subscriptionType" data-ng-model="subscription.subscriptionType"
-                                        ng-options="type as type.name for type in subscriptionTypes track by type.name" required></select>
+                                        ng-options="type as type.name for type in subscriptionTypes track by type.name" required ng-disabled="editMode"></select>
                                 <ul ng-show="submitted && subscriptionForm.subscriptionType.$invalid" class="error-list">
                                     <li class="required" ng-show="subscriptionForm.subscriptionType.$error.required">Required</li>
                                 </ul>
@@ -84,11 +84,14 @@
                                             </td>
                                             <td class="col-sm-2 text-center" data-title="'Qty'" sortable="'qty'" data-filter="{ 'qty': 'text' }">
                                                 <span ng-if="!item.$edit">{{item.qty}}</span>
-                                                <div ng-if="item.$edit"><input type="text" name="editItemPrice" id="editItemPrice" class="form-control text-center"
+                                                <div ng-if="item.$edit"><input type="text" name="editItemQty" id="editItemQty" class="form-control text-center"
                                                                                ng-model="item.qty" value="{{item.qty}}"></div>
                                             </td>
                                             <td class="col-sm-2 text-center" data-title="'Price'" sortable="'price'" data-filter="{ 'price': 'text' }">
-                                                {{item.price | currency}}
+                                                <span ng-if="!item.$edit">{{item.price | currency}}</span>
+                                                <div ng-if="item.$edit"><input type="text" name="editItemPrice" id="editItemPrice" class="form-control text-center"
+                                                                               ng-model="item.price" value="{{item.price}}"></div>
+
                                             </td>
                                             <td class="col-sm-2 text-center" data-title="'Extended'" sortable="'extended'" data-filter="{ 'extended': 'text' }">
                                                 {{item.extended | currency}}
