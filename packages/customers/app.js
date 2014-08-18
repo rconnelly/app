@@ -22,7 +22,7 @@ Customers.register(function(app, auth, database) {
         link: 'customers',
         roles: ['authenticated'],
         menu: 'main',
-        priority: 100
+        priority: 50
     });
 
   Customers.angularDependencies(['ngTable']);

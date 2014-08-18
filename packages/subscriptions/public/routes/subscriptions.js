@@ -13,7 +13,7 @@ angular.module('mean.subscriptions').config(['$stateProvider',
         templateUrl: 'subscriptions/views/edit.html'
       })
       .state('subscription edit', {
-        url: '/subscriptions/:subscriptionId',
+        url: '/:subscriptionId',
         templateUrl: 'subscriptions/views/edit.html'
       });
   }

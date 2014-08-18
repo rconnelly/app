@@ -1,0 +1,57 @@
+<div class="" data-ng-controller="SettingsController">
+
+    <div class="layout layout-main-right layout-stack-sm">
+
+        <div class="col-md-3 col-sm-4 layout-sidebar">
+
+            <ul id="myTab" class="nav nav-layout-sidebar nav-stacked">
+                <li ng-class="{active: isActive('settings.subscriptions')}">
+                    <a ui-sref="settings.subscriptions">
+                        <i class="fa fa-calendar"></i>
+                        &nbsp;&nbsp;Subscriptions
+                    </a>
+                </li>
+
+                <li>
+                    <a ui-sref="settings.notifications">
+                        <i class="fa fa-bullhorn"></i>
+                        &nbsp;&nbsp;Notifications
+                    </a>
+                </li>
+
+                <li>
+                    <a ui-sref="settings.payments">
+                        <i class="fa fa-dollar"></i>
+                        &nbsp;&nbsp;Payments
+                    </a>
+                </li>
+
+                <li>
+                    <a ui-sref="settings.reports">
+                        <i class="fa fa-signal"></i>
+                        &nbsp;&nbsp;Reports
+                    </a>
+                </li>
+
+                <li>
+                    <a ui-sref="settings.integrations">
+                        <i class="fa fa-cloud-download"></i>
+                        &nbsp;&nbsp;Integrations
+                    </a>
+                </li>
+            </ul>
+
+        </div> <!-- /.col -->
+
+
+        <div class="col-md-9 col-sm-8 layout-main">
+
+            <div id="settings-content" class="tab-content stacked-content">
+
+                <div ui-view></div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

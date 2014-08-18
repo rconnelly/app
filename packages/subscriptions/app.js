@@ -22,7 +22,7 @@ Subscriptions.register(function(app, auth, database) {
         link: 'subscriptions',
         roles: ['authenticated'],
         menu: 'main',
-        priority: 90
+        priority: 30
     });
 
     /**

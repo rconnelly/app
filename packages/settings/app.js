@@ -5,31 +5,31 @@
  */
 var Module = require('meanio').Module;
 
-var Items = new Module('items');
+var Settings = new Module('settings');
 
 /*
  * All MEAN packages require registration
  * Dependency injection is used to define required modules
  */
-Items.register(function(app, auth, database) {
+Settings.register(function(app, auth, database) {
 
     //We enable routing. By default the Package Object is passed to the routes
-    Items.routes(app, auth, database);
+    Settings.routes(app, auth, database);
 
     //We are adding a link to the main menu for all authenticated users
-    Items.menus.add({
-        title: 'Items',
-        link: 'items',
+    Settings.menus.add({
+        title: 'Settings',
+        link: 'settings.subscriptions',
         roles: ['authenticated'],
         menu: 'main',
-        priority: 20
+        priority: 10
     });
 
     /**
     //Uncomment to use. Requires meanio@0.3.7 or above
     // Save settings with callback
     // Use this for saving data from administration pages
-    Items.settings({
+    Settings.settings({
         'someSetting': 'some value'
     }, function(err, settings) {
         //you now have the settings object
@@ -37,15 +37,15 @@ Items.register(function(app, auth, database) {
 
     // Another save settings example this time with no callback
     // This writes over the last settings.
-    Items.settings({
+    Settings.settings({
         'anotherSettings': 'some value'
     });
 
     // Get settings. Retrieves latest saved settigns
-    Items.settings(function(err, settings) {
+    Settings.settings(function(err, settings) {
         //you now have the settings object
     });
     */
 
-    return Items;
+    return Settings;
 });
