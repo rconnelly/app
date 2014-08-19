@@ -186,7 +186,7 @@ angular.module('mean.invoices').controller('InvoicesController', ['$scope', '$st
       /****** Common ********/
 
       $scope.cancel = function($event) {
-        $state.go('invoice');
+        $state.go('invoices.list');
       };
 
       /****** List **********/

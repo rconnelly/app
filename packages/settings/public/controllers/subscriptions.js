@@ -8,7 +8,7 @@ angular.module('mean.settings').controller('SubscriptionSettingsController', ['$
     };
 
     $scope.isActive = function(link){
-      return link == $state.current.name;
+      return link === $state.current.name;
     };
 
     $scope.scheduleListData = new TableParams({

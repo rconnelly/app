@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('mean.subscriptions').controller('SubscriptionsController', ['$scope', '$window', '$location', '$filter', '$state', '$stateParams', '$q','lodash',
+angular.module('mean.subscriptions').controller('SubscriptionsController', ['$scope', '$filter', '$state', '$stateParams', '$q','lodash',
   'Global', 'Subscriptions', 'Customers','Items', 'BillingSchedules','SubscriptionTypes','ngTableParams',
-    function($scope, $window, $location, $filter, $state, $stateParams, $q, _, Global, Subscriptions, Customers, Items, BillingSchedules,SubscriptionTypes,TableParams) {
+    function($scope, $filter, $state, $stateParams, $q, _, Global, Subscriptions, Customers, Items, BillingSchedules,SubscriptionTypes,TableParams) {
         $scope.global = Global;
         $scope.package = {
             name: 'subscriptions'
@@ -96,7 +96,7 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
       };
 
       $scope.cancel = function(){
-        $window.history.back();
+        $state.go('subscriptions.list');
       };
 
       /** Items

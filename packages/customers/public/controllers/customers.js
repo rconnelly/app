@@ -57,7 +57,7 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
     };
 
     $scope.cancel = function() {
-      $location.path('customers/list');
+      $state.go('customers.list');
     };
 
     $scope.edit = function(customer) {
