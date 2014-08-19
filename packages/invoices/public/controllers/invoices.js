@@ -59,11 +59,11 @@ angular.module('mean.invoices').controller('InvoicesController', ['$scope', '$st
           if(angular.isDefined($stateParams.invoiceId)) {
             i._id = $stateParams.invoiceId;
             i.$update(function(response){
-              $state.go('invoice');
+              $state.go('invoices.list');
             });
           } else {
             i.$save(function (response) {
-              $state.go('invoice');
+              $state.go('invoices.list');
             });
           }
         } else {
@@ -192,11 +192,11 @@ angular.module('mean.invoices').controller('InvoicesController', ['$scope', '$st
       /****** List **********/
 
       $scope.editInvoice = function(invoice){
-        $state.go('invoice edit', {invoiceId: invoice._id });
+        $state.go('invoices.edit', {invoiceId: invoice._id });
       };
 
       $scope.viewInvoice = function(invoice) {
-        $state.go('invoice view', {invoiceId: invoice._id });
+        $state.go('invoices.view', {invoiceId: invoice._id });
       };
 
       $scope.invoiceListData = new TableParams({

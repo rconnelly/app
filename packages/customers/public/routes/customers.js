@@ -1,53 +1,30 @@
 'use strict';
 
-angular.module('mean.customers').config(['$stateProvider',
+angular.module('mean.customers').config(['$stateProvider','$urlRouterProvider',
+  function($stateProvider, $urlRouterProvider) {
 
-
-  function($stateProvider) {
-
-    var checkLoggedin = function($q, $timeout, $http, $location) {
-      // Initialize a new promise
-      var deferred = $q.defer();
-
-      // Make an AJAX call to check if the user is logged in
-      $http.get('/loggedin').success(function(user) {
-        // Authenticated
-        if (user !== '0') $timeout(deferred.resolve);
-
-        // Not Authenticated
-        else {
-          $timeout(deferred.reject);
-          $location.url('/login');
-        }
-      });
-
-      return deferred.promise;
-    };
+    $urlRouterProvider.when('/customers', '/customers/list');
 
     $stateProvider
       .state('customers', {
+        abstract: true,
+        template: '<ui-view/>'
+      })
+      .state('customers.list', {
         url: '/customers/list',
-        templateUrl: 'customers/views/list.html',
-        resolve: {
-          loggedin: checkLoggedin
-        }
+        templateUrl: 'customers/views/list.html'
       })
-      .state('create customer', {
+      .state('customers.create', {
         url: '/customers/create',
-        templateUrl: 'customers/views/edit.html',
-        resolve: {
-          loggedin: checkLoggedin
-        }
+        templateUrl: 'customers/views/edit.html'
       })
-      .state('edit customer', {
+      .state('customers.edit', {
         url: '/customers/:customerId/edit',
-        templateUrl: 'customers/views/edit.html',
-        resolve: {
-          loggedin: checkLoggedin
-        }
-      })
+        templateUrl: 'customers/views/edit.html'
+      });
 
       // TODO: Remove price list support
+      /*
       .state('list price list', {
         url: '/customers/:customerId/priceitems',
         templateUrl: 'customers/views/priceitem/list.html',
@@ -68,7 +45,7 @@ angular.module('mean.customers').config(['$stateProvider',
         resolve: {
           loggedin: checkLoggedin
         }
-      });
+      }); */
 
   }
 ]);

@@ -1,7 +1,9 @@
 'use strict';
 
-angular.module('mean.settings').config(['$stateProvider',
-  function($stateProvider) {
+angular.module('mean.settings').config(['$stateProvider','$urlRouterProvider',
+  function($stateProvider, $urlRouterProvider) {
+
+    $urlRouterProvider.when('/settings', '/settings/subscriptions');
     $stateProvider.state('settings', {
       url: '/settings',
       templateUrl: 'settings/views/index.html',

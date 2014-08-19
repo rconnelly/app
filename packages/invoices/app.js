@@ -18,7 +18,8 @@ Invoices.register(function(app, auth, database) {
   //We are adding a link to the main menu for all authenticated users
   Invoices.menus.add({
     title: 'Invoices',
-    link: 'invoice',
+    link: 'invoices.list',
+    section: 'invoices',
     roles: ['authenticated'],
     menu: 'main',
     priority: 40

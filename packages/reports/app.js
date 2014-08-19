@@ -20,6 +20,7 @@ Reports.register(function(app, auth, database) {
     Reports.menus.add({
         title: 'Reports',
         link: 'reports',
+      section: 'reports',
         roles: ['authenticated'],
         menu: 'main',
         priority: 11

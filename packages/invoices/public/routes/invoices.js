@@ -1,21 +1,27 @@
 'use strict';
 
-angular.module('mean.invoices').config(['$stateProvider',
-  function($stateProvider) {
+angular.module('mean.invoices').config(['$stateProvider','$urlRouterProvider',
+  function($stateProvider, $urlRouterProvider) {
+
+    $urlRouterProvider.when('/invoices', '/invoices/list');
     $stateProvider
-      .state('invoice', {
-        url: '/invoices',
+      .state('invoices', {
+        abstract: true,
+        template: '<ui-view/>'
+      })
+      .state('invoices.list', {
+        url: '/invoices/list',
         templateUrl: 'invoices/views/list.html'
       })
-      .state('invoice create', {
+      .state('invoices.create', {
         url: '/invoices/create',
         templateUrl: 'invoices/views/edit.html'
       })
-      .state('invoice edit', {
+      .state('invoices.edit', {
         url: '/invoices/:invoiceId/edit',
         templateUrl: 'invoices/views/edit.html'
       })
-      .state('invoice view', {
+      .state('invoices.view', {
         url: '/invoices/:invoiceId/view',
         templateUrl: 'invoices/views/view.html'
       });

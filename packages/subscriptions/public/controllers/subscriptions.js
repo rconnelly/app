@@ -76,11 +76,11 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
           if(angular.isDefined($stateParams.subscriptionId)) {
             s._id = $stateParams.subscriptionId;
             s.$update(function(response){
-              $state.go('subscriptions');
+              $state.go('subscriptions.list');
             });
           } else {
             s.$save(function (response) {
-              $state.go('subscriptions');
+              $state.go('subscriptions.list');
             });
           }
 
@@ -165,7 +165,7 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
       };
 
       $scope.editSubscription = function(subscription) {
-        $location.path('subscriptions/' + subscription._id);
+        $state.go('subscriptions.edit', {subscriptionId: subscription._id});
       };
 
       $scope.removeSubscription = function(subscription){

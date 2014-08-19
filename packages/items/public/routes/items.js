@@ -1,51 +1,25 @@
 'use strict';
 
-angular.module('mean.items').config(['$stateProvider',
+angular.module('mean.items').config(['$stateProvider','$urlRouterProvider',
+  function($stateProvider, $urlRouterProvider) {
 
-
-  function($stateProvider) {
-
-    var checkLoggedin = function($q, $timeout, $http, $location) {
-      // Initialize a new promise
-      var deferred = $q.defer();
-
-      // Make an AJAX call to check if the user is logged in
-      $http.get('/loggedin').success(function(user) {
-        // Authenticated
-        if (user !== '0') $timeout(deferred.resolve);
-
-        // Not Authenticated
-        else {
-          $timeout(deferred.reject);
-          $location.url('/login');
-        }
-      });
-
-      return deferred.promise;
-    };
-
+    $urlRouterProvider.when('/items', '/items/list');
     $stateProvider
       .state('items', {
+        abstract: true,
+        template: '<ui-view/>'
+      })
+      .state('items.list', {
         url: '/items/list',
-        templateUrl: 'items/views/list.html',
-        resolve: {
-          loggedin: checkLoggedin
-        }
+        templateUrl: 'items/views/list.html'
       })
-      .state('create item', {
+      .state('items.create', {
         url: '/items/create',
-        templateUrl: 'items/views/edit.html',
-        resolve: {
-          loggedin: checkLoggedin
-        }
+        templateUrl: 'items/views/edit.html'
       })
-      .state('edit item', {
+      .state('items.edit', {
         url: '/items/:itemId/edit',
-        templateUrl: 'items/views/edit.html',
-        resolve: {
-          loggedin: checkLoggedin
-        }
+        templateUrl: 'items/views/edit.html'
       });
-
   }
 ]);

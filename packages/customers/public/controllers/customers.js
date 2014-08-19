@@ -43,11 +43,11 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
         if(angular.isDefined($stateParams.customerId)) {
           c._id = $stateParams.customerId;
           c.$update(function(response){
-            $state.go('customers');
+            $state.go('customers.list');
           });
         } else {
           c.$save(function (response) {
-            $state.go('customers');
+            $state.go('customers.list');
           });
         }
 
@@ -61,16 +61,18 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
     };
 
     $scope.edit = function(customer) {
-      $location.path('customers/' + customer._id + '/edit');
+      $state.go('customers.edit',{customerId: customer._id});
     };
 
     $scope.manageSubscriptions = function(customer) {
-      $state.go('subscriptions');
+      $state.go('subscriptions.list');
     };
 
+    /*
     $scope.managePriceLists = function(customer) {
       $location.path('customers/' + customer._id + '/priceitems');
     };
+    */
 
     $scope.remove = function(customer) {
       //customer.$remove();
