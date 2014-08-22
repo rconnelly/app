@@ -22,7 +22,8 @@ Settings.register(function(app, auth, database) {
     link: 'settings.subscriptions',
     section: 'settings',
     roles: ['authenticated'],
-    menu: 'main',
+    menu: 'top',
+    iconClass: 'fa fa-gears',
     priority: 10
   });
 

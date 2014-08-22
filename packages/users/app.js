@@ -26,27 +26,5 @@ MeanUser.register(function(app, auth, passport, database) {
 
   MeanUser.aggregateAsset('js', 'meanUser.js');
 
-  /**
-    //Uncomment to use. Requires meanio@0.3.7 or above
-    // Save settings with callback
-    // Use this for saving data from administration pages
-    MeanUser.settings({
-        'someSetting': 'some value'
-    }, function(err, settings) {
-        //you now have the settings object
-    });
-
-    // Another save settings example this time with no callback
-    // This writes over the last settings.
-    MeanUser.settings({
-        'anotherSettings': 'some value'
-    });
-
-    // Get settings. Retrieves latest saved settigns
-    MeanUser.settings(function(err, settings) {
-        //you now have the settings object
-    });
-    */
-
   return MeanUser;
 });

@@ -155,23 +155,10 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
 
-                        <li>
-                            <a href="./page-profile.html">
-                                <i class="fa fa-user"></i>
-                                &nbsp;&nbsp;Account
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="./page-pricing.html">
-                                <i class="fa fa-dollar"></i>
-                                &nbsp;&nbsp;Plans & Billing
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./page-settings.html">
-                                <i class="fa fa-cogs"></i>
-                                &nbsp;&nbsp;Settings
+                        <li data-ng-repeat="item in menus.top|orderBy:'-priority'" ui-route="/{{item.link}}">
+                            <a ui-sref='{{item.link}}'>
+                                <i ng-class="item.iconClass"></i>
+                                &nbsp;&nbsp;{{item.title}}
                             </a>
                         </li>
 

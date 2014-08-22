@@ -1,7 +1,12 @@
 <div ng-controller="SubscriptionSettingsController">
 
     <h3 class="content-title"><u>Subscription Settings</u></h3>
-    <h4>Schedules</h4>
+    <div>
+        <div class="pull-right" style="margin-bottom: 20px">
+            <a ui-sref="settings.subscriptions.create" class="btn btn-primary btn-lg" >Create Schedule</a>
+        </div>
+        <h4>Subscriptions</h4>
+    </div>
 
     <table class="table table-striped table-bordered" ng-table="scheduleListData" data-ng-hide="schedules.length === 0">
         <tbody>

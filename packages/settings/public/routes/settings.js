@@ -13,6 +13,17 @@ angular.module('mean.settings').config(['$stateProvider','$urlRouterProvider',
         url: '/subscriptions',
         templateUrl: 'settings/views/subscriptions.html'
       })
+      .state('settings.subscriptions.create', {
+        url: '/schedules/create',
+        onEnter: ['$stateParams', '$state', '$modal', '$resource', function($stateParams, $state, $modal) {
+          $modal.open({
+            templateUrl: 'settings/views/schedules.html',
+            controller: 'SchedulesController'
+          }).result.finally(function() {
+              return $state.transitionTo('settings.subscriptions');
+            });
+        }]
+      })
       .state('settings.notifications', {
         url: '/notifications',
         templateUrl: 'settings/views/notifications.html'
