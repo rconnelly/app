@@ -32,7 +32,7 @@
                                 </ul>
                             </div>
                             <div class="form-group col-md-4" data-ng-class="{ 'has-error' : submitted && itemForm.subscriptionType.$invalid }">
-                                <label mean-token="'create-item-subscription-type'" for="subscriptionType" class="control-label">Subscription Period</label>
+                                <label mean-token="'subscription-type'" for="subscriptionType" class="control-label">Subscription Type</label>
                                 <select name="subscriptionType" class="form-control" id="subscriptionType" data-ng-model="item.subscriptionType"
                                         ng-options="type as type.name for type in subscriptionTypes track by type.name" ng-required="true"></select>
                                 <ul ng-show="submitted && itemForm.subscriptionType.$invalid" class="error-list">

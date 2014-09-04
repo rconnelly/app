@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.settings').controller('SettingsController', ['$scope', '$state', 'Global', 'Settings',
-  function($scope, $state, Global, Settings) {
+angular.module('mean.settings').controller('SettingsController', ['$scope', '$state', 'Global',
+  function($scope, $state, Global) {
     $scope.global = Global;
     $scope.package = {
       name: 'settings'

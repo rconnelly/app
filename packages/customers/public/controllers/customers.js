@@ -68,12 +68,6 @@ angular.module('mean.customers').controller('CustomersController', ['$scope', '$
       $state.go('subscriptions.list');
     };
 
-    /*
-    $scope.managePriceLists = function(customer) {
-      $location.path('customers/' + customer._id + '/priceitems');
-    };
-    */
-
     $scope.remove = function(customer) {
       //customer.$remove();
       customer.$delete(function(){

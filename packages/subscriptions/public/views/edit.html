@@ -17,7 +17,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="form-group col-md-3" data-ng-class="{ 'has-error' : submitted && subscriptionForm.customerName.$invalid }">
-                                <label mean-token="'create-subscription-customer'" for="customerName" class="control-label">Customer</label>
+                                <label mean-token="'customer'" for="customerName" class="control-label">Customer</label>
                                 <input type="text" name="customerName" class="form-control" data-ng-model="subscription.customer"
                                        typeahead="customer as customer.displayName for customer in findCustomers($viewValue) | filter:$viewValue | limitTo:8"
                                        id="customerName" placeholder="required" required />
@@ -26,24 +26,34 @@
                                 </ul>
                             </div>
                             <div class="form-group col-md-3" data-ng-class="{ 'has-error' : submitted && subscriptionForm.subscriptionType.$invalid }">
-                                <label mean-token="'create-subscription-type'" for="subscriptionType" class="control-label">Subscription Period</label>
-                                <select name="subscriptionType" class="form-control" id="subscriptionType" data-ng-model="subscription.subscriptionType"
-                                        ng-options="type as type.name for type in subscriptionTypes track by type.name" required ng-disabled="editMode"></select>
+                                <label mean-token="'subscription-type'" for="subscriptionType" class="control-label">Subscription Type</label>
+                                <div class="input-group">
+                                    <select name="subscriptionType" class="form-control" id="subscriptionType" data-ng-model="subscription.subscriptionType"
+                                            ng-options="type as type.name for type in subscriptionTypes track by type.name" required ng-disabled="editMode">
+                                        <option value="" selected disabled>{{scheduleTypeOptionName}}</option>
+                                    </select>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="createNewType()" ng-disabled="editMode">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                    </span>
+                                </div>
                                 <ul ng-show="submitted && subscriptionForm.subscriptionType.$invalid" class="error-list">
                                     <li class="required" ng-show="subscriptionForm.subscriptionType.$error.required">Required</li>
                                 </ul>
                             </div>
+
                             <div class="form-group col-md-3" data-ng-class="{ 'has-error' : submitted && subscriptionForm.startDate.$invalid }">
                                 <label mean-token="'create-subscription-start-date'" for="startDate" class="control-label">Start Date</label>
                                 <div class="input-group">
                                     <input type="text" name="startDate" id="startDate" class="form-control" datepicker-popup="{{format}}" ng-model="subscription.startDate" is-open="startDateOpened"
-                                        max-date="maxDate" datepicker-options="dateOptions"
+                                           max-date="maxDate" datepicker-options="dateOptions"
                                            ng-required="true" close-text="Close" />
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="openStartDate($event)">
-                                            <i class="glyphicon glyphicon-calendar"></i>
-                                        </button>
-                                    </span>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openStartDate($event)">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </span>
                                 </div>
                                 <ul ng-show="submitted && subscriptionForm.startDate.$invalid" class="error-list">
                                     <li class="required" ng-show="subscriptionForm.startDate.$error.required">Required</li>
@@ -126,8 +136,8 @@
                                                 ng-options="item as item.name for item in items">
                                             <option value="" selected disabled>{{itemOptionName}}</option>
                                         </select>
-                                    </div>
 
+                                    </div>
                                     <div class="form-group col-md-4">
                                         <button type="button" class="btn btn-secondary btn-block" ng-disabled="!newItem" ng-click="addItem(newItem)">Add Item</button>
                                     </div>

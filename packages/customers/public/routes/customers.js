@@ -1,14 +1,17 @@
 'use strict';
 
 angular.module('mean.customers').config(['$stateProvider','$urlRouterProvider',
-  function($stateProvider, $urlRouterProvider) {
+  function($stateProvider, $urlRouterProvider, USER_ROLES) {
 
     $urlRouterProvider.when('/customers', '/customers/list');
 
     $stateProvider
       .state('customers', {
         abstract: true,
-        template: '<ui-view/>'
+        template: '<ui-view/>',
+        data: {
+          authorizedRoles: ['authenticated']
+        }
       })
       .state('customers.list', {
         url: '/customers/list',

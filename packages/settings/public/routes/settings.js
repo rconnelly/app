@@ -14,11 +14,11 @@ angular.module('mean.settings').config(['$stateProvider','$urlRouterProvider',
         templateUrl: 'settings/views/subscriptions.html'
       })
       .state('settings.subscriptions.create', {
-        url: '/schedules/create',
+        url: '/types/create',
         onEnter: ['$stateParams', '$state', '$modal', '$resource', function($stateParams, $state, $modal) {
           $modal.open({
-            templateUrl: 'settings/views/schedules.html',
-            controller: 'SchedulesController'
+            templateUrl: 'settings/views/subscriptionTypesModal.html',
+            controller: 'SubscriptionTypesModalController'
           }).result.finally(function() {
               return $state.transitionTo('settings.subscriptions');
             });

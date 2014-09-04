@@ -17,6 +17,7 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
       $scope.total = 0;
       $scope.pageTitle = (!$stateParams.subscriptionId) ? 'Create Subscription' : 'Edit Subscription';
       $scope.editMode = !!$stateParams.subscriptionId;
+      $scope.scheduleTypeOptionName = 'Select One';
 
       $scope.initList = function(){
 
@@ -67,6 +68,10 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
         Items.query({subscriptionType: subscriptionType},function(s){
           $scope.items = s;
         });
+      };
+
+      $scope.createNewType = function() {
+        $state.go('subscriptions.create.newtype');
       };
 
       $scope.save = function(subscription){

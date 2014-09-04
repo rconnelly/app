@@ -1,7 +1,7 @@
 {
-    "name": "clients",
+    "name": "dashboard",
     "version": "0.0.1",
-    "description": "Some description of clients",
+    "description": "Some description of dashboard",
     "author": {
         "name": "mean scaffold"
     },

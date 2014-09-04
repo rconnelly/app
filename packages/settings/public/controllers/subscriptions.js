@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.settings').controller('SubscriptionSettingsController', ['$scope', '$state', 'Global', 'Settings','ngTableParams',
-  function($scope, $state, Global, Settings, TableParams) {
+angular.module('mean.settings').controller('SubscriptionSettingsController', ['$scope', '$state', '$filter', 'Global', 'SubscriptionTypes','ngTableParams',
+  function($scope, $state, $filter, Global, SubscriptionTypes, TableParams) {
     $scope.global = Global;
     $scope.package = {
       name: 'subscription settings'
@@ -9,6 +9,16 @@ angular.module('mean.settings').controller('SubscriptionSettingsController', ['$
 
     $scope.isActive = function(link){
       return link === $state.current.name;
+    };
+
+    $scope.reloadSubscriptions = function(){
+      $scope.tableParams.reload();
+    };
+
+    $scope.remove = function(subscriptionType) {
+      subscriptionType.$remove(function(){
+        $scope.tableParams.reload();
+      });
     };
 
     $scope.scheduleListData = new TableParams({
@@ -21,7 +31,7 @@ angular.module('mean.settings').controller('SubscriptionSettingsController', ['$
       counts: 0,
       total: 0,
       getData: function($defer, params) {
-       /* Subscriptions.query(function(subscriptions) {
+        SubscriptionTypes.query(function(subscriptions) {
           // update table params
           $scope.schedules = subscriptions;
 
@@ -33,9 +43,6 @@ angular.module('mean.settings').controller('SubscriptionSettingsController', ['$
 
           $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         });
-        */
-        var orderedData = [];
-        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });
   }
