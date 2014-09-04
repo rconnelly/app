@@ -7,8 +7,8 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   timestamps = require('mongoose-times'),
   ObjectId = mongoose.Schema.Types.ObjectId,
+  moment = require('moment'),
   _ = require('lodash');
-
 
 require('mongoose-schema-extend');
 
@@ -32,7 +32,15 @@ var SubscriptionTypeSchema = new Schema({
     type: String,
     required: true
   }
-}, { discriminatorKey : '_type' });
+}, { discriminatorKey : '_type',
+  collection : 'subscriptiontypes',
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
+  }
+});
 
 /**
  *
@@ -46,7 +54,7 @@ var MonthlySubscriptionTypeSchema = SubscriptionTypeSchema.extend({
   dayOfMonth: {
     type: Number,
     required: true,
-    min: 1, // 1 means first day of month
+    min: 1, // 1 means first day of the month
     max: 29 // 29 means last day of month
   }
 });
@@ -67,14 +75,29 @@ var MonthlyByDayOfWeekSubscriptionTypeSchema = SubscriptionTypeSchema.extend({
 });
 
 var AnnualSubscriptionTypeSchema = SubscriptionTypeSchema.extend({
-  month: {
-    type: Number,
-    required: true
-  },
   dayOfMonth: {
     type: Number,
-    required: true
-  }
+    required: true,
+    min: 1, // 1 means first day of the month
+    max: 29 // 29 means last day of month
+  }});
+
+AnnualSubscriptionTypeSchema.virtual('description').get(function () {
+  if(!this.dayOfMonth)
+    return '';
+
+  var value = (this.dayOfMonth < 29) ? moment().date(this.dayOfMonth).format('Do') : 'last day';
+  return _.template('Sends an invoice every year on the ${ monthDay } of the month.', {monthDay: value});
+});
+
+MonthlySubscriptionTypeSchema.virtual('description').get(function () {
+  if(!this.dayOfMonth)
+    return '';
+
+  var value = (this.dayOfMonth < 29) ? moment().date(this.dayOfMonth).format('Do') : 'last day';
+  var monthlyIntervalText = (this.monthlyInterval === 1) ? 'month' : '' + this.monthlyInterval + ' months';
+  return _.template('Sends an invoice every ${ monthlyInterval } on the ${ monthDay }.',
+    { monthDay: value, monthlyInterval: monthlyIntervalText });
 });
 
 /**
@@ -103,7 +126,8 @@ SubscriptionTypeSchema.statics.daysOfWeek = function(cb) {
  * @param cb callback function returns a list of days of week
  */
 SubscriptionTypeSchema.statics.daysOfMonth = function(cb) {
-  var results = _.forEach([{ name:'1', value: 1 },
+  var results = _.forEach([
+    { name:'1', value: 1 },
     { name:'2', value: 2 },
     { name:'3', value: 3 },
     { name:'4', value: 4 },

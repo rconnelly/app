@@ -7,7 +7,6 @@ var mongoose = require('mongoose'),
   SubscriptionType = mongoose.model('SubscriptionType'),
   _ = require('lodash');
 
-
 /**
  * Find by id
  */
@@ -20,19 +19,25 @@ exports.subscriptionType = function(req, res, next, id) {
   });
 };
 
+var validate = function(req, res, data) {
+  // TODO: Validate _type
+};
+
 /**
  * Create
  */
 exports.create = function(req, res) {
-  // TODO: Add validation
   var data = req.body;
-  var subType = new SubscriptionType(data);
+  validate(req,res, data);
 
-  subType.save(function(err) {
+  var SubscriptionTypeModel = mongoose.model(data._type);
+  var subType =  new SubscriptionTypeModel(data);
+
+  subType.save(function(err, st) {
     if (err) {
       return res.json(500, err);
     }
-    res.json(subType);
+    res.json(st);
   });
 };
 
@@ -40,9 +45,10 @@ exports.create = function(req, res) {
  * Update
  */
 exports.update = function(req, res) {
-  // TODO: Add validation
   var subType = req.subscriptionType;
   subType = _.extend(subType, req.body);
+  validate(req,res, subType);
+
   subType.save(function(err) {
       if (err) {
         return res.json(500, err);
@@ -61,22 +67,6 @@ exports.destroy = function(req, res) {
       return res.json(500, err);
     }
     res.json(st);
-  });
-};
-
-/**
- * Create
- */
-exports.create = function(req, res) {
-  // TODO: Add validation
-  var data = req.body;
-  var subType = new SubscriptionType(data);
-
-  subType.save(function(err) {
-    if (err) {
-      return res.json(500, err);
-    }
-    res.json(subType);
   });
 };
 

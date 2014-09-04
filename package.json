@@ -96,7 +96,8 @@
     "mongo-migrate": "^0.1.0",
     "install": "^0.1.7",
     "npm": "^1.4.23",
-    "mongoose-schema-extend": "^0.1.7"
+    "mongoose-schema-extend": "^0.1.7",
+    "moment": "^2.8.2"
   },
   "devDependencies": {
     "grunt-karma": "^0.8.2",

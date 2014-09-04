@@ -1,11 +1,14 @@
 'use strict';
 
-angular.module('mean.settings').controller('SubscriptionSettingsController', ['$scope', '$state', '$filter', 'Global', 'SubscriptionTypes','ngTableParams',
-  function($scope, $state, $filter, Global, SubscriptionTypes, TableParams) {
+angular.module('mean.settings').controller('SubscriptionSettingsController', ['$scope', '$state', '$filter', 'Global', 'SubscriptionTypes','SETTINGS_EVENTS','ngTableParams',
+  function($scope, $state, $filter, Global, SubscriptionTypes, SETTINGS_EVENTS, TableParams) {
     $scope.global = Global;
     $scope.package = {
       name: 'subscription settings'
     };
+
+    $scope.$on(SETTINGS_EVENTS.createSubscriptionType,function(){ $scope.reloadSubscriptions(); });
+    $scope.$on(SETTINGS_EVENTS.editSubscriptionType,function(){ $scope.reloadSubscriptions(); });
 
     $scope.isActive = function(link){
       return link === $state.current.name;
@@ -20,6 +23,7 @@ angular.module('mean.settings').controller('SubscriptionSettingsController', ['$
         $scope.reloadSubscriptions();
       });
     };
+
 
     $scope.scheduleListData = new TableParams({
       page: 1,            // show first page

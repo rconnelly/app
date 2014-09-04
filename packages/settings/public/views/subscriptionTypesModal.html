@@ -17,7 +17,7 @@
                     <label mean-token="'edit-subscriptionType-schedule-type'" for="type" class="control-label">Schedule Type</label>
                     <select name="type" class="form-control" id="type" data-ng-model="subscriptionType._type"
                             ng-options="type.value as type.name for type in scheduleTypes" required>
-                        <option value="" selected disabled>{{scheduleTypeOptionName}}</option>
+                        <option value="" selected disabled>{{defaultOptionName}}</option>
                     </select>
                     <ul ng-show="submitted && subscriptionTypeForm.type.$invalid" class="error-list">
                         <li class="required" ng-show="subscriptionTypeForm.type.$error.required">Required</li>
@@ -26,16 +26,16 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12 col-md-offset-1" ng-show="!!subscriptionType._type">
-                    <h4>Subscription Starts</h4>
+                <div class="col-md-12" ng-show="!!subscriptionType._type">
+                    <h4>Recurring Invoice Schedule</h4>
                 </div>
             </div>
             <div class="row" ng-show="subscriptionType._type === 'Monthly'">
-                <div class="form-group col-md-3 col-md-offset-1" data-ng-class="{ 'has-error' : submitted && subscriptionTypeForm.monthlyDay.$invalid }">
-                    <label mean-token="'edit-subscriptionType-type'" for="monthlyDay" class="control-label">Day of month</label>
+                <div class="form-group col-md-6" data-ng-class="{ 'has-error' : submitted && subscriptionTypeForm.monthlyDay.$invalid }">
+                    <label mean-token="'edit-subscriptionType-day-of-month'" for="monthlyDay" class="control-label">Day of month to send invoice</label>
                     <select name="monthlyDay" class="form-control" id="monthlyDay" data-ng-model="subscriptionType.dayOfMonth"
-                            ng-options="day.value as day.name for day in daysOfMonth" required>
-                        <option value="" selected disabled>{{subscriptionTypeTypeOptionName}}</option>
+                            ng-options="day.value as day.name for day in daysOfMonth" ng-disabled="subscriptionType._type !== 'Monthly'" required>
+                        <option value="" selected disabled>{{defaultOptionName}}</option>
                     </select>
                     <ul ng-show="submitted && subscriptionTypeForm.monthlyDay.$invalid" class="error-list">
                         <li class="required" ng-show="subscriptionTypeForm.monthlyDay.$error.required">Required</li>
@@ -44,31 +44,21 @@
                 <div class="form-group col-md-3" data-ng-class="{ 'has-error' : submitted && subscriptionTypeForm.monthlyInterval.$invalid }">
                     <label mean-token="'edit-subscriptionType-monthly-interval'" for="monthlyInterval" class="control-label">Repeat every</label>
                     <input type="text" name="monthlyInterval" class="form-control" data-ng-model="subscriptionType.monthlyInterval"
-                           id="monthlyInterval" placeholder="required" required /> <span>month(s)</span>
+                           id="monthlyInterval" placeholder="required" ng-disabled="subscriptionType._type !== 'Monthly'" required /> <span>month(s)</span>
                     <ul ng-show="submitted && subscriptionTypeForm.monthlyInterval.$invalid" class="error-list">
                         <li class="required" ng-show="subscriptionTypeForm.monthlyInterval.$error.required">Required</li>
                     </ul>
                 </div>
             </div>
             <div class="row" ng-show="subscriptionType._type === 'Annual'">
-                <div class="form-group col-md-3 col-md-offset-1" data-ng-class="{ 'has-error' : submitted && subscriptionTypeForm.description.$invalid }">
-                    <label mean-token="'edit-subscriptionType-annual-month'" for="month" class="control-label">Month</label>
-                    <select name="month" class="form-control" id="month" data-ng-model="subscriptionType.month"
-                            ng-options="day.value as day.name for day in months">
-                        <option value="" selected disabled>{{subscriptionTypeTypeOptionName}}</option>
+                <div class="form-group col-md-6" data-ng-class="{ 'has-error' : submitted && subscriptionTypeForm.annualDay.$invalid }">
+                    <label mean-token="'edit-subscriptionType-day-of-month'" for="annualDay" class="control-label">Day of month to send invoice</label>
+                    <select name="annualDay" class="form-control" id="annualDay" data-ng-model="subscriptionType.dayOfMonth"
+                            ng-options="day.value as day.name for day in daysOfMonth" required ng-disabled="subscriptionType._type !== 'Annual'" >
+                        <option value="" selected disabled>{{defaultOptionName}}</option>
                     </select>
-                    <ul ng-show="submitted && subscriptionTypeForm.type.$invalid" class="error-list">
-                        <li class="required" ng-show="subscriptionTypeForm.type.$error.required">Required</li>
-                    </ul>
-                </div>
-                <div class="form-group col-md-3" data-ng-class="{ 'has-error' : submitted && subscriptionTypeForm.description.$invalid }">
-                    <label mean-token="'edit-subscriptionType-type'" for="day" class="control-label">Day</label>
-                    <select name="day" class="form-control" id="day" data-ng-model="subscriptionType.dayOfMonth"
-                            ng-options="day.value as day.name for day in daysOfMonth">
-                        <option value="" selected disabled>{{subscriptionTypeTypeOptionName}}</option>
-                    </select>
-                    <ul ng-show="submitted && subscriptionTypeForm.type.$invalid" class="error-list">
-                        <li class="required" ng-show="subscriptionTypeForm.type.$error.required">Required</li>
+                    <ul ng-show="submitted && subscriptionTypeForm.annualDay.$invalid" class="error-list">
+                        <li class="required" ng-show="subscriptionTypeForm.annualDay.$error.required">Required</li>
                     </ul>
                 </div>
             </div>

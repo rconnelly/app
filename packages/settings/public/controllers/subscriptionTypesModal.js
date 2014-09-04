@@ -8,8 +8,7 @@ angular.module('mean.settings').controller('SubscriptionTypesModalController', [
     };
     $scope.pageTitle = 'Create Subscription Type';
     $scope.subscriptionType = {monthlyInterval:1};
-    $scope.scheduleTypeOptionName = 'Select One';
-    $scope.dayOfWeekOptionName = 'Select One';
+    $scope.defaultOptionName = 'Select One';
     $scope.startDateOpened = false;
     $scope.endDateOpened = false;
 
@@ -45,7 +44,7 @@ angular.module('mean.settings').controller('SubscriptionTypesModalController', [
         if(angular.isDefined($stateParams.typeId)) {
           type._id = $stateParams.typeId;
           type.$update(function(result){
-            //$scope.$emit(SETTINGS_EVENTS.editSubscriptionType, {subscriptionType:result});
+            $rootScope.$broadcast(SETTINGS_EVENTS.editSubscriptionType, {subscriptionType:result});
             $scope.$close();
           });
         } else {

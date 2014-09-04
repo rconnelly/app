@@ -17,12 +17,12 @@
             <td class="col-md-3 text-center" data-title="'Schedule Type'" sortable="'subscriptionType._type'" filter="{ 'schedule.type': 'text' }">
                 {{subscriptionType._type}}
             </td>
-            <td class="col-md-3 text-center" data-title="'Description'" sortable="'subscriptionType.description'" data-filter="{ 'subscriptionType.description': 'text' }">
+            <td class="col-md-3 text-left" data-title="'Description'" sortable="'subscriptionType.description'" data-filter="{ 'subscriptionType.description': 'text' }">
                 {{subscriptionType.description}}
             </td>
             <td class="col-md-3 text-right">
                 <div class="btn-toolbar">
-                    <a class="btn btn-default" data-ng-click="edit(subscriptionType);">
+                    <a class="btn btn-default" data-ng-click="edit(subscriptionType);" data-ng-disabled="true" >
                         Edit
                     </a>
                     <a class="btn btn-danger" data-ng-click="remove(subscriptionType);">
