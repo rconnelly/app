@@ -4,6 +4,7 @@ angular.module('mean.users')
     function($scope, $rootScope, $http, $location) {
       // This object will be filled by the form
       $scope.user = {};
+      $rootScope.bodyClass = 'account-bg';
       // Register the login() function
       $scope.login = function() {
         $http.post('/login', {
@@ -35,6 +36,7 @@ angular.module('mean.users')
   .controller('RegisterCtrl', ['$scope', '$rootScope', '$http', '$location',
     function($scope, $rootScope, $http, $location) {
       $scope.user = {};
+      $rootScope.bodyClass = 'account-bg';
       $scope.register = function() {
 
         if (!$scope.registerForm.$valid) {
@@ -72,7 +74,7 @@ angular.module('mean.users')
   .controller('ForgotPasswordCtrl', ['$scope', '$rootScope', '$http', '$location',
     function($scope, $rootScope, $http, $location) {
       $scope.user = {};
-      //$rootScope.bodyClass = 'account-bg';
+      $rootScope.bodyClass = 'account-bg';
       $scope.forgotpassword = function() {
 
         if (!$scope.forgotForm.$valid) {
@@ -95,6 +97,7 @@ angular.module('mean.users')
   .controller('ResetPasswordCtrl', ['$scope', '$rootScope', '$http', '$location', '$stateParams',
     function($scope, $rootScope, $http, $location, $stateParams) {
       $scope.user = {};
+      $rootScope.bodyClass = 'account-bg';
       $scope.resetpassword = function() {
 
         $http.post('/reset/' + $stateParams.tokenId, {

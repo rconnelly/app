@@ -7,6 +7,7 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
 
     // Default hard coded menu items for main menu
     var defaultMainMenu = [];
+    var topMenu = [];
 
     // Query menus added by modules. Only returns menus that user is allowed to see.
     function queryMenu(name, defaultMenu) {
@@ -21,7 +22,7 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
 
     // Query server for menus and check permissions
     queryMenu('main', defaultMainMenu);
-    queryMenu('top', defaultMainMenu);
+    queryMenu('top', topMenu);
 
     $scope.isBannerCollapsed = true;
     $scope.isMainMenuCollapsed = true;
@@ -35,6 +36,7 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
     $rootScope.$on('loggedin', function() {
 
       queryMenu('main', defaultMainMenu);
+      queryMenu('top', topMenu);
 
       $scope.global = {
         authenticated: !! $rootScope.user,
