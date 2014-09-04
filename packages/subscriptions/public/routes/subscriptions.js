@@ -20,7 +20,7 @@ angular.module('mean.subscriptions').config(['$stateProvider','$urlRouterProvide
       })
       .state('subscriptions.create.newtype', {
         url: '/newtype',
-        onEnter: ['$stateParams', '$state', '$modal', '$resource', function($stateParams, $state, $modal) {
+        onEnter: ['$stateParams', '$state', '$modal', function($stateParams, $state, $modal) {
           $modal.open({
             templateUrl: 'settings/views/subscriptionTypesModal.html',
             controller: 'SubscriptionTypesModalController'

@@ -7,8 +7,8 @@
 var should = require('should'),
   mongoose = require('mongoose'),
   SubscriptionType = mongoose.model('SubscriptionType'),
-  MonthlySubscriptionType = mongoose.model('Monthly'),
-  MonthlyByDayOfWeek = mongoose.model('MonthlyByDayOfWeek');
+  MonthlySubscriptionType = mongoose.model('Monthly');
+  //MonthlyByDayOfWeek = mongoose.model('MonthlyByDayOfWeek');
 
 /**
  * Globals
@@ -16,9 +16,6 @@ var should = require('should'),
 var monthlySubscriptionType;
 var savedMonthlySubscriptionType;
 
-
-var monthlySubscriptionType2;
-var savedMonthlySubscriptionType2;
 
 /**
  * Test Suites
@@ -106,60 +103,7 @@ describe('<Unit Test>', function() {
     });
   });
 
-  describe('Model Monthly:', function() {
-
-    before(function(done) {
-      monthlySubscriptionType = {
-        name: 'Monthly Subscription Type Test',
-        monthlyInterval: 1
-      };
-
-      monthlySubscriptionType2 = {
-        name: 'Monthly By Day of Week Subscription Type Test',
-        dayOfWeek: 0,
-        monthlyInterval: 5,
-        weekOfMonth: 0
-      };
-
-      done();
-    });
-
-    describe('Validation', function() {
-      it('should require monthlyInterval, weekOfMonth, and dayOfWeek', function(done) {
-        should(MonthlyByDayOfWeek.schema.paths.monthlyInterval).have.property('isRequired',true);
-        should(MonthlyByDayOfWeek.schema.paths.weekOfMonth).have.property('isRequired',true);
-        should(MonthlyByDayOfWeek.schema.paths.dayOfWeek).have.property('isRequired',true);
-        done();
-      });
-    });
-
-    describe('Method Save', function() {
-      it('should begin without the test monthly subscription type', function(done) {
-        MonthlySubscriptionType.find({
-          name: monthlySubscriptionType.name
-        }, function(err, types) {
-          should.not.exist(err);
-          types.should.have.length(0);
-          done();
-        });
-      });
-      it('should be able to save without problems', function(done) {
-        savedMonthlySubscriptionType2 = new MonthlyByDayOfWeek(monthlySubscriptionType2);
-        savedMonthlySubscriptionType2.save(function(err) {
-          should.not.exist(err);
-          done();
-        });
-      });
-    });
-
-    after(function(done) {
-      savedMonthlySubscriptionType2.remove();
-
-      done();
-    });
-  });
-
-  describe('Model Monthly:', function() {
+  describe('Model MonthlySubscriptionType:', function() {
     before(function(done) {
       monthlySubscriptionType = {
         name: 'Monthly Test',
@@ -179,20 +123,23 @@ describe('<Unit Test>', function() {
     });
 
     describe('Method Save', function() {
-      it('should begin without the test monthly subscription type', function(done) {
-        MonthlySubscriptionType.find({
+      it('should begin without the test monthly subscription type ', function(done) {
+
+        should.exist(monthlySubscriptionType);
+        MonthlySubscriptionType.findOne({
           name: monthlySubscriptionType.name
-        }, function(err, types) {
+        }).exec(function(err, type) {
           should.not.exist(err);
-          types.should.have.length(0);
+          should.not.exist(type);
           done();
         });
       });
 
       it('should be able to save without problems', function(done) {
         savedMonthlySubscriptionType = new MonthlySubscriptionType(monthlySubscriptionType);
-        savedMonthlySubscriptionType.save(function(err) {
+        savedMonthlySubscriptionType.save(function(err, type) {
           should.not.exist(err);
+          console.log('saved with type id: ' + type._id + ' and name: ' + type.name);
           done();
         });
       });
@@ -200,7 +147,6 @@ describe('<Unit Test>', function() {
 
     after(function(done) {
       savedMonthlySubscriptionType.remove();
-
       done();
     });
   });

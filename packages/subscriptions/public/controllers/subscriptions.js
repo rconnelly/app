@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean.subscriptions').controller('SubscriptionsController', ['$scope', '$filter', '$state', '$stateParams', '$q','lodash',
-  'Global', 'Subscriptions', 'Customers','Items', 'BillingSchedules','SubscriptionTypes','ngTableParams',
-    function($scope, $filter, $state, $stateParams, $q, _, Global, Subscriptions, Customers, Items, BillingSchedules,SubscriptionTypes,TableParams) {
+  'Global', 'Subscriptions', 'Customers','Items', 'BillingSchedules','SubscriptionTypes','SETTINGS_EVENTS','ngTableParams',
+    function($scope, $filter, $state, $stateParams, $q, _, Global, Subscriptions, Customers, Items, BillingSchedules,SubscriptionTypes, SETTINGS_EVENTS, TableParams) {
         $scope.global = Global;
         $scope.package = {
             name: 'subscriptions'
@@ -49,6 +49,9 @@ angular.module('mean.subscriptions').controller('SubscriptionsController', ['$sc
         });
         return deferred.promise;
       };
+
+      $scope.$on(SETTINGS_EVENTS.createSubscriptionType,function(){ $scope.getSubscriptionTypes(); });
+      $scope.$on(SETTINGS_EVENTS.editSubscriptionType,function(){ $scope.getSubscriptionTypes(); });
 
       $scope.$watch(
         'subscription.subscriptionType',

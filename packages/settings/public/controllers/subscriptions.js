@@ -12,12 +12,12 @@ angular.module('mean.settings').controller('SubscriptionSettingsController', ['$
     };
 
     $scope.reloadSubscriptions = function(){
-      $scope.tableParams.reload();
+      $scope.scheduleListData.reload();
     };
 
     $scope.remove = function(subscriptionType) {
       subscriptionType.$remove(function(){
-        $scope.tableParams.reload();
+        $scope.reloadSubscriptions();
       });
     };
 

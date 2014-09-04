@@ -32,9 +32,20 @@
                                 </ul>
                             </div>
                             <div class="form-group col-md-4" data-ng-class="{ 'has-error' : submitted && itemForm.subscriptionType.$invalid }">
+
                                 <label mean-token="'subscription-type'" for="subscriptionType" class="control-label">Subscription Type</label>
-                                <select name="subscriptionType" class="form-control" id="subscriptionType" data-ng-model="item.subscriptionType"
-                                        ng-options="type as type.name for type in subscriptionTypes track by type.name" ng-required="true"></select>
+                                <div class="input-group">
+                                    <select name="subscriptionType" class="form-control" id="subscriptionType" data-ng-model="item.subscriptionType"
+                                            ng-options="type as type.name for type in subscriptionTypes track by type.name" ng-required="true">
+                                        <option value="" selected disabled>{{subscriptionTypeOptionName}}</option>
+                                    </select>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="createNewType()" ng-disabled="editMode">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                    </span>
+                                </div>
+
                                 <ul ng-show="submitted && itemForm.subscriptionType.$invalid" class="error-list">
                                     <li class="required" ng-show="itemForm.subscriptionType.$error.required">Required</li>
                                 </ul>

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean.items').controller('ItemsController', ['$scope', '$location', '$filter', '$state', '$stateParams',
-  'Global', 'ngTableParams', 'Items','RevRecSchedules','SubscriptionTypes',
-  function ($scope, $location, $filter, $state, $stateParams, Global, TableParams, Items, RevRecSchedules,
+  'Global', 'ngTableParams', 'Items','RevRecSchedules','SETTINGS_EVENTS','SubscriptionTypes',
+  function ($scope, $location, $filter, $state, $stateParams, Global, TableParams, Items, RevRecSchedules, SETTINGS_EVENTS,
             SubscriptionTypes) {
     $scope.global = Global;
     $scope.package = {
@@ -10,7 +10,7 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
     };
 
     $scope.pageTitle = 'Create Item';
-
+    $scope.subscriptionTypeOptionName = 'Select One';
     $scope.tableParams = new TableParams({
       page: 1,            // show first page
       count: 10,          // count per page
@@ -35,6 +35,9 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
         });
       }
     });
+
+    $scope.$on(SETTINGS_EVENTS.createSubscriptionType,function(){ $scope.getSubscriptionTypes(); });
+    $scope.$on(SETTINGS_EVENTS.editSubscriptionType,function(){ $scope.getSubscriptionTypes(); });
 
     $scope.getRecurringPeriodTypes = function(){
       $scope.recurringPeriodTypes = [{type:'month', name:'Month(s)'},{type:'day', name:'Days(s)'}];
@@ -108,5 +111,10 @@ angular.module('mean.items').controller('ItemsController', ['$scope', '$location
         $scope.items = items;
       });
     };
+
+    $scope.createNewType = function() {
+      $state.go('.newtype');
+    };
+
   }
 ]);

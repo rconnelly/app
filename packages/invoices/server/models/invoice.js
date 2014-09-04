@@ -72,6 +72,10 @@ InvoiceSchema.statics.getDefaultDueDate = function(startDate, terms, cb) {
  * Plugins
  */
 
-mongoose.model('Invoice', InvoiceSchema);
-
 InvoiceSchema.plugin(timestamps, {created: 'createdAt', lastUpdated: 'updatedAt'} );
+
+/**
+ * Register
+ */
+
+mongoose.model('Invoice', InvoiceSchema);

@@ -12,10 +12,10 @@ var mongoose = require('mongoose'),
  * Find by id
  */
 exports.subscriptionType = function(req, res, next, id) {
-  SubscriptionType.load(id, function(err, invoice) {
+  SubscriptionType.load(id, function(err, subscriptionType) {
     if (err) return next(err);
-    if (!invoice) return next(new Error('Failed to load invoice ' + id));
-    req.invoice = invoice;
+    if (!subscriptionType) return next(new Error('Failed to load subscriptionType ' + id));
+    req.subscriptionType = subscriptionType;
     next();
   });
 };
@@ -41,7 +41,7 @@ exports.create = function(req, res) {
  */
 exports.update = function(req, res) {
   // TODO: Add validation
-  var subType = req.subType;
+  var subType = req.subscriptionType;
   subType = _.extend(subType, req.body);
   subType.save(function(err) {
       if (err) {
@@ -55,12 +55,12 @@ exports.update = function(req, res) {
  * Delete
  */
 exports.destroy = function(req, res) {
-  var invoice = req.invoice;
-  invoice.remove(function(err) {
+  SubscriptionType.remove({_id: req.subscriptionType._id},
+    function(err, st) {
     if (err) {
       return res.json(500, err);
     }
-    res.json(invoice);
+    res.json(st);
   });
 };
 
@@ -124,7 +124,7 @@ exports.months = function(req, res) {
  * Show a subscription type
  */
 exports.show = function(req, res) {
-  res.json(req.subType);
+  res.json(req.subscriptionType);
 };
 
 /**

@@ -138,7 +138,7 @@ CustomerSchema.statics.load = function(id, cb) {
  * Plugins
  */
 
+CustomerSchema.plugin(timestamps, {created: 'createdAt', lastUpdated: 'updatedAt'} );
 module.exports = mongoose.model('Customer', CustomerSchema);
 
-CustomerSchema.plugin(timestamps, {created: 'createdAt', lastUpdated: 'updatedAt'} );
 //InvoiceSchema.plugin(autoIncrement.plugin, { model: 'Invoice', field: 'invoiceNumber' });

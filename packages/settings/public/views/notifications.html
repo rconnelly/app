@@ -1,43 +1,29 @@
-<div>
+<div ng-controller="NotificationSettingsController">
     <h3 class="content-title"><u>Notification Settings</u></h3>
 
-    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes.</p>
+    <p>Setup rules for when you wish to be notified.</p>
 
     <br><br>
 
-    <form action="./page-settings.html" class="form form-horizontal">
+    <form ng-submit="save(notificationSettings)" class="form form-horizontal" novalidate>
 
         <div class="form-group">
 
-            <label class="col-md-3">Toggle Notifications</label>
+            <label class="col-md-3">Notifications</label>
 
             <div class="col-md-7">
 
                 <div class="checkbox">
                     <label>
-                        <input value="" type="checkbox" checked>
-                        Send me security emails
+                        <input value="" name="security" id="security" type="checkbox" ng-model="notificationSettings.security" checked>
+                        Send security emails
                     </label>
                 </div> <!-- /.checkbox -->
 
                 <div class="checkbox">
                     <label>
-                        <input value="" type="checkbox" checked>
+                        <input value="" type="checkbox" name="system" id="system" ng-model="notificationSettings.system" checked>
                         Send system emails
-                    </label>
-                </div> <!-- /.checkbox -->
-
-                <div class="checkbox">
-                    <label>
-                        <input value="" type="checkbox">
-                        Lorem ipsum dolor sit amet
-                    </label>
-                </div> <!-- /.checkbox -->
-
-                <div class="checkbox">
-                    <label>
-                        <input value="" type="checkbox">
-                        Laborum, quam iure quibusdam
                     </label>
                 </div> <!-- /.checkbox -->
 
@@ -51,11 +37,7 @@
             <label class="col-md-3">Email for Notifications</label>
 
             <div class="col-md-7">
-                <select name="email_notifications" class="form-control">
-                    <option value="1">john@mvpready.com</option>
-                    <option value="2">mary@mvpready.com</option>
-                    <option value="3">chris@mvpready.com</option>
-                </select>
+                <input type="text" class="form-control" ng-model="notificationSettings.email" />
             </div> <!-- /.col -->
 
         </div> <!-- /.form-group -->

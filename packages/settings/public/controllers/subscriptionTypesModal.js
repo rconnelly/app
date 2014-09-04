@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.settings').controller('SubscriptionTypesModalController', ['$scope', '$state', '$stateParams', 'Global', 'SubscriptionTypes','SETTINGS_EVENTS',
-  function($scope, $state, $stateParams, Global, SubscriptionTypes, SETTINGS_EVENTS) {
+angular.module('mean.settings').controller('SubscriptionTypesModalController', ['$rootScope', '$scope', '$state', '$stateParams', 'Global', 'SubscriptionTypes','SETTINGS_EVENTS',
+  function( $rootScope, $scope, $state, $stateParams, Global, SubscriptionTypes, SETTINGS_EVENTS) {
     $scope.global = Global;
     $scope.package = {
       name: 'settings'
@@ -45,12 +45,12 @@ angular.module('mean.settings').controller('SubscriptionTypesModalController', [
         if(angular.isDefined($stateParams.typeId)) {
           type._id = $stateParams.typeId;
           type.$update(function(result){
-            $scope.emit(SETTINGS_EVENTS.editSubscriptionType, {subscriptionType:result});
+            //$scope.$emit(SETTINGS_EVENTS.editSubscriptionType, {subscriptionType:result});
             $scope.$close();
           });
         } else {
           type.$save(function(result){
-            $scope.emit(SETTINGS_EVENTS.createSubscriptionType, {subscriptionType:result});
+            $rootScope.$broadcast(SETTINGS_EVENTS.createSubscriptionType, {subscriptionType:result});
             $scope.$close();
           });
         }

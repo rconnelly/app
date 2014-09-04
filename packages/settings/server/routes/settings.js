@@ -11,6 +11,7 @@ module.exports = function(Settings, app, auth, database) {
     .post(auth.requiresLogin, subscriptionTypes.create);
 
   app.route('/settings/subscriptions/types/:typeId')
+    .put(auth.requiresLogin, subscriptionTypes.update)
     .delete(auth.requiresLogin, subscriptionTypes.destroy);
 
   app.get('/settings/subscriptions/scheduletypes', subscriptionTypes.scheduleTypes);

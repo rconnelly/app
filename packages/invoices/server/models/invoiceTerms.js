@@ -82,9 +82,15 @@ InvoiceTermsSchema.statics.getDefaultDueDate = function(startDate, terms, cb) {
  */
 
 InvoiceTermsSchema.plugin(timestamps, {created: 'createdAt', lastUpdated: 'updatedAt'} );
-var model = mongoose.model('InvoiceTerms', InvoiceTermsSchema);
 
+/**
+ * Register
+ */
+var model = mongoose.model('InvoiceTerms', InvoiceTermsSchema);
+module.exports.Schema = InvoiceTermsSchema;
+
+/**
+ * Seed
+ */
 model.seed();
 
-
-module.exports.Schema = InvoiceTermsSchema;
